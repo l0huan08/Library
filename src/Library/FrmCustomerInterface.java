@@ -1,10 +1,12 @@
 package Library;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 
-public class FrmCustomerInterface {
+@SuppressWarnings("serial")
+public class FrmCustomerInterface extends JFrame{
 	private JFrame jf;
 	private JButton Borrow, Return, Close;
 	FrmCustomerInterface(){

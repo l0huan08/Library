@@ -7,10 +7,11 @@ import java.util.*;
 public class Library {
 	
 	ArrayList<Book> bookList;
-	//ArrayList<Book> newBookList;
 	ArrayList<User> userList;
-	final String bookListURL = "c:\\BookList.ser";
-	final String userListURL = "c:\\userList.ser";
+	final String bookListURL = "c:\\BookList.dat";
+	final String userListURL = "c:\\userList.dat";
+	final long timeLimit = 60*1000; // in millisecond
+	
 	
 	Library(User currentUser){
 		
@@ -18,26 +19,43 @@ public class Library {
 	}//constructor
 	
 	
-	void saveBooks(){
+	void saveBooks() throws IOException{
 		
-	//	FileOutputStream fout = new FileOutputStream(bookListURL);
-		//ObjectOutputStream oos = new ObjectOutputStream(fout);
-	//	oos.writeObject();
+		FileOutputStream fout = new FileOutputStream(bookListURL);
+		ObjectOutputStream oos = new ObjectOutputStream(fout);
+		oos.writeObject(bookList);
 
-		
 	}
 	
-	void loadBooks(){
+	void saveUsers() throws IOException{
 		
+		FileOutputStream fout = new FileOutputStream(userListURL);
+		ObjectOutputStream oos = new ObjectOutputStream(fout);
+		oos.writeObject(userList);
+		oos.close();
 	}
 	
-	void loadUsers(){
+	@SuppressWarnings("unchecked")
+	void loadBooks() throws Exception{
 		
+		FileInputStream fis = new FileInputStream(bookListURL);
+	    ObjectInputStream ois = new ObjectInputStream(fis);
+	    bookList = (ArrayList<Book>)ois.readObject();
+	    ois.close();
+	    
+	 
+	}
+	
+	@SuppressWarnings("unchecked")
+	void loadUsers() throws Exception{
+		
+		FileInputStream fis = new FileInputStream(userListURL);
+	    ObjectInputStream ois = new ObjectInputStream(fis);
+	    userList = (ArrayList<User>)ois.readObject();
+	    ois.close();
 	}
 	 
-	void saveUsers(){
-		
-	}
+	
 	
 	boolean loginCheck(String userName, String password){
 		Iterator<User> userItr = userList.iterator();
@@ -49,25 +67,34 @@ public class Library {
 		}//end while
 		return false;
 		
-	}//login check
+	}//login check  - old version
 	
-	/*
+	
 	User login(String userName, String password){
 		
-		try {
-			BufferedReader br = new BufferedReader(new FileReader(bookListURL));
-			
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
-		}
+		User currentUser = null; //initialize
+		Iterator<User> userItr = userList.iterator();
+		while(userItr.hasNext()){
+			User tempUser = userItr.next();
+			if(tempUser.getUserName().equals(userName) && tempUser.getPassword().equals(password)){
+				currentUser = tempUser;
+				break;
+			}//if login successful
+		}//while
+		return currentUser; //return null if login failed.
+	}
+	
+	String getBookImgFileFullName(String isbn){
 		
-	}*/
+		return isbn + ".jpg"; //Extension .jpg
+		
+	}
+	
 	
 	void addBook(Book b){
+		b.setAddedDate(new Date());
 		bookList.add(b);
+		
 	}//add book
 	
 	void updateBook(String isbn, Book b){
@@ -168,17 +195,69 @@ public class Library {
 		return tempBookList;
 	}
 	
-	//ArrayList<Book> showBookList_overdue(){}
+	ArrayList<Book> getBorrowedBooks(int customerId){
 	
-	boolean rentBook(Book b){
-		
-		
-		
-		return false;
+		Iterator<Book> bookItr = bookList.iterator();
+		ArrayList<Book> tempBookList = new ArrayList<Book>();
+		while(bookItr.hasNext()){
+			Book tempBook = bookItr.next();
+			if(tempBook.getOwnerId()==customerId){
+				tempBookList.add(tempBook);
+				
+			}//end if
+		}//end while
+		return tempBookList;	
 	}
 	
-	boolean returnBook(Book b){
-		return false;
+	
+	ArrayList<Book> showBookList_overdue(){
+		
+		Iterator<Book> bookItr = bookList.iterator();
+		ArrayList<Book> tempBookList = new ArrayList<Book>();
+		while(bookItr.hasNext()){
+			Book tempBook = bookItr.next();
+			if(tempBook.isRented()==true){
+				
+				if(new Date().getTime() - tempBook.getLastRented().getTime() >=  timeLimit)
+				tempBookList.add(tempBook);
+				
+				
+			}//end if
+		}//end while
+		
+		return tempBookList;
+	}
+	
+	
+	
+	void rentBook(int customerId, String isbn){
+		
+		Iterator<Book> bookItr = bookList.iterator();
+		while(bookItr.hasNext()){
+			Book tempBook = bookItr.next();
+			if(tempBook.getIsbn().equals(isbn)){
+				tempBook.setLastRented(new Date());
+				tempBook.setRented(true);
+				tempBook.setOwnerId(customerId);
+				
+			}//end if
+		}//end while
+		
+	}
+	
+	void returnBook(String isbn){
+		
+
+		Iterator<Book> bookItr = bookList.iterator();
+		while(bookItr.hasNext()){
+			Book tempBook = bookItr.next();
+			if(tempBook.getIsbn().equals(isbn)){
+				tempBook.setRented(false);
+				tempBook.setOwnerId(0);
+				
+			}//end if
+		}//end while
+
 	}
 
 	
