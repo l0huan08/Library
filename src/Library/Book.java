@@ -3,14 +3,17 @@ package Library;
 import java.io.Serializable;
 import java.util.*;
 
+@SuppressWarnings("serial")
 public class Book implements Serializable {
+	
 	
 	private String bookName;
 	private String author;
 	private String isbn;
-	private Calendar lastRented;
-	private boolean isRented;
-	private int ownerId;
+	private Date lastRented; //update when rent
+	private Date AddedDate;
+	private boolean isRented; //update when rent
+	private int ownerId; //update when rent
 	private Category category;
 	
 	
@@ -33,10 +36,10 @@ public class Book implements Serializable {
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
-	public Calendar getLastRented() {
+	public Date getLastRented() {
 		return lastRented;
 	}
-	public void setLastRented(Calendar lastRented) {
+	public void setLastRented(Date lastRented) {
 		this.lastRented = lastRented;
 	}
 	public boolean isRented() {
@@ -51,11 +54,17 @@ public class Book implements Serializable {
 	public void setOwnerId(int ownerId) {
 		this.ownerId = ownerId;
 	}
-	public Category getCtg() {
+	public Date getAddedDate() {
+		return AddedDate;
+	}
+	public void setAddedDate(Date addedDate) {
+		AddedDate = addedDate;
+	}
+	public Category getCategory() {
 		return category;
 	}
-	public void setCtg(Category ctg) {
-		this.category = ctg;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 	
 	
