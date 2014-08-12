@@ -218,7 +218,7 @@ public class Library {
 			Book tempBook = bookItr.next();
 			if(tempBook.isRented()==true){
 				
-				if(tempBook.getLastRented().compareTo(new Date())<0)
+				if(new Date().getTime() - tempBook.getLastRented().getTime() >=  timeLimit)
 				tempBookList.add(tempBook);
 				
 				
