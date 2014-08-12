@@ -2,7 +2,7 @@ package Library;
 
 import javax.swing.*;
 import java.awt.*;
-//import java.awt.event.*;
+import java.awt.event.*;
 
 public class FrmCustomerLogin {
 	private JFrame jf;
@@ -30,6 +30,12 @@ public class FrmCustomerLogin {
 		jf.setLayout(new FlowLayout());
 		jf.setSize(350, 150);
 		jf.setVisible(true);
+		Close.addMouseListener(new MouseAdapter()
+		{
+			public void mouseClicked(MouseEvent me){
+				System.exit(0);
+			}
+		});
 	}
 	public static void main(String[] args){
 		new FrmCustomerLogin();
