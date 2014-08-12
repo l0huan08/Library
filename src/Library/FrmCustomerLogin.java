@@ -69,6 +69,7 @@ public class FrmCustomerLogin extends JFrame{
 		{
 			public void mouseClicked(MouseEvent me){
 				jf.setVisible(false);
+				new FrmLibrary();
 			}
 		});
 	}
