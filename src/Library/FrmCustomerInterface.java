@@ -20,6 +20,13 @@ public class FrmCustomerInterface extends JFrame{
 		jf.setSize(300, 150);
 		jf.setLayout(new FlowLayout());
 		jf.setVisible(true);
+		Return.addMouseListener(new MouseAdapter()
+		{
+			public void mouseClicked(MouseEvent me){
+				jf.setVisible(false);
+				new FrmCustomerReturnBook();
+			}
+		});
 		Close.addMouseListener(new MouseAdapter()
 		{
 			public void mouseClicked(MouseEvent me){
