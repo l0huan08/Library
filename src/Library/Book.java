@@ -1,8 +1,9 @@
 package Library;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Book {
+public class Book implements Serializable {
 	
 	private String bookName;
 	private String author;
