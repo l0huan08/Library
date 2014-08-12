@@ -12,13 +12,17 @@ public class FrmCustomerInterface extends JFrame{
 	FrmCustomerInterface(){
 		jf = new JFrame("Customer Interface");
 		Borrow = new JButton("Borrow Book");
+		Borrow.setBounds(20, 20, 130, 30);
 		Return = new JButton("Return Book");
+		Return.setBounds(230, 20, 130, 30);
 		Close = new JButton("Close");
+		Close.setBounds(125, 80, 130, 30);
+		jf.setLayout(null);
 		jf.add(Borrow);
 		jf.add(Return);
 		jf.add(Close);
-		jf.setSize(300, 150);
-		jf.setLayout(new FlowLayout());
+		jf.setSize(400, 200);
+		jf.setResizable(false);
 		jf.setVisible(true);
 		Return.addMouseListener(new MouseAdapter()
 		{

@@ -18,9 +18,9 @@ public class FrmCustomerReturnBook extends JFrame{
 		msg.setText("Rented Books");
 		msg.setBounds(20, 20, 80, 10);
 		Return = new JButton("Return");
-		Return.setBounds(60, 550, 75, 20);
+		Return.setBounds(60, 550, 75, 30);
 		close = new JButton("Close");
-		close.setBounds(180, 550, 75, 20);
+		close.setBounds(180, 550, 75, 30);
 		books = new JTable();
 		books.setBounds(20, 35, 300, 500);
 		jf.add(msg);

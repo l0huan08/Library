@@ -14,14 +14,21 @@ public class FrmCustomerLogin extends JFrame{
 	private String pwd, user;
 	FrmCustomerLogin(){
 		jf = new JFrame("Customer Login");
+		jf.setLayout(null);
 		UserName = new JLabel();
 		UserName.setText("Username:");
+		UserName.setBounds(60, 10, 70, 20);
 		PassWord = new JLabel();
 		PassWord.setText("Password:");
+		PassWord.setBounds(60, 40, 70, 20);
 		userName = new JTextField(20);
+		userName.setBounds(130, 10, 200, 20);
 		passWord = new JPasswordField(20);
+		passWord.setBounds(130, 40, 200, 20);
 		Login = new JButton("Login");
+		Login.setBounds(100, 100, 75, 30);
 		Close = new JButton("Close");
+		Close.setBounds(230, 100, 75, 30);
 		jf.add(UserName);
 		jf.add(userName);
 		jf.add(PassWord);
@@ -29,8 +36,7 @@ public class FrmCustomerLogin extends JFrame{
 		jf.add(Login);
 		jf.add(Close);
 		jf.setResizable(false);
-		jf.setLayout(new FlowLayout());
-		jf.setSize(350, 150);
+		jf.setSize(400, 200);
 		jf.setVisible(true);
 		Login.addMouseListener(new MouseAdapter()
 		{
