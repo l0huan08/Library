@@ -46,8 +46,13 @@ public class FrmCustomerLogin extends JFrame{
 					} else{
 						Library l = new Library();
 						if(l.loginCheck(user, pwd)){
-							jf.setVisible(false);
-							new FrmCustomerInterface();
+							User currentUser = l.login(user, pwd);
+							if(!currentUser.isAdmin()){
+								jf.setVisible(false);
+								new FrmCustomerInterface();
+							} else{
+								JOptionPane.showMessageDialog(jf, "Invalid username or password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
+							}
 						} else{
 							JOptionPane.showMessageDialog(jf, "Invalid username or password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
 						}
