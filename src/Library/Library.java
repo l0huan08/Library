@@ -17,11 +17,12 @@ public class Library {
 		
 	}//constructor
 	
+	
 	void saveBooks(){
 		
-		FileOutputStream fout = new FileOutputStream(bookListURL);
-		ObjectOutputStream oos = new ObjectOutputStream(fout);
-		oos.writeObject();
+	//	FileOutputStream fout = new FileOutputStream(bookListURL);
+		//ObjectOutputStream oos = new ObjectOutputStream(fout);
+	//	oos.writeObject();
 
 		
 	}
@@ -50,6 +51,7 @@ public class Library {
 		
 	}//login check
 	
+	/*
 	User login(String userName, String password){
 		
 		try {
@@ -62,7 +64,7 @@ public class Library {
 			
 		}
 		
-	}
+	}*/
 	
 	void addBook(Book b){
 		bookList.add(b);
