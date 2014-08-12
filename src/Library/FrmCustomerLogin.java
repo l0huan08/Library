@@ -12,7 +12,6 @@ public class FrmCustomerLogin extends JFrame{
 	private JTextField userName;
 	private JPasswordField passWord;
 	private JButton Login, Close;
-	private User currentUser;
 	private String pwd, user;
 	FrmCustomerLogin(){
 		jf = new JFrame("Customer Login");
@@ -45,7 +44,7 @@ public class FrmCustomerLogin extends JFrame{
 					if(pwd.length() == 0){
 						JOptionPane.showMessageDialog(jf, "Please enter your password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
 					} else{
-						Library l = new Library(currentUser);
+						Library l = new Library();
 						if(l.loginCheck(user, pwd)){
 							jf.setVisible(false);
 							new FrmCustomerInterface();
