@@ -1,10 +1,12 @@
 package Library;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 
-public class FrmCustomerLogin {
+@SuppressWarnings("serial")
+public class FrmCustomerLogin extends JFrame{
 	private JFrame jf;
 	private JLabel UserName, PassWord;
 	private JTextField userName;
@@ -37,19 +39,27 @@ public class FrmCustomerLogin {
 			public void mouseClicked(MouseEvent me){
 				pwd = new String(passWord.getPassword());
 				user = userName.getText();
-				Library l = new Library(currentUser);
-				if(l.loginCheck(user, pwd)){
-					jf.setVisible(false);
-					new FrmCustomerInterface();
+				if(user.length() == 0){
+					JOptionPane.showMessageDialog(jf, "Please enter your username.", "Login Failed", JOptionPane.ERROR_MESSAGE);
 				} else{
-					JOptionPane.showMessageDialog(jf, "Invalid username or password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
+					if(pwd.length() == 0){
+						JOptionPane.showMessageDialog(jf, "Please enter your password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
+					} else{
+						Library l = new Library(currentUser);
+						if(l.loginCheck(user, pwd)){
+							jf.setVisible(false);
+							new FrmCustomerInterface();
+						} else{
+							JOptionPane.showMessageDialog(jf, "Invalid username or password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
+						}
+					}
 				}
 			}
 		});   
 		Close.addMouseListener(new MouseAdapter()
 		{
 			public void mouseClicked(MouseEvent me){
-				System.exit(0);
+				jf.setVisible(false);
 			}
 		});
 	}
