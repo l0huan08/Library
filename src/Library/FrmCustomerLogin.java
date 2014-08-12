@@ -9,7 +9,7 @@ public class FrmCustomerLogin {
 	private JLabel UserName, PassWord;
 	private JTextField userName;
 	private JPasswordField passWord;
-	private JButton Login, Exit;
+	private JButton Login, Close;
 	FrmCustomerLogin(){
 		jf = new JFrame("Customer Login");
 		UserName = new JLabel();
@@ -19,13 +19,13 @@ public class FrmCustomerLogin {
 		userName = new JTextField(20);
 		passWord = new JPasswordField(20);
 		Login = new JButton("Login");
-		Exit = new JButton("Exit");
+		Close = new JButton("Close");
 		jf.add(UserName);
 		jf.add(userName);
 		jf.add(PassWord);
 		jf.add(passWord);
 		jf.add(Login);
-		jf.add(Exit);
+		jf.add(Close);
 		jf.setResizable(false);
 		jf.setLayout(new FlowLayout());
 		jf.setSize(350, 150);
