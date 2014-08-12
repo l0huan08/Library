@@ -13,12 +13,6 @@ public class Library {
 	final long timeLimit = 60*1000; // in millisecond
 	
 	
-	Library(User currentUser){
-		
-		
-	}//constructor
-	
-	
 	void saveBooks() throws IOException{
 		
 		FileOutputStream fout = new FileOutputStream(bookListURL);
@@ -227,7 +221,6 @@ public class Library {
 		
 		return tempBookList;
 	}
-	
 	
 	
 	void rentBook(int customerId, String isbn){
