@@ -45,7 +45,7 @@ public class FrmCustomerLogin {
 					JOptionPane.showMessageDialog(jf, "Invalid username or password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
 				}
 			}
-		});
+		});   
 		Close.addMouseListener(new MouseAdapter()
 		{
 			public void mouseClicked(MouseEvent me){
