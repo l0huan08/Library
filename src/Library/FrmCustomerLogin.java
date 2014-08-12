@@ -10,6 +10,8 @@ public class FrmCustomerLogin {
 	private JTextField userName;
 	private JPasswordField passWord;
 	private JButton Login, Close;
+	private User currentUser;
+	private String pwd, user;
 	FrmCustomerLogin(){
 		jf = new JFrame("Customer Login");
 		UserName = new JLabel();
@@ -30,6 +32,20 @@ public class FrmCustomerLogin {
 		jf.setLayout(new FlowLayout());
 		jf.setSize(350, 150);
 		jf.setVisible(true);
+		Login.addMouseListener(new MouseAdapter()
+		{
+			public void mouseClicked(MouseEvent me){
+				pwd = new String(passWord.getPassword());
+				user = userName.getText();
+				Library l = new Library(currentUser);
+				if(l.loginCheck(user, pwd)){
+					jf.setVisible(false);
+					new FrmCustomerInterface();
+				} else{
+					JOptionPane.showMessageDialog(jf, "Invalid username or password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		Close.addMouseListener(new MouseAdapter()
 		{
 			public void mouseClicked(MouseEvent me){
