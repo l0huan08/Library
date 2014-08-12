@@ -9,6 +9,7 @@ public class FrmCustomerInterface extends JFrame{
 	private JButton Borrow, Return, Close;
 	FrmCustomerInterface(){
 		jf = new JFrame("Customer Interface");
+		jf.setLocation(350, 50);
 		Borrow = new JButton("Borrow Book");
 		Borrow.setBounds(20, 20, 130, 30);
 		Return = new JButton("Return Book");

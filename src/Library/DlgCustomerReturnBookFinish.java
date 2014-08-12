@@ -11,6 +11,7 @@ public class DlgCustomerReturnBookFinish extends JFrame{
 	private JLabel msg, fine;
 	DlgCustomerReturnBookFinish(){
 		jd = new JDialog();
+		jd.setLocation(350, 50);
 		OK = new JButton("OK");
 		msg = new JLabel();
 		fine = new JLabel();

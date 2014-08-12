@@ -13,6 +13,7 @@ public class FrmCustomerReturnBook extends JFrame{
 	FrmCustomerReturnBook(){
 		jf = new JFrame();
 		jf.setLayout(null);
+		jf.setLocation(350, 50);
 		msg = new JLabel();
 		msg.setText("Rented Books");
 		msg.setBounds(20, 20, 80, 10);
