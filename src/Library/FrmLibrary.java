@@ -2,13 +2,17 @@ package Library;
 
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*; //javax.swing.JFrame;
-import java.io.*;
 
+import javax.swing.*; //javax.swing.JFrame;
+
+import java.io.*;
+/*
+ * Joe
+ * Very First Frame  Chose login Type
+ * */
 public class FrmLibrary extends JFrame {
 	public FrmLibrary(){
 		JFrame L = new JFrame("Library");
-		L.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		L.setSize(600, 600);
 		L.setLocation(350, 50);
 		L.setVisible(true);
@@ -25,46 +29,34 @@ public class FrmLibrary extends JFrame {
 		label2.setBounds(70, 85, 400, 100);
 		L.add(label2);		
 		
-		JButton BtnCustomer = new JButton("Customer");
-		BtnCustomer.setVisible(true);
-		BtnCustomer.setBounds(150, 120, 120, 30);
-		L.add(BtnCustomer);
+		JButton btnCustomer = new JButton("Customer");
+		btnCustomer.setVisible(true);
+		btnCustomer.setBounds(150, 120, 120, 30);
+		L.add(btnCustomer);
 		
-		JButton BtnAdmin = new JButton("Adminstrator");
-		BtnAdmin.setVisible(true);
-		BtnAdmin.setBounds(290, 120, 120, 30);
-		L.add(BtnAdmin);
+		JButton btnAdmin = new JButton("Adminstrator");
+		btnAdmin.setVisible(true);
+		btnAdmin.setBounds(290, 120, 120, 30);
+		L.add(btnAdmin);
 		
-		JButton BtnExit = new JButton("Exit");
-		BtnExit.setVisible(true);
-		BtnExit.setBounds(450, 520, 120, 30);
-		L.add(BtnExit);
+		JButton btnExit = new JButton("Exit");
+		btnExit.setVisible(true);
+		btnExit.setBounds(450, 520, 120, 30);
+		L.add(btnExit);
 		
-		//eCustomerLog CustomerLog = new eCustomerLog();
-		//eAdministratorLog AdministratorLog = new eAdministratorLog();
-		
-		//BtnAdmin.addActionListener(AdministratorLog);	
-		//BtnCustomer.addActionListener(CustomerLog);	
-		 
-//		BtnAdmin.addActionListener(new java.awt.event.ActionListener() {
-//		    public void actionPerformed(java.awt.event.ActionEvent evt) {
-//		       L.setVisible(false);
-//		    }
-//		});
-		
-		BtnAdmin.addActionListener(new java.awt.event.ActionListener() {
+		btnAdmin.addActionListener(new java.awt.event.ActionListener() {
 	    public void actionPerformed(java.awt.event.ActionEvent evt) {
 	    	FrmAdministratorLog AdministratorLog = new FrmAdministratorLog();
 	    	}
 		});
 		
-		BtnExit.addActionListener(new java.awt.event.ActionListener() {
+		btnExit.addActionListener(new java.awt.event.ActionListener() {
 		    public void actionPerformed(java.awt.event.ActionEvent evt) {
 		       System.exit(0);
 		    }
 		});	
 		
-		BtnCustomer.addActionListener(new java.awt.event.ActionListener() {
+		btnCustomer.addActionListener(new java.awt.event.ActionListener() {
 		    public void actionPerformed(java.awt.event.ActionEvent evt) {
 		       FrmCustomerLogin CustomerLogin = new FrmCustomerLogin();
 		    }

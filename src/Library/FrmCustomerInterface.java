@@ -3,38 +3,45 @@ package Library;
 import javax.swing.*;
 import java.awt.event.*;
 
+/**
+ * @author Run Yan
+ * add 8/12/2014
+ */
+
 @SuppressWarnings("serial")
 public class FrmCustomerInterface extends JFrame{
-	private JFrame jf;
-	private JButton Borrow, Return, Close;
+	private JFrame frmJf;
+	private JButton btnBorrow, btnReturn, btnClose;
+	private Library l;
+	private User u;
 	FrmCustomerInterface(){
-		jf = new JFrame("Customer Interface");
-		jf.setLocation(350, 50);
-		Borrow = new JButton("Borrow Book");
-		Borrow.setBounds(20, 20, 130, 30);
-		Return = new JButton("Return Book");
-		Return.setBounds(230, 20, 130, 30);
-		Close = new JButton("Close");
-		Close.setBounds(125, 80, 130, 30);
-		jf.setLayout(null);
-		jf.add(Borrow);
-		jf.add(Return);
-		jf.add(Close);
-		jf.setSize(400, 200);
-		jf.setResizable(false);
-		jf.setVisible(true);
-		Return.addMouseListener(new MouseAdapter()
+		frmJf = new JFrame("Customer Interface");
+		frmJf.setLocation(350, 50);
+		btnBorrow = new JButton("Borrow Book");
+		btnBorrow.setBounds(20, 20, 130, 30);
+		btnReturn = new JButton("Return Book");
+		btnReturn.setBounds(230, 20, 130, 30);
+		btnClose = new JButton("Close");
+		btnClose.setBounds(125, 80, 130, 30);
+		frmJf.setLayout(null);
+		frmJf.add(btnBorrow);
+		frmJf.add(btnReturn);
+		frmJf.add(btnClose);
+		frmJf.setSize(400, 200);
+		frmJf.setResizable(false);
+		frmJf.setVisible(true);
+		btnReturn.addMouseListener(new MouseAdapter()
 		{
 			public void mouseClicked(MouseEvent me){
-				jf.setVisible(false);
-				new FrmCustomerReturnBook();
+				frmJf.setVisible(false);
+				new FrmCustomerReturnBook(l, u);
 			}
 		});
-		Close.addMouseListener(new MouseAdapter()
+		btnClose.addMouseListener(new MouseAdapter()
 		{
 			public void mouseClicked(MouseEvent me){
-				jf.setVisible(false);
-				new FrmCustomerLogin();
+				frmJf.setVisible(false);
+				new FrmCustomerLogin(l, u);
 			}
 		});
 	}

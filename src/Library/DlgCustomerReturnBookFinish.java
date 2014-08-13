@@ -4,36 +4,47 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * @author Run Yan
+ * add 8/12/2014
+*/
 @SuppressWarnings("serial")
 public class DlgCustomerReturnBookFinish extends JFrame{
-	private JDialog jd;
-	private JButton OK;
-	private JLabel msg, fine;
+	private JDialog dlgJd;
+	private JButton btnOK;
+	private JLabel lblMsg, lblFine;
 	DlgCustomerReturnBookFinish(){
-		jd = new JDialog();
-		jd.setLocation(350, 50);
-		OK = new JButton("OK");
-		msg = new JLabel();
-		fine = new JLabel();
-		jd.setLayout(null);
-		jd.add(msg);
-		msg.setBounds(115, 10, 220, 20);
-		msg.setText("Book Returned!");
-		msg.setFont(new Font("Arial", Font.BOLD, 28));
-		jd.add(fine);
-		fine.setBounds(70, 40, 300, 30);
-		fine.setText("Please pay late fee: $99.99");
-		fine.setFont(new Font("Arial", Font.PLAIN, 24));
-		fine.setForeground(Color.red);
-		jd.add(OK);
-		OK.setBounds(195, 100, 60, 30);
-		jd.setTitle("Book Returned");
-		jd.setSize(450,210);
-		jd.setResizable(false);
-		jd.setVisible(true);
-		OK.addMouseListener(new MouseAdapter(){
+
+	}
+	DlgCustomerReturnBookFinish(double fine){
+		dlgJd = new JDialog();
+		dlgJd.setLocation(350, 50);
+		btnOK = new JButton("OK");
+		lblMsg = new JLabel();
+		lblFine = new JLabel();
+		dlgJd.setLayout(null);
+		dlgJd.add(lblMsg);
+		dlgJd.add(lblFine);
+		lblMsg.setBounds(115, 20, 220, 20);
+		lblMsg.setText("Book Returned!");
+		lblMsg.setFont(new Font("Arial", Font.BOLD, 28));
+		if(fine != 0){
+			lblFine.setText("Please pay late fee: $" + fine);
+		} else{
+			lblFine.setText("");
+		}
+		lblFine.setBounds(70, 50, 300, 30);
+		lblFine.setFont(new Font("Arial", Font.PLAIN, 24));
+		lblFine.setForeground(Color.red);
+		dlgJd.add(btnOK);
+		btnOK.setBounds(195, 100, 60, 30);
+		dlgJd.setTitle("Book Returned");
+		dlgJd.setSize(450,210);
+		dlgJd.setResizable(false);
+		dlgJd.setVisible(true);
+		btnOK.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent me){
-				jd.setVisible(false);
+				dlgJd.setVisible(false);
 			}
 		});
 	}
