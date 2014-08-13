@@ -21,7 +21,7 @@ public class FrmAddBooks extends JFrame {
 	private JTextField jtf_isbn, jtf_name, jtf_author;
 	private JLabel jl_isbn, jl_name, jl_author, jl_category, picLabel;
 	private JComboBox cb_category;
-	private String picPath;
+	private String picPath, picDirectory, picFileName;
 	private ImageIcon bookPic;
 
 	FrmAddBooks() {
@@ -86,7 +86,9 @@ public class FrmAddBooks extends JFrame {
 						FileDialog readFD = new FileDialog(new Frame(),
 								"Choose a file", FileDialog.LOAD);
 						readFD.setVisible(true);
-						picPath = readFD.getDirectory() + readFD.getFile();
+						picDirectory = readFD.getDirectory();
+						picFileName = readFD.getFile();
+						picPath = picDirectory + picFileName;
 						// System.out.println(picPath); //test
 						ImageIcon bookImgIcon = CreateStretchImageIcon(picPath,
 								picturePanel.getWidth(),
@@ -98,7 +100,9 @@ public class FrmAddBooks extends JFrame {
 		add.addMouseListener(new MouseAdapter() // add new book
 		{
 			public void mouseClicked(MouseEvent me) {
-				
+
+				Test test = new Test();
+
 				String currentISBN = jtf_isbn.getText();
 				String currentBookName = jtf_name.getText();
 				String currentAuthor = jtf_author.getText();
@@ -122,28 +126,48 @@ public class FrmAddBooks extends JFrame {
 				case "Travel": {
 					currentCategory = Category.TRAVEL;
 					break;
-				}//case travel
+				}// case travel
 				default:
 					currentCategory = null;
 
-				}//switch
-				
-				Book currentNewBook = new Book();
-				currentNewBook.setBookName(currentBookName);
-				currentNewBook.setAuthor(currentAuthor);
-				currentNewBook.setIsbn(currentISBN);
-				currentNewBook.setLastRented(null);
-				currentNewBook.setAddedDate(new Date());
-				currentNewBook.setRented(false);
-				currentNewBook.setOwnerId(Library.LIBRARY_OWNER_ID);
-				currentNewBook.setCategory(currentCategory);
-				
-				//***************************
-				new Library().addBook(currentNewBook);  //interface to other frame, set library object before use
-				//***************************
-				JOptionPane.showMessageDialog(FrmAddBooks.this, "New book added.");
-				
-			}//mouse clicked
+				}// switch
+
+				if (test.isIsbnValid(currentISBN)
+						&& test.isContentValid(currentBookName)
+						&& test.isContentValid(currentAuthor)) {
+
+					Book currentNewBook = new Book();
+					currentNewBook.setBookName(currentBookName);
+					currentNewBook.setAuthor(currentAuthor);
+					currentNewBook.setIsbn(currentISBN);
+					currentNewBook.setLastRented(null);
+					currentNewBook.setAddedDate(new Date());
+					currentNewBook.setRented(false);
+					currentNewBook.setOwnerId(Library.LIBRARY_OWNER_ID);
+					currentNewBook.setCategory(currentCategory);
+
+					// ***************************
+					new Library().addBook(currentNewBook); // interface to other
+															// frame, set
+															// library object
+															// before use
+
+					// ***************************
+					try {
+						new reName().rename(picDirectory, picFileName,currentISBN);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					JOptionPane.showMessageDialog(FrmAddBooks.this,"New book added.","OK",JOptionPane.PLAIN_MESSAGE);
+
+				}
+
+				else {
+					JOptionPane.showMessageDialog(FrmAddBooks.this, "Invaild book information!", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+
+			}// mouse clicked
 		});
 
 		close.addMouseListener(new MouseAdapter() {
