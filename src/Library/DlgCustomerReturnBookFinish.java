@@ -14,6 +14,9 @@ public class DlgCustomerReturnBookFinish extends JFrame{
 	private JButton btnOK;
 	private JLabel lblMsg, lblFine;
 	DlgCustomerReturnBookFinish(){
+
+	}
+	DlgCustomerReturnBookFinish(double fine){
 		dlgJd = new JDialog();
 		dlgJd.setLocation(350, 50);
 		btnOK = new JButton("OK");
@@ -21,12 +24,16 @@ public class DlgCustomerReturnBookFinish extends JFrame{
 		lblFine = new JLabel();
 		dlgJd.setLayout(null);
 		dlgJd.add(lblMsg);
-		lblMsg.setBounds(115, 10, 220, 20);
+		dlgJd.add(lblFine);
+		lblMsg.setBounds(115, 20, 220, 20);
 		lblMsg.setText("Book Returned!");
 		lblMsg.setFont(new Font("Arial", Font.BOLD, 28));
-		dlgJd.add(lblFine);
-		lblFine.setBounds(70, 40, 300, 30);
-		lblFine.setText("Please pay late fee: $99.99");
+		if(fine != 0){
+			lblFine.setText("Please pay late fee: $" + fine);
+		} else{
+			lblFine.setText("");
+		}
+		lblFine.setBounds(70, 50, 300, 30);
 		lblFine.setFont(new Font("Arial", Font.PLAIN, 24));
 		lblFine.setForeground(Color.red);
 		dlgJd.add(btnOK);
