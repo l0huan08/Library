@@ -12,7 +12,8 @@ public class Library {
 	ArrayList<User> userList;
 	final String bookListURL = "c:\\BookList.dat";
 	final String userListURL = "c:\\userList.dat";
-	final long timeLimit = 60*1000; // in millisecond
+	final long OverdueTimeLimit = 60*1000; // in millisecond
+	final long NewbookTimeLimit = 30*1000; // in millisecond
 	
 	
 	void saveBooks() throws IOException{
@@ -214,7 +215,7 @@ public class Library {
 			Book tempBook = bookItr.next();
 			if(tempBook.isRented()==true){
 				
-				if(new Date().getTime() - tempBook.getLastRented().getTime() >=  timeLimit)
+				if(new Date().getTime() - tempBook.getLastRented().getTime() >=  OverdueTimeLimit)
 				tempBookList.add(tempBook);
 				
 				
@@ -274,6 +275,27 @@ public class Library {
 		return tempBookList;
 		
 	}
+	
+	ArrayList<Book> showBookList_new(Category[] ctgList){
+		
+		ArrayList<Book> tempBookList = new ArrayList<Book>();
+		Category currentCtg = null;
+		for(int i =0;i<ctgList.length;i++){//for each category
+			currentCtg = ctgList[i];
+			Iterator<Book> bookItr = bookList.iterator();
+			while(bookItr.hasNext()){
+				Book tempBook = bookItr.next();
+				if(tempBook.getCategory()==currentCtg){
+					tempBookList.add(tempBook);
+					
+				}//end if
+			}//end while
+			
+		}//end for
+		return tempBookList;
+		
+	}
+	
 	
 	
 

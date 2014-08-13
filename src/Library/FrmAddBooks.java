@@ -1,10 +1,14 @@
 package Library;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 //Sen Li
 
@@ -14,9 +18,10 @@ public class FrmAddBooks extends JFrame{
 	private JPanel picturePanel;
 	private JButton choosePic, add, close;
 	private JTextField jtf_isbn,jtf_name,jtf_author;
-	private JLabel jl_isbn,jl_name,jl_author,jl_category;
+	private JLabel jl_isbn,jl_name,jl_author,jl_category,picLabel;
 	private JComboBox cb_category;
 	private String picPath;
+	private ImageIcon bookPic;
 	
 	FrmAddBooks(){
 		jf = new JFrame("Add book");
@@ -29,6 +34,13 @@ public class FrmAddBooks extends JFrame{
 		picturePanel = new JPanel();
 		picturePanel.setBackground(Color.BLACK);
 		picturePanel.setBounds(50, 20, 210, 280);
+		
+		picLabel = new JLabel();
+		picLabel.setSize(210,280);
+		picturePanel.add(picLabel);
+		
+		
+		
 		
 		jtf_isbn = new JTextField();
 		jtf_isbn.setBounds(120, 330, 300, 25);
@@ -73,10 +85,13 @@ public class FrmAddBooks extends JFrame{
 		{
 			public void mouseClicked(MouseEvent me){
 				
+				//System.out.println("fffff"); //test1
 				FileDialog readFD = new FileDialog(new Frame(),"Choose a file",FileDialog.LOAD);
 				readFD.setVisible(true);
 				picPath = readFD.getDirectory()+readFD.getFile();
-				
+				//System.out.println(picPath); //test
+				ImageIcon bookImgIcon=CreateStretchImageIcon(picPath,picturePanel.getWidth(),picturePanel.getHeight());
+				FrmAddBooks.this.picLabel.setIcon(bookImgIcon);
 			}
 		});
 		
@@ -88,6 +103,27 @@ public class FrmAddBooks extends JFrame{
 			}
 		});
 	}
+	
+	void loadPic(String path){
+		
+		
+	}
+	
+	private ImageIcon CreateStretchImageIcon(String imgPath,
+			int width, int height) {
+		BufferedImage img = null;
+		try {
+		    img = ImageIO.read(new File(imgPath));
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		
+		Image scaledImg = img.getScaledInstance(width, height,
+		        java.awt.Image.SCALE_SMOOTH);
+		ImageIcon imageIcon = new ImageIcon(scaledImg);
+		return imageIcon;
+	}
+	
 	public static void main(String[] args){
 		new FrmAddBooks();
 	}
