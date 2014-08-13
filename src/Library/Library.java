@@ -237,11 +237,11 @@ public class Library {
 		Iterator<Book> bookItr = bookList.iterator();
 		while(bookItr.hasNext()){
 			Book tempBook = bookItr.next();
-			if(tempBook.getIsbn().equals(isbn)){
+			if(tempBook.getIsbn().equals(isbn) && tempBook.isRented()==false){
 				tempBook.setLastRented(new Date());
 				tempBook.setRented(true);
 				tempBook.setOwnerId(customerId);
-				
+				return true;
 			}//end if
 		}//end while
 		return false;
