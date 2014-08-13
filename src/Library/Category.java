@@ -1,5 +1,5 @@
 package Library;
 
 public enum Category { 
-	CHILDREN, COOKING, HISTORY, TRAVEL
+	NONE, CHILDREN, COOKING, HISTORY, TRAVEL
 }

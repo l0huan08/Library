@@ -16,6 +16,12 @@ public class Book implements Serializable {
 	private int ownerId; //update when rent
 	private Category category;
 	
+	Book(){
+		
+		isRented = false;
+		ownerId = Library.LIBRARY_OWNER_ID;
+		category = Category.NONE;
+	}
 	
 	//getters & setters
 	public String getBookName() {
