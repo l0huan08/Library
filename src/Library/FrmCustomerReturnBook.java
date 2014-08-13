@@ -20,8 +20,7 @@ public class FrmCustomerReturnBook extends JFrame{
 	private final String[] TBBookColumnTitle = {"isbn", "name","bookObj"};
 	private boolean isResponseTbBooksSelecetedChanged = true;
 	private final int N_Book_Table_Columns = 3;
-	
-	private final int TBBook_BookObjColIndex = 2; //the column index of the book table
+	private final int TBBook_BookObjColIndex = 2; 
 	private Library library;
 	private User user;
 	private JFrame frmJf;
@@ -162,16 +161,13 @@ public class FrmCustomerReturnBook extends JFrame{
 	}
 	private class SelectionListener implements ListSelectionListener {
         JTable table;
-
         SelectionListener(JTable table) {
             this.table = table;
         }
-   
         public void valueChanged(ListSelectionEvent e) {
         		if (!getResponseTbBooksSelectedChanged()) {
         			return;
         		}
-        		
                 Book book = getSelectedBook();
                 if (book==null)
                 	pnlBookInfo.clear();
