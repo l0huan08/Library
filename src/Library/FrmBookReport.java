@@ -7,8 +7,8 @@ import javax.swing.*;
  * Search by Rented, In Library and Overdue *
  */
 public class FrmBookReport {
+	JFrame L = new JFrame();
 	public FrmBookReport(){
-		JFrame L = new JFrame();
 		//L.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		L.setSize(600, 400);
 		L.setLocation(250,40);

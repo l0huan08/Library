@@ -4,7 +4,7 @@ import java.io.*;
 
 public class reName {
 	
-	static final String DEFAULT_IMAGE_PATH =  "D:\\images";
+	static final String DEFAULT_IMAGE_PATH =  "./images";
 	
 	public void rename(String path, String oldName, String newName)throws Exception{
 		String srcPath = path + oldName;
