@@ -5,12 +5,11 @@ import javax.swing.*;
 //Joe Simply a Frame that lists all the Categories we have for different books
 
 public class FrmViewCategories {
+	JFrame L = new JFrame("View Categories");
 	public FrmViewCategories(){
-		JFrame L = new JFrame();
 		L.setSize(300, 400);
 		L.setLocation(250,40);
 		L.setVisible(true);
-		L.setTitle("View Categories");	
 		L.setLayout(null);
 
 		JTextArea TF = new JTextArea();

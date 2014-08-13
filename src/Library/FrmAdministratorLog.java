@@ -11,37 +11,39 @@ import java.awt.event.*;
 //				   PassWord:__________
 
 public class FrmAdministratorLog extends JFrame {
+	JFrame J = new JFrame();
+
 	
 	public FrmAdministratorLog() {
-		JFrame L = new JFrame();
-		L.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		L.setSize(600, 280);
-		L.setLocation(250,40);
-		L.setVisible(true);
-		L.setTitle("Admin Login");		
-		L.setLayout(null);
+		
+		J.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		J.setSize(600, 280);
+		J.setLocation(250,40);
+		J.setVisible(true);
+		J.setTitle("Admin Login");		
+		J.setLayout(null);
 		
 		JLabel label1 = new JLabel("Administrator Name: ");
 		label1.setBounds(50, 54, 120, 120);
-		L.add(label1);
+		J.add(label1);
 		
 		JLabel label2 = new JLabel("PassWord: ");
 		label2.setBounds(100, 85, 120, 120);
-		L.add(label2);
+		J.add(label2);
 		
 		// Administrator Log Name
 		JTextField LoginName = new JTextField();
 		LoginName.setBounds(180, 100, 290, 25);
-		L.add(LoginName);
+		J.add(LoginName);
 		
 		// Administrator Log PassWord
 		JTextField LoginPassWord = new JTextField();
 		LoginPassWord.setBounds(180, 131, 290, 25);
-		L.add(LoginPassWord);
+		J.add(LoginPassWord);
 		
 		JButton BtnLogin = new JButton("Login");
 		BtnLogin.setBounds(380, 190, 90, 25);
-		L.add(BtnLogin);
+		J.add(BtnLogin);
 		
 		BtnLogin.addActionListener(new java.awt.event.ActionListener() {
 	    public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,7 +69,7 @@ public class FrmAdministratorLog extends JFrame {
 				    public void actionPerformed(java.awt.event.ActionEvent evt) {
 				    	FrmAdminLogin AdministratorLog = new FrmAdminLogin();
 				    	F1C.setVisible(false);
-				    	L.setVisible(false);
+				    	J.setVisible(false);
 				    }
 				});
 	    	}else {	
