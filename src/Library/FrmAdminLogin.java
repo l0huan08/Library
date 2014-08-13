@@ -7,62 +7,57 @@ import javax.swing.*;
 
 import java.awt.event.*;
 
+// Joe, After Administrator sucessfully Login, Main menu  (Books, Customers and Categories)
+
 public class FrmAdminLogin extends JFrame {
 
 	public FrmAdminLogin() {
 		JFrame L = new JFrame();
-		L.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		L.setSize(600, 280);
 		L.setLocation(250,40);
 		L.setVisible(true);
 		L.setTitle("Admin Login");		
 		L.setLayout(null);
 		
-		JButton BtnBooks = new JButton("Books");
-		BtnBooks.setBounds(140, 80, 90, 40);
-		L.add(BtnBooks);
+		JButton btnBooks = new JButton("Books");
+		btnBooks.setBounds(140, 80, 90, 40);
+		L.add(btnBooks);
 		
-		JButton BtnCustomers = new JButton("Customers");
-		BtnCustomers.setBounds(260, 80, 110, 40);
-		L.add(BtnCustomers);
+		JButton btnCustomers = new JButton("Customers");
+		btnCustomers.setBounds(260, 80, 110, 40);
+		L.add(btnCustomers);
 		
-		JButton BtnCategories = new JButton("Categories");
-		BtnCategories.setBounds(400, 80, 110, 40);
-		L.add(BtnCategories);
+		JButton btnCategories = new JButton("Categories");
+		btnCategories.setBounds(400, 80, 110, 40);
+		L.add(btnCategories);
 		
-		JButton BtnClose = new JButton("Clsoe");
-		BtnClose.setBounds(450, 190, 90, 40);
-		L.add(BtnClose);
+		JButton btnClose = new JButton("Clsoe");
+		btnClose.setBounds(450, 190, 90, 40);
+		L.add(btnClose);
 		
-		BtnBooks.addActionListener(new java.awt.event.ActionListener() {
+		btnBooks.addActionListener(new java.awt.event.ActionListener() {
 		    public void actionPerformed(java.awt.event.ActionEvent evt) {
 		    	FrmBooksManagement N = new FrmBooksManagement();
 		    }
 		});
 		
-		BtnCustomers.addActionListener(new java.awt.event.ActionListener() {
+		btnCustomers.addActionListener(new java.awt.event.ActionListener() {
 		    public void actionPerformed(java.awt.event.ActionEvent evt) {
-		    	//F1C.setVisible(false);
+		    	FrmCustomersManagement N = new FrmCustomersManagement();
 		    }
 		});
 		
-		BtnCategories.addActionListener(new java.awt.event.ActionListener() {
+		btnCategories.addActionListener(new java.awt.event.ActionListener() {
 		    public void actionPerformed(java.awt.event.ActionEvent evt) {
-		    	//F1C.setVisible(false);
+		    	FrmViewCategories N = new FrmViewCategories();
 		    }
 		});
 		
-		BtnClose.addActionListener(new java.awt.event.ActionListener() {
+		btnClose.addActionListener(new java.awt.event.ActionListener() {
 		    public void actionPerformed(java.awt.event.ActionEvent evt) {
 		    	L.setVisible(false);
 		    }
 		});
-		
-//		BtnLogin.addActionListener(new java.awt.event.ActionListener() {
-//			public void actionPerformed(java.awt.event.ActionEvent evt){
-//				
-//	    	}
-//	    });
 	}
 }
 
