@@ -306,7 +306,7 @@ public class FrmBorrowBook extends JFrame {
 		if (this.library==null)
 			return null;
 		else {
-			List<Book> books =library.getBorrowedBooks(customer.getUserId());
+			List<Book> books =library.showBookList_BorrowedByCustomer(customer.getUserId());
 			int nBooks = books.size();//number of books
 			Object[][] booksData = new Object[nBooks][];
 			for (int i=0;i<nBooks;i++) {
