@@ -4,7 +4,7 @@ import java.io.*;
 import java.text.*;
 import java.util.*;
 
-//Sen Li
+//Sen Li 
 
 public class Library {
 	
@@ -12,6 +12,7 @@ public class Library {
 	ArrayList<User> userList;
 	final String bookListURL = "c:\\BookList.dat";
 	final String userListURL = "c:\\userList.dat";
+	static final int LIBRARY_OWNER_ID = 0; // ownerId of the library is 0. i.e. not rented.  
 	final long OverdueTimeLimit = 60*1000; // in millisecond
 	final long NewbookTimeLimit = 30*1000; // in millisecond
 	
@@ -254,7 +255,7 @@ public class Library {
 			Book tempBook = bookItr.next();
 			if(tempBook.getIsbn().equals(isbn)){
 				tempBook.setRented(false);
-				tempBook.setOwnerId(0);
+				tempBook.setOwnerId(LIBRARY_OWNER_ID);
 				
 			}//end if
 		}//end while
@@ -303,8 +304,5 @@ public class Library {
 		
 	}
 	
-	
-	
-
-	
+		
 }
