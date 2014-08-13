@@ -232,7 +232,7 @@ public class Library {
 	}
 	
 	
-	void rentBook(int customerId, String isbn){
+	boolean rentBook(int customerId, String isbn){
 		
 		Iterator<Book> bookItr = bookList.iterator();
 		while(bookItr.hasNext()){
@@ -244,7 +244,7 @@ public class Library {
 				
 			}//end if
 		}//end while
-		
+		return false;
 	}
 	
 	void returnBook(String isbn){

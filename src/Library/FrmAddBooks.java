@@ -139,7 +139,7 @@ public class FrmAddBooks extends JFrame {
 				currentNewBook.setCategory(currentCategory);
 				
 				//***************************
-				new Library().addBook(currentNewBook);  //interface to other frame, set library object before use
+				if(new Library().addBook(currentNewBook));  //interface to other frame, set library object before use
 				//***************************
 				
 			}//mouse clicked
