@@ -4,6 +4,8 @@ import java.io.*;
 import java.text.*;
 import java.util.*;
 
+//Sen Li
+
 public class Library {
 	
 	ArrayList<Book> bookList;
@@ -189,7 +191,7 @@ public class Library {
 		return tempBookList;
 	}
 	
-	ArrayList<Book> getBorrowedBooks(int customerId){
+	ArrayList<Book> showBookList_BorrowedByCustomer(int customerId){
 	
 		Iterator<Book> bookItr = bookList.iterator();
 		ArrayList<Book> tempBookList = new ArrayList<Book>();
@@ -252,6 +254,28 @@ public class Library {
 		}//end while
 
 	}
+	
+	ArrayList<Book> showBookList_preferedCategory(Category[] ctgList){
+		
+		ArrayList<Book> tempBookList = new ArrayList<Book>();
+		Category currentCtg = null;
+		for(int i =0;i<ctgList.length;i++){//for each category
+			currentCtg = ctgList[i];
+			Iterator<Book> bookItr = bookList.iterator();
+			while(bookItr.hasNext()){
+				Book tempBook = bookItr.next();
+				if(tempBook.getCategory()==currentCtg){
+					tempBookList.add(tempBook);
+					
+				}//end if
+			}//end while
+			
+		}//end for
+		return tempBookList;
+		
+	}
+	
+	
 
 	
 }
