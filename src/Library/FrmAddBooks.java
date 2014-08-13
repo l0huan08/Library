@@ -81,7 +81,7 @@ public class FrmAddBooks extends JFrame{
 		jf.setLayout(null);
 		jf.setVisible(true);
 		
-		choosePic.addMouseListener(new MouseAdapter()
+		choosePic.addMouseListener(new MouseAdapter() //choose a picture
 		{
 			public void mouseClicked(MouseEvent me){
 				
@@ -92,6 +92,20 @@ public class FrmAddBooks extends JFrame{
 				//System.out.println(picPath); //test
 				ImageIcon bookImgIcon=CreateStretchImageIcon(picPath,picturePanel.getWidth(),picturePanel.getHeight());
 				FrmAddBooks.this.picLabel.setIcon(bookImgIcon);
+			}
+		});
+		
+		add.addMouseListener(new MouseAdapter()  //add new book
+		{
+			public void mouseClicked(MouseEvent me){
+				Book currentNewBook = new Book();
+				String currentISBN =  jtf_isbn.getText();
+				String currentBookName =  jtf_name.getText();
+				String currentAuthor =  jtf_author.getText();
+				String currentCategory = (String) cb_category.getSelectedItem();
+				
+				
+				
 			}
 		});
 		
