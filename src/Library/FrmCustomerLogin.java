@@ -87,7 +87,6 @@ public class FrmCustomerLogin extends JFrame{
 		});
 	}
 	public static void main(String[] args){
-		FrmCustomerLogin login = new FrmCustomerLogin();
-		new FrmCustomerLogin(login.library, login.currentUser);
+		new FrmCustomerLogin();
 	}
 }
