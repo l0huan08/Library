@@ -149,6 +149,18 @@ public class PanelBookInfo extends JPanel {
 	}
 	
 	/**
+	 * Clear the entries of the book info
+	 */
+	public void clear() {
+		this.lblBookImg.setIcon(null);
+		this.txtStatus.setText("");
+		this.txtIsbn.setText("");
+		this.txtName.setText("");
+		this.txtAuthor.setText("");
+		this.cmbCategory.setSelectedIndex(0);
+	}
+	
+	/**
 	 * Load information from book, fill the attribute boxes.
 	 * @param book
 	 */

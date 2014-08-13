@@ -2,6 +2,8 @@ package Library;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.*;
@@ -15,14 +17,17 @@ import java.util.*;
 
 @SuppressWarnings("serial")
 public class FrmCustomerReturnBook extends JFrame{
+	private final String[] TBBookColumnTitle = {"isbn", "name","bookObj"};
+	private boolean isResponseTbBooksSelecetedChanged = true;
 	private final int N_Book_Table_Columns = 2;
-	private final String[] tbBookColumnTitle = {"isbn", "name"};
+	private final int TBBook_IsbnColIndex=0; //the column index of the book table
+	private final int TBBook_BookObjColIndex=2; //the column index of the book table
 	private Library library;
 	private User user;
 	private JFrame frmJf;
 	private JLabel lblMsg;
 	private JButton btnReturn, btnClose;
-	private JTable tblBooks;
+	private JTable tbBooks;
 	private JPanel pnlLeft, pnlRight;
 	private PanelBookInfo pnlBookInfo;
 	private DefaultTableModel tbBooksModel;
@@ -47,18 +52,21 @@ public class FrmCustomerReturnBook extends JFrame{
 		btnReturn.setBounds(80, 400, 75, 30);
 		btnClose = new JButton("Close");
 		btnClose.setBounds(220, 400, 75, 30);
-		tblBooks = new JTable(null,tbBookColumnTitle);
-		tblBooks.setBorder(new LineBorder(new Color(0, 0, 0)));
-		tblBooks.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tbBooksModel = new DefaultTableModel(
-				new Object[][] {
+				new Object[][] { {"huangli","example",new Book()},
+						{"haha","ex2",new Book()}
 				},
-				tbBookColumnTitle
+				TBBookColumnTitle
 		);
-		tblBooks.setModel(tbBooksModel);
-		tblBooks.setBounds(20, 35, 380, 330);
+		tbBooks = new JTable();
+		tbBooks.setModel(tbBooksModel);
+		tbBooks.setBorder(new LineBorder(new Color(0, 0, 0)));
+		tbBooks.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tbBooks.setBounds(20, 35, 380, 330);
+		SelectionListener listener = new SelectionListener(tbBooks);
+		tbBooks.getSelectionModel().addListSelectionListener(listener);
 		pnlLeft.add(lblMsg);
-		pnlLeft.add(tblBooks);
+		pnlLeft.add(tbBooks);
 		pnlLeft.add(btnReturn);
 		pnlLeft.add(btnClose);
 		pnlLeft.setSize(600, 500);
@@ -76,9 +84,10 @@ public class FrmCustomerReturnBook extends JFrame{
 		btnReturn.addMouseListener(new MouseAdapter()
 		{
 			public void mouseClicked(MouseEvent me){
-				//new DlgCustomerReturnBookFinish();
-				double fine = 20;
+				double fine = 0;
 				new DlgCustomerReturnBookFinish(fine);
+				//library.returnBook(getISBN());
+				refreshTable();
 			}
 		});
 		btnClose.addMouseListener(new MouseAdapter()
@@ -98,15 +107,16 @@ public class FrmCustomerReturnBook extends JFrame{
 		Object[][] data = getRentedBookTableData();
 		this.tbBooksModel.addRow(data);;
 	}
-	private void returnBook(){
-		int columns = tblBooks.getColumnCount();
-		
+	private String getISBN(){
+		int row = tbBooks.getSelectedRow();
+		String isbn = (String)tbBooksModel.getValueAt(row, 1);
+		return isbn;
 	}
 	private Object[] createBookTableRowData(Book book){
 		Object[] row = new Object[N_Book_Table_Columns];
 		row[0] = book.getIsbn();
 		row[1] = book.getBookName();
-		return row;
+		return row; 
 	}
 	private Object[][] getRentedBookTableData(){
 		if(this.library == null){
@@ -125,8 +135,52 @@ public class FrmCustomerReturnBook extends JFrame{
 			}
 		}
 	}
+	private Book getSelectedBook() {
+		JTable table = this.tbBooks;
+		int selRow = table.getSelectedRow();
+        //String isbn = (String)table.getValueAt(selRow, TBBook_IsbnColIndex);
+        Book book = (Book)table.getValueAt(selRow, TBBook_BookObjColIndex);
+        return book;
+	}
+	private void setResponseTbBooksSelectedChanged(boolean enable) {
+		isResponseTbBooksSelecetedChanged = enable;
+	}
+	
+	private boolean getResponseTbBooksSelectedChanged() {
+		return isResponseTbBooksSelecetedChanged;
+	}
+	private class SelectionListener implements ListSelectionListener {
+        JTable table;
+
+        SelectionListener(JTable table) {
+            this.table = table;
+        }
+   
+        public void valueChanged(ListSelectionEvent e) {
+        		if (!getResponseTbBooksSelectedChanged()) {
+        			return;
+        		}
+        		
+                
+                Book book = getSelectedBook();
+                pnlBookInfo.ReadFrom(book);
+            }
+    }
 	public static void main(String[] args){
-		FrmCustomerReturnBook Return = new FrmCustomerReturnBook();
-		//Return.tblBooks = new JTable(null, tbBookColumnTitle);
+		Library lib=new Library();
+		Book b1 = new Book();
+		Book b2 = new Book();
+		b1.setIsbn("111");
+		b1.setBookName("book1");
+		b1.setCategory(Category.HISTORY);
+		b2.setIsbn("222");
+		b2.setBookName("book2");
+		b2.setCategory(Category.COOKING);
+		lib.addBook(b1);
+		lib.addBook(b2);
+		User u1 = new User();
+		u1.setUserName("huangli");
+		u1.setUserId(123);
+		new FrmCustomerReturnBook(lib, u1);
 	}
 }

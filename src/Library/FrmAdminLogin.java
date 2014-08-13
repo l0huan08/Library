@@ -10,30 +10,29 @@ import java.awt.event.*;
 // Joe, After Administrator sucessfully Login, Main menu  (Books, Customers and Categories)
 
 public class FrmAdminLogin extends JFrame {
-
+	JFrame J = new JFrame("Admin Login");
+	
 	public FrmAdminLogin() {
-		JFrame L = new JFrame();
-		L.setSize(600, 280);
-		L.setLocation(250,40);
-		L.setVisible(true);
-		L.setTitle("Admin Login");		
-		L.setLayout(null);
+		J.setSize(600, 280);
+		J.setLocation(250,40);
+		J.setVisible(true);
+		J.setLayout(null);
 		
 		JButton btnBooks = new JButton("Books");
 		btnBooks.setBounds(140, 80, 90, 40);
-		L.add(btnBooks);
+		J.add(btnBooks);
 		
 		JButton btnCustomers = new JButton("Customers");
 		btnCustomers.setBounds(260, 80, 110, 40);
-		L.add(btnCustomers);
+		J.add(btnCustomers);
 		
 		JButton btnCategories = new JButton("Categories");
 		btnCategories.setBounds(400, 80, 110, 40);
-		L.add(btnCategories);
+		J.add(btnCategories);
 		
 		JButton btnClose = new JButton("Clsoe");
 		btnClose.setBounds(450, 190, 90, 40);
-		L.add(btnClose);
+		J.add(btnClose);
 		
 		btnBooks.addActionListener(new java.awt.event.ActionListener() {
 		    public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -55,7 +54,7 @@ public class FrmAdminLogin extends JFrame {
 		
 		btnClose.addActionListener(new java.awt.event.ActionListener() {
 		    public void actionPerformed(java.awt.event.ActionEvent evt) {
-		    	L.setVisible(false);
+		    	J.setVisible(false);
 		    }
 		});
 	}

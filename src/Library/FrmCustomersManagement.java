@@ -11,8 +11,8 @@ import javax.swing.JTable;
 //Joe, Customers Management Frame, Including Adding Updating and Deleting. 
 
 public class FrmCustomersManagement {
+	JFrame L = new JFrame();
 	public FrmCustomersManagement(){
-		JFrame L = new JFrame();
 		L.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		L.setSize(800, 800);
 		L.setLocation(250,40);
