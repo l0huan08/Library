@@ -1,9 +1,14 @@
+//TODO: borrow book table, when select one row, update the book's info to the right part
+//Click "Close" this frame close
+//Click "Borrow" show FrmBookBorrowFinish window
 package Library;
 
 import java.awt.*;
 
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.*;
 
 import java.awt.event.*;
@@ -27,11 +32,16 @@ public class FrmBorrowBook extends JFrame {
 		Available,
 		All,
 	}
-	private final int N_Book_Table_Columns = 2;
-	private final String[] tbBookColumnTitle = {"isbn", "name"};
+	private final int N_Book_Table_Columns = 3;
+	private final String[] TBBookColumnTitle = {"isbn", "name","bookObj"};
+	private final int TBBook_IsbnColIndex=0; //the column index of the book table
+	private final int TBBook_BookObjColIndex=2; //the column index of the book table
+	
 	
 	private Library library;
 	private User customer;
+	
+	private boolean isResponseTbBooksSelecetedChanged=true;
 	
 	private JPanel contentPane;
 	private JPanel pnlLeft;
@@ -61,7 +71,25 @@ public class FrmBorrowBook extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FrmBorrowBook frame = new FrmBorrowBook();
+					Library lib=new Library();
+					Book b1 = new Book();
+					Book b2 = new Book();
+					b1.setIsbn("111");
+					b1.setBookName("book1");
+					b1.setCategory(Category.HISTORY);
+					
+					b2.setIsbn("222");
+					b2.setBookName("book2");
+					
+					lib.addBook(b1);
+					lib.addBook(b2);
+					
+					User u1 = new User();
+					u1.setUserName("huangli");
+					u1.setUserId(123);
+					
+					FrmBorrowBook frame = new FrmBorrowBook(lib,u1);
+					
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -73,7 +101,10 @@ public class FrmBorrowBook extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrmBorrowBook() {
+	public FrmBorrowBook(Library library, User customer) {
+		this.library=library;
+		this.customer=customer;
+		
 		setTitle("Borrow Book");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 593, 394);
@@ -95,6 +126,7 @@ public class FrmBorrowBook extends JFrame {
 		pnlBooks.add(rdAvailable);
 		
 		rdAll = new JRadioButton("All");
+		rdAll.setSelected(true);
 		pnlBooks.add(rdAll);
 		
 		btngrpViewBooks = new ButtonGroup();
@@ -120,9 +152,10 @@ public class FrmBorrowBook extends JFrame {
 		
 
 		tbBooksModel = new DefaultTableModel(
-				new Object[][] {
+				new Object[][] { {"huangli","example",new Book()},
+						{"haha","ex2",new Book()}
 				},
-				tbBookColumnTitle
+				TBBookColumnTitle
 		);
 		
 		
@@ -169,7 +202,7 @@ public class FrmBorrowBook extends JFrame {
 		pnlRight.setLayout(new BorderLayout(0, 0));
 		
 		//--------------- add by Huang Li ----------------
-		pnlBookInfo = new PanelBookInfo();
+		pnlBookInfo = new PanelBookInfo(this.library);
 		pnlRight.add(pnlBookInfo,BorderLayout.CENTER);
 		//------------------------------------------------
 		
@@ -184,6 +217,7 @@ public class FrmBorrowBook extends JFrame {
 		
 		
 		//---------------- Event Handlers -------------------------
+		///btnView
 		this.btnView.addActionListener( new ActionListener() {
 
 			@Override
@@ -192,15 +226,65 @@ public class FrmBorrowBook extends JFrame {
 			}
 			
 		});
+		
+		///tbBooks
+		SelectionListener listener = new SelectionListener(tbBooks);
+		tbBooks.getSelectionModel().addListSelectionListener(listener);
+		
+		///btnClose
+		btnClose.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				FrmBorrowBook.this.dispose();
+			}	
+		});
+		
+		///btnBorrow
 	}
 	
-	
-	
-	public FrmBorrowBook(Library library, User customer){
-		this();
-		this.library=library;
-		this.customer=customer;
+	public FrmBorrowBook(){
+		this(null,null);
 	}
+	
+	/**
+	 * Set whether will the TbBooksSelectedChanged envent handler will be triggered
+	 */
+	private void setResponseTbBooksSelectedChanged(boolean enable) {
+		isResponseTbBooksSelecetedChanged = enable;
+	}
+	
+	private boolean getResponseTbBooksSelectedChanged() {
+		return isResponseTbBooksSelecetedChanged;
+	}
+	
+	private class SelectionListener implements ListSelectionListener {
+        JTable table;
+
+        SelectionListener(JTable table) {
+            this.table = table;
+        }
+        
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            	//if (e.getSource() == table.getColumnModel().getSelectionModel() ){
+                //&& table.getColumnSelectionAllowed() ){
+        	
+        		if (!getResponseTbBooksSelectedChanged()) {
+        			return;
+        		}
+        		
+                //Event handling
+                //
+                //Here we only use Single Line select, use firstRow
+                int selRow = table.getSelectedRow();
+                String isbn = (String)table.getValueAt(selRow, TBBook_IsbnColIndex);
+                Book book = (Book)table.getValueAt(selRow, TBBook_BookObjColIndex);
+                pnlBookInfo.ReadFrom(book);
+            }
+        //} //if
+        
+    }
+	
 	
 	/**
 	 * Fill the table with books according to the UI options
@@ -232,7 +316,11 @@ public class FrmBorrowBook extends JFrame {
 		}
 		
 		Category[] categories = subscribeCategories.toArray(new Category[0]);
+		
+		this.setResponseTbBooksSelectedChanged(false);
 		refreshBookTable(viewType,categories);
+		this.setResponseTbBooksSelectedChanged(true);
+		
 	}
 	
 	private void refreshBookTable(BookViewType viewType,Category[] subscribeNewBookCategories) {
@@ -256,7 +344,10 @@ public class FrmBorrowBook extends JFrame {
 			break;
 		}
 		
-		this.tbBooksModel.addRow(data);
+		int nDataRows = data.length;
+		for (int i=0;i<nDataRows;i++){
+			this.tbBooksModel.addRow(data[i]);
+		}
 	}
 	
 
@@ -265,6 +356,7 @@ public class FrmBorrowBook extends JFrame {
 		Object[] row = new Object[N_Book_Table_Columns];
 		row[0]=book.getIsbn();
 		row[1]=book.getBookName();
+		row[2]=book;
 		return row;
 	}
 	
@@ -284,29 +376,25 @@ public class FrmBorrowBook extends JFrame {
 	}
 	
 	private Object[][] getNewBookTableData(Category[] subScribeCategories) {
-		//TODO: need library.getNewBooks(Category[] subScribeCategories) method.
-		
-		
-		return null;
-//		if (this.library==null)
-//			return null;
-//		else {
-//			List<Book> books =library.();
-//			int nBooks = books.size();//number of books
-//			Object[][] booksData = new Object[nBooks][];
-//			for (int i=0;i<nBooks;i++) {
-//				booksData[i]=createBookTableRowData(books.get(i));
-//			}
-//
-//			return booksData;
-//		}
+		if (this.library==null)
+			return null;
+		else {
+			List<Book> books =library.showBookList_new(subScribeCategories);
+			int nBooks = books.size();//number of books
+			Object[][] booksData = new Object[nBooks][];
+			for (int i=0;i<nBooks;i++) {
+				booksData[i]=createBookTableRowData(books.get(i));
+			}
+
+			return booksData;
+		}
 	}
 	
 	private Object[][] getAllBookTableData() {
 		if (this.library==null)
 			return null;
 		else {
-			List<Book> books =library.showBookList_BorrowedByCustomer(customer.getUserId());
+			List<Book> books =library.showBookList_all();
 			int nBooks = books.size();//number of books
 			Object[][] booksData = new Object[nBooks][];
 			for (int i=0;i<nBooks;i++) {
