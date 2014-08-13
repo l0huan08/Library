@@ -284,6 +284,7 @@ public class Library {
 	
 	ArrayList<Book> showBookList_new(Category[] ctgList){
 		
+		Date currentDate = new Date(); 
 		ArrayList<Book> tempBookList = new ArrayList<Book>();
 		Category currentCtg = null;
 		for(int i =0;i<ctgList.length;i++){//for each category
@@ -293,7 +294,7 @@ public class Library {
 				Book tempBook = bookItr.next();
 				if(tempBook.getCategory()==currentCtg){
 					
-					if(new Date().getTime() - tempBook.getAddedDate().getTime() < NewbookTimeLimit)
+					if(currentDate.getTime() - tempBook.getAddedDate().getTime() < NewbookTimeLimit)
 					tempBookList.add(tempBook);
 					
 				}//end if
