@@ -6,10 +6,11 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import java.awt.event.*;
+//
+//Joe, Admin Login   Name:____________
+//				   PassWord:__________
 
-public class FrmAdministratorLog extends JFrame {//implements ActionListener{	
-//	public void actionPerformed(ActionEvent e){
-//	}	
+public class FrmAdministratorLog extends JFrame {
 	
 	public FrmAdministratorLog() {
 		JFrame L = new JFrame();
@@ -28,10 +29,12 @@ public class FrmAdministratorLog extends JFrame {//implements ActionListener{
 		label2.setBounds(100, 85, 120, 120);
 		L.add(label2);
 		
+		// Administrator Log Name
 		JTextField LoginName = new JTextField();
 		LoginName.setBounds(180, 100, 290, 25);
 		L.add(LoginName);
 		
+		// Administrator Log PassWord
 		JTextField LoginPassWord = new JTextField();
 		LoginPassWord.setBounds(180, 131, 290, 25);
 		L.add(LoginPassWord);
@@ -42,6 +45,7 @@ public class FrmAdministratorLog extends JFrame {//implements ActionListener{
 		
 		BtnLogin.addActionListener(new java.awt.event.ActionListener() {
 	    public void actionPerformed(java.awt.event.ActionEvent evt) {
+	    	// Correct Info. provided
 	    	if(LoginName.getText().equals("a") && LoginPassWord.getText().equals("1")){
 				JFrame F1C = new JFrame();
 				F1C.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,10 +66,12 @@ public class FrmAdministratorLog extends JFrame {//implements ActionListener{
 				BtnConfirm.addActionListener(new java.awt.event.ActionListener() {
 				    public void actionPerformed(java.awt.event.ActionEvent evt) {
 				    	FrmAdminLogin AdministratorLog = new FrmAdminLogin();
+				    	F1C.setVisible(false);
+				    	L.setVisible(false);
 				    }
 				});
-	    	}
-	    	else {
+	    	}else {	
+	    		// Wrong info. provided
 				JFrame F1C = new JFrame();
 				F1C.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				F1C.setSize(350, 200);
