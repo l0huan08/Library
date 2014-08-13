@@ -133,6 +133,7 @@ public class PanelBookInfo extends JPanel {
 	
 	
 	public PanelBookInfo(Library library) {
+		this();
 		this.library=library;
 	}
 	
