@@ -286,6 +286,8 @@ public class Library {
 			while(bookItr.hasNext()){
 				Book tempBook = bookItr.next();
 				if(tempBook.getCategory()==currentCtg){
+					
+					if(new Date().getTime() - tempBook.getAddedDate().getTime() < NewbookTimeLimit)
 					tempBookList.add(tempBook);
 					
 				}//end if
