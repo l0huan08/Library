@@ -1,39 +1,19 @@
 package Library;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.*;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.*;
+import javax.swing.border.*;
+import javax.swing.table.*;
 
-import java.awt.GridLayout;
+import java.awt.event.*;
 
-import javax.swing.BoxLayout;
-import javax.swing.border.TitledBorder;
-import javax.swing.ButtonGroup;
-import javax.swing.JRadioButton;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+import javax.swing.GroupLayout.*;
+import javax.swing.LayoutStyle.*;
 
-import java.awt.FlowLayout;
-
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.ListSelectionModel;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.LineBorder;
-
-import java.awt.Color;
+import java.util.*;
 import java.util.List;
 
-import javax.swing.border.MatteBorder;
-import javax.swing.border.BevelBorder;
-import javax.swing.event.TableModelListener;
 
 /**
  * Borrow Books Frame
@@ -74,21 +54,21 @@ public class FrmBorrowBook extends JFrame {
 	private DefaultTableModel tbBooksModel;
 	
 	
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					FrmBorrowBook frame = new FrmBorrowBook();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+	/**
+	 * Test
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FrmBorrowBook frame = new FrmBorrowBook();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the frame.
@@ -122,9 +102,6 @@ public class FrmBorrowBook extends JFrame {
 		btngrpViewBooks.add(rdAvailable);
 		btngrpViewBooks.add(rdAll);
 		
-		btnView = new JButton("View");
-		pnlBooks.add(btnView);
-		
 		pnlNewBookCategory = new JPanel();
 		pnlNewBookCategory.setBorder(new TitledBorder(null, "New Book Subscribed Category", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		pnlNewBookCategory.setLayout(new GridLayout(2, 2, 0, 0));
@@ -154,23 +131,33 @@ public class FrmBorrowBook extends JFrame {
 		tbBooks.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tbBooks.setModel(tbBooksModel);
 		
+		btnView = new JButton("View");
+		
 		GroupLayout gl_pnlLeft = new GroupLayout(pnlLeft);
 		gl_pnlLeft.setHorizontalGroup(
-			gl_pnlLeft.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_pnlLeft.createSequentialGroup()
+			gl_pnlLeft.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_pnlLeft.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_pnlLeft.createParallelGroup(Alignment.TRAILING)
-						.addComponent(tbBooks, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
-						.addComponent(pnlBooks, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-						.addComponent(pnlNewBookCategory, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_pnlLeft.createParallelGroup(Alignment.LEADING)
+						.addComponent(tbBooks, GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+						.addComponent(pnlBooks, 0, 0, Short.MAX_VALUE)
+						.addGroup(gl_pnlLeft.createSequentialGroup()
+							.addComponent(pnlNewBookCategory, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(26)
+							.addComponent(btnView)))
 					.addContainerGap())
 		);
 		gl_pnlLeft.setVerticalGroup(
 			gl_pnlLeft.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_pnlLeft.createSequentialGroup()
 					.addComponent(pnlBooks, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(pnlNewBookCategory, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_pnlLeft.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_pnlLeft.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(pnlNewBookCategory, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_pnlLeft.createSequentialGroup()
+							.addGap(28)
+							.addComponent(btnView)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(tbBooks, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
 					.addContainerGap())
@@ -194,7 +181,20 @@ public class FrmBorrowBook extends JFrame {
 		
 		btnClose = new JButton("Close");
 		pnlBorrowCloseBtns.add(btnClose);
+		
+		
+		//---------------- Event Handlers -------------------------
+		this.btnView.addActionListener( new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				refreshBookTableUI();
+			}
+			
+		});
 	}
+	
+	
 	
 	public FrmBorrowBook(Library library, User customer){
 		this();
@@ -202,7 +202,40 @@ public class FrmBorrowBook extends JFrame {
 		this.customer=customer;
 	}
 	
-	private void refreshBookTable(BookViewType viewType,Category[] subScribeCategories) {
+	/**
+	 * Fill the table with books according to the UI options
+	 */
+	private void refreshBookTableUI() {
+
+		BookViewType viewType = BookViewType.All;
+		
+		if (this.rdAll.isSelected()) {
+			viewType=BookViewType.All;
+		} else if (this.rdAvailable.isSelected()) {
+			viewType=BookViewType.Available;
+		} else if (this.rdNew.isSelected()) {
+			viewType=BookViewType.New;
+		}
+		
+		ArrayList<Category> subscribeCategories = new ArrayList<Category>();
+		if (this.chkChildren.isSelected()){
+			subscribeCategories.add(Category.CHILDREN);
+		}
+		if (this.chkCooking.isSelected()){
+			subscribeCategories.add(Category.COOKING);
+		}
+		if (this.chkHistory.isSelected()){
+			subscribeCategories.add(Category.HISTORY);
+		}
+		if (this.chkTravel.isSelected()){
+			subscribeCategories.add(Category.TRAVEL);
+		}
+		
+		Category[] categories = subscribeCategories.toArray(new Category[0]);
+		refreshBookTable(viewType,categories);
+	}
+	
+	private void refreshBookTable(BookViewType viewType,Category[] subscribeNewBookCategories) {
 		// clear the table
 		int n = tbBooksModel.getRowCount();
 		for (int i=0;i<n;i++)
@@ -213,7 +246,7 @@ public class FrmBorrowBook extends JFrame {
 		switch (viewType)
 		{
 		case New:
-			data = getNewBookTableData(subScribeCategories);
+			data = getNewBookTableData(subscribeNewBookCategories);
 			break;
 		case Available:
 			data = getAvailableBookTableData();
@@ -283,62 +316,6 @@ public class FrmBorrowBook extends JFrame {
 			return booksData;
 		}
 	}
-}
 
-class BookTableModel implements TableModel {
-
-	@Override
-	public void addTableModelListener(TableModelListener arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Class<?> getColumnClass(int arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int getColumnCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public String getColumnName(int arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int getRowCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public Object getValueAt(int arg0, int arg1) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean isCellEditable(int arg0, int arg1) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void removeTableModelListener(TableModelListener arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setValueAt(Object arg0, int arg1, int arg2) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 }
