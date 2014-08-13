@@ -12,6 +12,8 @@ import java.awt.event.*;
 public class FrmCustomerInterface extends JFrame{
 	private JFrame frmJf;
 	private JButton btnBorrow, btnReturn, btnClose;
+	private Library l;
+	private User u;
 	FrmCustomerInterface(){
 		frmJf = new JFrame("Customer Interface");
 		frmJf.setLocation(350, 50);
@@ -32,14 +34,14 @@ public class FrmCustomerInterface extends JFrame{
 		{
 			public void mouseClicked(MouseEvent me){
 				frmJf.setVisible(false);
-				new FrmCustomerReturnBook();
+				new FrmCustomerReturnBook(l, u);
 			}
 		});
 		btnClose.addMouseListener(new MouseAdapter()
 		{
 			public void mouseClicked(MouseEvent me){
 				frmJf.setVisible(false);
-				new FrmCustomerLogin();
+				new FrmCustomerLogin(l, u);
 			}
 		});
 	}
