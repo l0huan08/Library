@@ -20,7 +20,7 @@ public class Book implements Serializable {
 		
 		isRented = false;
 		ownerId = Library.LIBRARY_OWNER_ID;
-		category = Category.NONE;
+		
 	}
 	
 	//getters & setters
