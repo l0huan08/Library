@@ -19,9 +19,9 @@ import java.util.*;
 public class FrmCustomerReturnBook extends JFrame{
 	private final String[] TBBookColumnTitle = {"isbn", "name","bookObj"};
 	private boolean isResponseTbBooksSelecetedChanged = true;
-	private final int N_Book_Table_Columns = 2;
-	private final int TBBook_IsbnColIndex=0; //the column index of the book table
-	private final int TBBook_BookObjColIndex=2; //the column index of the book table
+	private final int N_Book_Table_Columns = 3;
+	
+	private final int TBBook_BookObjColIndex = 2; //the column index of the book table
 	private Library library;
 	private User user;
 	private JFrame frmJf;
@@ -32,18 +32,18 @@ public class FrmCustomerReturnBook extends JFrame{
 	private PanelBookInfo pnlBookInfo;
 	private DefaultTableModel tbBooksModel;
 	
+	FrmCustomerReturnBook(){
+		this(null, null);
+	}
 	FrmCustomerReturnBook(Library l, User u){
-		this();
 		this.library = l;
 		this.user = u;
-	}
-	FrmCustomerReturnBook(){
 		frmJf = new JFrame();
 		frmJf.setLayout(null);
 		frmJf.setLocation(350, 50);
 		pnlLeft = new JPanel();
 		pnlRight = new JPanel();
-		pnlBookInfo = new PanelBookInfo();
+		pnlBookInfo = new PanelBookInfo(library);
 		pnlLeft.setLayout(null);
 		lblMsg = new JLabel();
 		lblMsg.setText("Rented Books:");
@@ -84,9 +84,9 @@ public class FrmCustomerReturnBook extends JFrame{
 		btnReturn.addMouseListener(new MouseAdapter()
 		{
 			public void mouseClicked(MouseEvent me){
-				double fine = 0;
+				double fine = 20;
 				new DlgCustomerReturnBookFinish(fine);
-				//library.returnBook(getISBN());
+				library.returnBook(getISBN());
 				refreshTable();
 			}
 		});
@@ -98,6 +98,9 @@ public class FrmCustomerReturnBook extends JFrame{
 			}
 		});
 		
+		
+		//--- init ----
+		refreshTable();
 	}
 	private void refreshTable(){
 		int n = tbBooksModel.getRowCount();
@@ -105,17 +108,23 @@ public class FrmCustomerReturnBook extends JFrame{
 			tbBooksModel.removeRow(0);
 		}
 		Object[][] data = getRentedBookTableData();
-		this.tbBooksModel.addRow(data);;
+		
+		int nDataRow=data.length;
+		for (int i = 0;i < nDataRow;i++) {
+			this.tbBooksModel.addRow(data[i]);
+		}
 	}
 	private String getISBN(){
-		int row = tbBooks.getSelectedRow();
-		String isbn = (String)tbBooksModel.getValueAt(row, 1);
+		Book book = getSelectedBook();
+		String isbn = book.getIsbn();
 		return isbn;
 	}
 	private Object[] createBookTableRowData(Book book){
 		Object[] row = new Object[N_Book_Table_Columns];
 		row[0] = book.getIsbn();
 		row[1] = book.getBookName();
+		row[2] = book;
+		
 		return row; 
 	}
 	private Object[][] getRentedBookTableData(){
@@ -138,10 +147,12 @@ public class FrmCustomerReturnBook extends JFrame{
 	private Book getSelectedBook() {
 		JTable table = this.tbBooks;
 		int selRow = table.getSelectedRow();
-        //String isbn = (String)table.getValueAt(selRow, TBBook_IsbnColIndex);
+		if(selRow < 0)
+			return null;
         Book book = (Book)table.getValueAt(selRow, TBBook_BookObjColIndex);
         return book;
 	}
+	
 	private void setResponseTbBooksSelectedChanged(boolean enable) {
 		isResponseTbBooksSelecetedChanged = enable;
 	}
@@ -161,9 +172,11 @@ public class FrmCustomerReturnBook extends JFrame{
         			return;
         		}
         		
-                
                 Book book = getSelectedBook();
-                pnlBookInfo.ReadFrom(book);
+                if (book==null)
+                	pnlBookInfo.clear();
+                else
+                	pnlBookInfo.ReadFrom(book);
             }
     }
 	public static void main(String[] args){
@@ -173,14 +186,22 @@ public class FrmCustomerReturnBook extends JFrame{
 		b1.setIsbn("111");
 		b1.setBookName("book1");
 		b1.setCategory(Category.HISTORY);
+		
 		b2.setIsbn("222");
 		b2.setBookName("book2");
 		b2.setCategory(Category.COOKING);
+		
 		lib.addBook(b1);
 		lib.addBook(b2);
+		
 		User u1 = new User();
 		u1.setUserName("huangli");
 		u1.setUserId(123);
+		
+		lib.addUser(u1);
+		lib.rentBook(u1.getUserId(), b1.getIsbn());
+		lib.rentBook(u1.getUserId(), b2.getIsbn());
+		
 		new FrmCustomerReturnBook(lib, u1);
 	}
 }

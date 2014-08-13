@@ -15,13 +15,11 @@ public class FrmBooksManagement {
 	
 	public FrmBooksManagement(Library L){
 		this.L=L;
-		}
-	public FrmBooksManagement(){
-		
+
 		//In the Requirement Document, Administrator is supposed to notify all the customers about the new books arriving.
 		//In this Frame, there is no certain button does that. Instead, as soon as a new book is added, all customers would
 		//be able to see the new added books from book list while they are trying rent new ones.
-				
+		
 		System.out.println(L.bookList.get(0).getBookName());
 		J.setSize(1000, 800);
 		J.setLocation(250,40);
@@ -68,10 +66,10 @@ public class FrmBooksManagement {
 		btnClose.setBounds(880, 620, 100, 30);
 		J.add(btnClose);
 		
-		PanelBookInfo P = new PanelBookInfo();
-		P.setBounds(650, 50, 400, 550);
-		J.add(P);
-		
+//		PanelBookInfo P = new PanelBookInfo();
+//		P.setBounds(650, 50, 400, 550);
+//		J.add(P);
+//		
 //	    table.addMouseListener(new java.awt.event.MouseAdapter() {
 //	        public void mouseClicked(java.awt.event.MouseEvent e) { 
 //	        	int rowI  = table.rowAtPoint(e.getPoint());	        	
@@ -89,6 +87,9 @@ public class FrmBooksManagement {
 		    	J.setVisible(false);
 		    }
 		});
+		}
+
+	public FrmBooksManagement(){
 		
 	}
 }

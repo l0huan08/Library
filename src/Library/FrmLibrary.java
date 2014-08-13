@@ -2,20 +2,23 @@ package Library;
 
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*; //javax.swing.JFrame;
-
 import java.io.*;
 /*
  * Joe
  * Very First Frame  Chose login Type
  * */
 import java.util.Date;
-public class FrmLibrary extends JFrame {
-	JFrame J = new JFrame("Library");
+public class FrmLibrary extends JFrame{
+	FrmLibrary frmLibrary = new FrmLibrary();
 
 	Library L = new Library();
-
+	
+	JLabel label1 = new JLabel("Welcome to Our Library System!");
+	JLabel label2 = new JLabel("Log in as a:  ");
+	JButton btnCustomer = new JButton("Customer");
+	JButton btnAdmin = new JButton("Adminstrator");
+	JButton btnExit = new JButton("Exit");
 	
 	public FrmLibrary(){
 		Book book1 = new Book();
@@ -40,40 +43,36 @@ public class FrmLibrary extends JFrame {
 		book2.setRented(false);
 		L.bookList.add(book2);
 		
-		J.setSize(600, 600);
-		J.setLocation(350, 50);
-		J.setVisible(true);
-		J.setTitle("Library");//Optional		
-		J.setLayout(null);
+		this.setSize(600, 600);
+		this.setLocation(350, 50);
+		this.setVisible(true);
+		this.setTitle("Library");//Optional		
+		this.setLayout(null);
+
 		
-		JLabel label1 = new JLabel("Welcome to Our Library System!");
 		label1.setBounds(150, -10, 400, 100);
 		label1.setForeground(Color.blue);
 		label1.setFont(new Font("", Font.BOLD,20));
-		J.add(label1);
+		this.add(label1);
 		
-		JLabel label2 = new JLabel("Log in as a:  ");
 		label2.setBounds(70, 85, 400, 100);
-		J.add(label2);		
-		
-		JButton btnCustomer = new JButton("Customer");
+		this.add(label2);		
+
 		btnCustomer.setVisible(true);
 		btnCustomer.setBounds(150, 120, 120, 30);
-		J.add(btnCustomer);
-		
-		JButton btnAdmin = new JButton("Adminstrator");
+		this.add(btnCustomer);
+
 		btnAdmin.setVisible(true);
 		btnAdmin.setBounds(290, 120, 120, 30);
-		J.add(btnAdmin);
-		
-		JButton btnExit = new JButton("Exit");
+		this.add(btnAdmin);
+
 		btnExit.setVisible(true);
 		btnExit.setBounds(450, 520, 120, 30);
-		J.add(btnExit);
+		this.add(btnExit);
 		
 		btnAdmin.addActionListener(new java.awt.event.ActionListener() {
 	    public void actionPerformed(java.awt.event.ActionEvent evt) {
-	    	FrmAdministratorLog AdministratorLog = new FrmAdministratorLog();
+	    	FrmAdministratorLog AdministratorLog = new FrmAdministratorLog(L);
 	    	}
 		});
 		
