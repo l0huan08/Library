@@ -62,7 +62,13 @@ public class FrmLibrary extends JFrame {
 		    public void actionPerformed(java.awt.event.ActionEvent evt) {
 		       System.exit(0);
 		    }
-		});		 
+		});	
+		
+		BtnCustomer.addActionListener(new java.awt.event.ActionListener() {
+		    public void actionPerformed(java.awt.event.ActionEvent evt) {
+		       FrmCustomerLogin CustomerLogin = new FrmCustomerLogin();
+		    }
+		});
 	}
 	
 	public static void main(String[] a){
