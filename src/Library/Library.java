@@ -15,6 +15,11 @@ public class Library {
 	final long OverdueTimeLimit = 60*1000; // in millisecond
 	final long NewbookTimeLimit = 30*1000; // in millisecond
 	
+	Library(){ //constructor
+		bookList = new ArrayList<Book>();
+		userList = new ArrayList<User>();
+	}
+	
 	
 	void saveBooks() throws IOException{
 		
