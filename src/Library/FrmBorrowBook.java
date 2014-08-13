@@ -63,43 +63,44 @@ public class FrmBorrowBook extends JFrame {
 	
 	private JTable tbBooks;
 	private DefaultTableModel tbBooksModel;
+	private JScrollPane scrPnlTbBooks;
 	
 	
 	/**
 	 * Test
 	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					Library lib=new Library();
-//					Book b1 = new Book();
-//					Book b2 = new Book();
-//					
-//					b1.setIsbn("111");
-//					b1.setBookName("book1");
-//					b1.setCategory(Category.HISTORY);
-//					
-//					b2.setIsbn("222");
-//					b2.setBookName("book2");
-//					b2.setCategory(Category.COOKING);
-//					
-//					lib.addBook(b1);
-//					lib.addBook(b2);
-//					
-//					User u1 = new User();
-//					u1.setUserName("huangli");
-//					u1.setUserId(123);
-//					
-//					FrmBorrowBook frame = new FrmBorrowBook(lib,u1);
-//					
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Library lib=new Library();
+					Book b1 = new Book();
+					Book b2 = new Book();
+					
+					b1.setIsbn("111");
+					b1.setBookName("book1");
+					b1.setCategory(Category.HISTORY);
+					
+					b2.setIsbn("222");
+					b2.setBookName("book2");
+					b2.setCategory(Category.COOKING);
+					
+					lib.addBook(b1);
+					lib.addBook(b2);
+					
+					User u1 = new User();
+					u1.setUserName("huangli");
+					u1.setUserId(123);
+					
+					FrmBorrowBook frame = new FrmBorrowBook(lib,u1);
+					
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the frame.
@@ -153,11 +154,11 @@ public class FrmBorrowBook extends JFrame {
 		chkTravel = new JCheckBox("Travel");
 		pnlNewBookCategory.add(chkTravel);
 		
-
+		btnView = new JButton("View");
+		
+		///TbBooks
 		tbBooksModel = new DefaultTableModel(
-				new Object[][] { {"huangli","example",new Book()},
-						{"haha","ex2",new Book()}
-				},
+				new Object[][]{},
 				TBBookColumnTitle
 		);
 		
@@ -167,7 +168,12 @@ public class FrmBorrowBook extends JFrame {
 		tbBooks.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tbBooks.setModel(tbBooksModel);
 		
-		btnView = new JButton("View");
+		SelectionListener listener = new SelectionListener(tbBooks);
+		tbBooks.getSelectionModel().addListSelectionListener(listener);
+		
+		///scrPnlTbBooks
+		scrPnlTbBooks = new JScrollPane(tbBooks);
+		
 		
 		GroupLayout gl_pnlLeft = new GroupLayout(pnlLeft);
 		gl_pnlLeft.setHorizontalGroup(
@@ -175,13 +181,17 @@ public class FrmBorrowBook extends JFrame {
 				.addGroup(gl_pnlLeft.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_pnlLeft.createParallelGroup(Alignment.LEADING)
-						.addComponent(tbBooks, GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
-						.addComponent(pnlBooks, 0, 0, Short.MAX_VALUE)
 						.addGroup(gl_pnlLeft.createSequentialGroup()
-							.addComponent(pnlNewBookCategory, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(26)
-							.addComponent(btnView)))
-					.addContainerGap())
+							.addGroup(gl_pnlLeft.createParallelGroup(Alignment.LEADING)
+								.addComponent(pnlBooks, 0, 0, Short.MAX_VALUE)
+								.addGroup(gl_pnlLeft.createSequentialGroup()
+									.addComponent(pnlNewBookCategory, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addGap(26)
+									.addComponent(btnView)))
+							.addGap(12))
+						.addGroup(gl_pnlLeft.createSequentialGroup()
+							.addComponent(scrPnlTbBooks, GroupLayout.PREFERRED_SIZE, 266, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(21, Short.MAX_VALUE))))
 		);
 		gl_pnlLeft.setVerticalGroup(
 			gl_pnlLeft.createParallelGroup(Alignment.LEADING)
@@ -194,10 +204,12 @@ public class FrmBorrowBook extends JFrame {
 						.addGroup(gl_pnlLeft.createSequentialGroup()
 							.addGap(28)
 							.addComponent(btnView)))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(tbBooks, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(scrPnlTbBooks, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
+		
+		
 		pnlLeft.setLayout(gl_pnlLeft);
 		
 		JPanel pnlRight = new JPanel();
@@ -230,10 +242,6 @@ public class FrmBorrowBook extends JFrame {
 			}
 			
 		});
-		
-		///tbBooks
-		SelectionListener listener = new SelectionListener(tbBooks);
-		tbBooks.getSelectionModel().addListSelectionListener(listener);
 		
 		///btnClose
 		btnClose.addActionListener(new ActionListener() {
@@ -314,6 +322,8 @@ public class FrmBorrowBook extends JFrame {
 		JTable table = this.tbBooks;
 		int selRow = table.getSelectedRow();
         //String isbn = (String)table.getValueAt(selRow, TBBook_IsbnColIndex);
+		if (selRow<0) //no selection
+			return null;
         Book book = (Book)table.getValueAt(selRow, TBBook_BookObjColIndex);
         return book;
 	}
