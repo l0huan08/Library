@@ -17,6 +17,14 @@ public class FrmCustomerLogin extends JFrame{
 	private JPasswordField pwdPassWord;
 	private JButton btnLogin, btnClose;
 	private String pwd, user;
+	private Library library;
+	private User currentUser;
+
+	FrmCustomerLogin(Library l, User u){
+		this();
+		this.library = l;
+		this.currentUser = u;
+	}
 	FrmCustomerLogin(){
 		frmJf = new JFrame("Customer Login");
 		frmJf.setLayout(null);
@@ -80,6 +88,7 @@ public class FrmCustomerLogin extends JFrame{
 		});
 	}
 	public static void main(String[] args){
-		new FrmCustomerLogin();
+		FrmCustomerLogin login = new FrmCustomerLogin();
+		new FrmCustomerLogin(login.library, login.currentUser);
 	}
 }
