@@ -2,7 +2,6 @@ package Library;
 
 import javax.swing.*;
 
-import java.awt.*;
 import java.awt.event.*;
 
 @SuppressWarnings("serial")
@@ -15,14 +14,22 @@ public class FrmCustomerLogin extends JFrame{
 	private String pwd, user;
 	FrmCustomerLogin(){
 		jf = new JFrame("Customer Login");
+		jf.setLayout(null);
+		jf.setLocation(250, 40);
 		UserName = new JLabel();
 		UserName.setText("Username:");
+		UserName.setBounds(170, 40, 70, 30);
 		PassWord = new JLabel();
 		PassWord.setText("Password:");
+		PassWord.setBounds(170, 100, 70, 30);
 		userName = new JTextField(20);
+		userName.setBounds(240, 40, 200, 30);
 		passWord = new JPasswordField(20);
+		passWord.setBounds(240, 100, 200, 30);
 		Login = new JButton("Login");
+		Login.setBounds(230, 160, 75, 30);
 		Close = new JButton("Close");
+		Close.setBounds(340, 160, 75, 30);
 		jf.add(UserName);
 		jf.add(userName);
 		jf.add(PassWord);
@@ -30,8 +37,7 @@ public class FrmCustomerLogin extends JFrame{
 		jf.add(Login);
 		jf.add(Close);
 		jf.setResizable(false);
-		jf.setLayout(new FlowLayout());
-		jf.setSize(350, 150);
+		jf.setSize(600, 280);
 		jf.setVisible(true);
 		Login.addMouseListener(new MouseAdapter()
 		{
@@ -64,6 +70,7 @@ public class FrmCustomerLogin extends JFrame{
 		{
 			public void mouseClicked(MouseEvent me){
 				jf.setVisible(false);
+				new FrmLibrary();
 			}
 		});
 	}

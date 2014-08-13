@@ -11,6 +11,7 @@ public class DlgCustomerReturnBookFinish extends JFrame{
 	private JLabel msg, fine;
 	DlgCustomerReturnBookFinish(){
 		jd = new JDialog();
+		jd.setLocation(350, 50);
 		OK = new JButton("OK");
 		msg = new JLabel();
 		fine = new JLabel();
@@ -25,7 +26,7 @@ public class DlgCustomerReturnBookFinish extends JFrame{
 		fine.setFont(new Font("Arial", Font.PLAIN, 24));
 		fine.setForeground(Color.red);
 		jd.add(OK);
-		OK.setBounds(195, 100, 60, 40);
+		OK.setBounds(195, 100, 60, 30);
 		jd.setTitle("Book Returned");
 		jd.setSize(450,210);
 		jd.setResizable(false);
