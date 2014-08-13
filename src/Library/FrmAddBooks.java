@@ -138,9 +138,9 @@ public class FrmAddBooks extends JFrame {
 				currentNewBook.setOwnerId(Library.LIBRARY_OWNER_ID);
 				currentNewBook.setCategory(currentCategory);
 				
-				//**************************
+				//***************************
 				new Library().addBook(currentNewBook);  //interface to other frame, set library object before use
-				//**************************
+				//***************************
 				
 			}//mouse clicked
 		});
