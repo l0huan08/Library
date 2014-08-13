@@ -11,8 +11,11 @@ import java.awt.event.*;
 
 public class FrmAdminLogin extends JFrame {
 	JFrame J = new JFrame("Admin Login");
+	private Library L;
 	
-	public FrmAdminLogin() {
+	public FrmAdminLogin(Library L){
+		this.L=L;
+
 		J.setSize(600, 280);
 		J.setLocation(250,40);
 		J.setVisible(true);
@@ -36,7 +39,7 @@ public class FrmAdminLogin extends JFrame {
 		
 		btnBooks.addActionListener(new java.awt.event.ActionListener() {
 		    public void actionPerformed(java.awt.event.ActionEvent evt) {
-		    	FrmBooksManagement N = new FrmBooksManagement();
+		    	FrmBooksManagement N = new FrmBooksManagement(L);
 		    }
 		});
 		
@@ -57,7 +60,9 @@ public class FrmAdminLogin extends JFrame {
 		    	J.setVisible(false);
 		    }
 		});
-	}
+		}
+	
+	public FrmAdminLogin() {}
 }
 
 

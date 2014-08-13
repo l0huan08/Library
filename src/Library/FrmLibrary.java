@@ -15,7 +15,6 @@ public class FrmLibrary extends JFrame {
 	JFrame J = new JFrame("Library");
 
 	Library L = new Library();
-
 	
 	public FrmLibrary(){
 		Book book1 = new Book();
@@ -28,6 +27,7 @@ public class FrmLibrary extends JFrame {
 		book1.setOwnerId(Library.LIBRARY_OWNER_ID);
 		book1.setRented(false);		
 		L.bookList.add(book1);
+
 		
 		Book book2 = new Book();
 		book2.setBookName("WWII");
@@ -73,7 +73,7 @@ public class FrmLibrary extends JFrame {
 		
 		btnAdmin.addActionListener(new java.awt.event.ActionListener() {
 	    public void actionPerformed(java.awt.event.ActionEvent evt) {
-	    	FrmAdministratorLog AdministratorLog = new FrmAdministratorLog();
+	    	FrmAdministratorLog AdministratorLog = new FrmAdministratorLog(L);
 	    	}
 		});
 		

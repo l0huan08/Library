@@ -11,11 +11,12 @@ import java.awt.event.*;
 //				   PassWord:__________
 
 public class FrmAdministratorLog extends JFrame {
-	JFrame J = new JFrame();
-
+	public FrmAdministratorLog() {}
 	
-	public FrmAdministratorLog() {
-		
+	JFrame J = new JFrame();	
+	private Library L;
+	public FrmAdministratorLog(Library L){
+		this.L=L;
 		J.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		J.setSize(600, 280);
 		J.setLocation(250,40);
@@ -67,7 +68,7 @@ public class FrmAdministratorLog extends JFrame {
 				
 				BtnConfirm.addActionListener(new java.awt.event.ActionListener() {
 				    public void actionPerformed(java.awt.event.ActionEvent evt) {
-				    	FrmAdminLogin AdministratorLog = new FrmAdminLogin();
+				    	FrmAdminLogin AdministratorLog = new FrmAdminLogin(L);
 				    	F1C.setVisible(false);
 				    	J.setVisible(false);
 				    }
@@ -98,8 +99,9 @@ public class FrmAdministratorLog extends JFrame {
 	    	}
 	    }
 		});
-	    
-
 		}
+
+
+
 	}
 
