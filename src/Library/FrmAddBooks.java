@@ -23,8 +23,10 @@ public class FrmAddBooks extends JFrame {
 	private JComboBox cb_category;
 	private String picPath, picDirectory, picFileName;
 	private ImageIcon bookPic;
-
-	FrmAddBooks() {
+	Library library;
+	
+	FrmAddBooks(Library lib) {
+		this.library = lib;
 		jf = new JFrame("Add book");
 		choosePic = new JButton("Choose picture");
 		choosePic.setBounds(300, 50, 150, 50);
@@ -147,24 +149,30 @@ public class FrmAddBooks extends JFrame {
 					currentNewBook.setCategory(currentCategory);
 
 					// ***************************
-					new Library().addBook(currentNewBook); // interface to other
+					library.addBook(currentNewBook); // interface to other
 															// frame, set
 															// library object
 															// before use
 
 					// ***************************
 					try {
-						new reName().rename(picDirectory, picFileName,currentISBN);
+						new reName().rename(picDirectory, picFileName,
+								currentISBN);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						System.out.println("No picture selected.");
+					} finally {
+						JOptionPane.showMessageDialog(FrmAddBooks.this,
+								"New book added.", "OK",
+								JOptionPane.PLAIN_MESSAGE);
 					}
-					JOptionPane.showMessageDialog(FrmAddBooks.this,"New book added.","OK",JOptionPane.PLAIN_MESSAGE);
 
 				}
 
 				else {
-					JOptionPane.showMessageDialog(FrmAddBooks.this, "Invaild book information!", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(FrmAddBooks.this,
+							"Invaild book information!", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
 
 			}// mouse clicked
@@ -197,7 +205,7 @@ public class FrmAddBooks extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		new FrmAddBooks();
+		new FrmAddBooks(new Library());
 	}
 
 }
