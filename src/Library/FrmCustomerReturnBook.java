@@ -1,40 +1,74 @@
 package Library;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.*;
+
+/**
+ * @author Run Yan
+ * add 8/12/2014
+ */
 
 @SuppressWarnings("serial")
 public class FrmCustomerReturnBook extends JFrame{
-	private JFrame jf;
-	private JLabel msg;
-	private JButton Return, close;
-	private JTable books;
+	private final String[] tbBookColumnTitle = {"isbn", "name"};
+	private JFrame frmJf;
+	private JLabel lblMsg;
+	private JButton btnReturn, btnClose;
+	private JTable tblBooks;
+	private JPanel pnlLeft, pnlRight;
+	private PanelBookInfo pnlBookInfo;
+	private DefaultTableModel tbBooksModel;
+	
 	FrmCustomerReturnBook(){
-		jf = new JFrame();
-		jf.setLayout(null);
-		jf.setLocation(350, 50);
-		msg = new JLabel();
-		msg.setText("Rented Books");
-		msg.setBounds(20, 20, 80, 10);
-		Return = new JButton("Return");
-		Return.setBounds(60, 550, 75, 30);
-		close = new JButton("Close");
-		close.setBounds(180, 550, 75, 30);
-		books = new JTable();
-		books.setBounds(20, 35, 300, 500);
-		jf.add(msg);
-		jf.add(books);
-		jf.add(Return);
-		jf.add(close);
-		jf.setTitle("Return Book");
-		jf.setSize(650, 650);
-		jf.setResizable(false);
-		jf.setVisible(true);
-		close.addMouseListener(new MouseAdapter()
+		frmJf = new JFrame();
+		frmJf.setLayout(null);
+		frmJf.setLocation(350, 50);
+		pnlLeft = new JPanel();
+		pnlRight = new JPanel();
+		pnlBookInfo = new PanelBookInfo();
+		pnlLeft.setLayout(null);
+		lblMsg = new JLabel();
+		lblMsg.setText("Rented Books:");
+		lblMsg.setBounds(20, 20, 90, 10);
+		btnReturn = new JButton("Return");
+		btnReturn.setBounds(80, 400, 75, 30);
+		btnClose = new JButton("Close");
+		btnClose.setBounds(220, 400, 75, 30);
+		tblBooks = new JTable();
+		tblBooks.setBorder(new LineBorder(new Color(0, 0, 0)));
+		tblBooks.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tbBooksModel = new DefaultTableModel(
+				new Object[][] {
+				},
+				tbBookColumnTitle
+		);
+		tblBooks.setModel(tbBooksModel);
+		tblBooks.setBounds(20, 35, 1000, 330);
+		pnlLeft.add(lblMsg);
+		pnlLeft.add(tblBooks);
+		pnlLeft.add(btnReturn);
+		pnlLeft.add(btnClose);
+		pnlLeft.setSize(600, 500);
+		pnlLeft.setBounds(5, 5, 400, 600);
+		pnlRight.setSize(500, 500);
+		pnlRight.setBounds(450, 20, 400, 400);
+		pnlRight.setLayout(new BorderLayout());
+		pnlRight.add(pnlBookInfo,BorderLayout.CENTER);
+		frmJf.setTitle("Return Book");
+		frmJf.add(pnlLeft);
+		frmJf.add(pnlRight);
+		frmJf.setSize(900, 500);
+		frmJf.setResizable(false);
+		frmJf.setVisible(true);
+		btnClose.addMouseListener(new MouseAdapter()
 		{
 			public void mouseClicked(MouseEvent me){
-				jf.setVisible(false);
+				frmJf.setVisible(false);
 				new FrmCustomerLogin();
 			}
 		});

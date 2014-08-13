@@ -4,72 +4,77 @@ import javax.swing.*;
 
 import java.awt.event.*;
 
+/**
+ * @author Run Yan
+ * add 8/12/2014
+ */
+
 @SuppressWarnings("serial")
 public class FrmCustomerLogin extends JFrame{
-	private JFrame jf;
-	private JLabel UserName, PassWord;
-	private JTextField userName;
-	private JPasswordField passWord;
-	private JButton Login, Close;
+	private JFrame frmJf;
+	private JLabel lblUserName, lblPassWord;
+	private JTextField txtUserName;
+	private JPasswordField pwdPassWord;
+	private JButton btnLogin, btnClose;
 	private String pwd, user;
 	FrmCustomerLogin(){
-		jf = new JFrame("Customer Login");
-		jf.setLayout(null);
-		jf.setLocation(250, 40);
-		UserName = new JLabel();
-		UserName.setText("Username:");
-		UserName.setBounds(170, 40, 70, 30);
-		PassWord = new JLabel();
-		PassWord.setText("Password:");
-		PassWord.setBounds(170, 100, 70, 30);
-		userName = new JTextField(20);
-		userName.setBounds(240, 40, 200, 30);
-		passWord = new JPasswordField(20);
-		passWord.setBounds(240, 100, 200, 30);
-		Login = new JButton("Login");
-		Login.setBounds(230, 160, 75, 30);
-		Close = new JButton("Close");
-		Close.setBounds(340, 160, 75, 30);
-		jf.add(UserName);
-		jf.add(userName);
-		jf.add(PassWord);
-		jf.add(passWord);
-		jf.add(Login);
-		jf.add(Close);
-		jf.setResizable(false);
-		jf.setSize(600, 280);
-		jf.setVisible(true);
-		Login.addMouseListener(new MouseAdapter()
+		frmJf = new JFrame("Customer Login");
+		frmJf.setLayout(null);
+		frmJf.setLocation(250, 40);
+		lblUserName = new JLabel();
+		lblUserName.setText("Username:");
+		lblUserName.setBounds(170, 40, 70, 30);
+		lblPassWord = new JLabel();
+		lblPassWord.setText("Password:");
+		lblPassWord.setBounds(170, 100, 70, 30);
+		txtUserName = new JTextField(20);
+		txtUserName.setBounds(240, 40, 200, 30);
+		pwdPassWord = new JPasswordField(20);
+		pwdPassWord.setBounds(240, 100, 200, 30);
+		btnLogin = new JButton("Login");
+		btnLogin.setBounds(230, 160, 75, 30);
+		btnClose = new JButton("Close");
+		btnClose.setBounds(340, 160, 75, 30);
+		frmJf.add(lblUserName);
+		frmJf.add(txtUserName);
+		frmJf.add(lblPassWord);
+		frmJf.add(pwdPassWord);
+		frmJf.add(btnLogin);
+		frmJf.add(btnClose);
+		frmJf.setResizable(false);
+		frmJf.setSize(600, 280);
+		frmJf.setVisible(true);
+		btnLogin.addMouseListener(new MouseAdapter()
 		{
 			public void mouseClicked(MouseEvent me){
-				pwd = new String(passWord.getPassword());
-				user = userName.getText();
+				pwd = new String(pwdPassWord.getPassword());
+				user = txtUserName.getText();
 				if(user.length() == 0){
-					JOptionPane.showMessageDialog(jf, "Please enter your username.", "Login Failed", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frmJf, "Please enter your username.", "Login Failed", JOptionPane.ERROR_MESSAGE);
 				} else{
 					if(pwd.length() == 0){
-						JOptionPane.showMessageDialog(jf, "Please enter your password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(frmJf, "Please enter your password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
 					} else{
 						Library l = new Library();
 						if(l.loginCheck(user, pwd)){
 							User currentUser = l.login(user, pwd);
 							if(!currentUser.isAdmin()){
-								jf.setVisible(false);
+								frmJf.setVisible(false);
 								new FrmCustomerInterface();
 							} else{
-								JOptionPane.showMessageDialog(jf, "Invalid username or password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
+								JOptionPane.showMessageDialog(frmJf, "Invalid username or password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
 							}
 						} else{
-							JOptionPane.showMessageDialog(jf, "Invalid username or password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(frmJf, "Invalid username or password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
 						}
 					}
 				}
 			}
 		});   
-		Close.addMouseListener(new MouseAdapter()
+		btnClose.addMouseListener(new MouseAdapter()
 		{
 			public void mouseClicked(MouseEvent me){
-				jf.setVisible(false);
+				frmJf.setVisible(false);
 				new FrmLibrary();
 			}
 		});
