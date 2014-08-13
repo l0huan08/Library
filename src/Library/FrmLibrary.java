@@ -56,7 +56,7 @@ public class FrmLibrary extends JFrame {
 		    }
 		});	
 		
-		BtnCustomer.addActionListener(new java.awt.event.ActionListener() {
+		btnCustomer.addActionListener(new java.awt.event.ActionListener() {
 		    public void actionPerformed(java.awt.event.ActionEvent evt) {
 		       FrmCustomerLogin CustomerLogin = new FrmCustomerLogin();
 		    }
