@@ -8,8 +8,8 @@ import java.util.*;
 
 public class Library {
 	
-	ArrayList<Book> bookList;
-	ArrayList<User> userList;
+	private ArrayList<Book> bookList;
+	private ArrayList<User> userList;
 	final String bookListURL = "c:\\BookList.dat";
 	final String userListURL = "c:\\userList.dat";
 	static final int LIBRARY_OWNER_ID = 0; // ownerId of the library is 0. i.e. not rented.  
