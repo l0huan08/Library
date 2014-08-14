@@ -1,51 +1,54 @@
 package Library;
 
-import java.awt.*;
-import java.awt.event.*;
 
 import javax.swing.*;
 
-import java.awt.event.*;
+// Joe, 
 
-// Joe, After Administrator sucessfully Login, Main menu  (Books, Customers and Categories)
-
+/**
+ * After Administrator sucessfully Login, Main menu  (Books, Customers and Categories)
+ * @author Joe
+ * add 2014.8.13
+ * edit 2014.8.14 edit by Li Huang, fix complile problem from JDK 8.0 
+ */
 public class FrmAdminLogin extends JFrame {
-	JFrame J = new JFrame("Admin Login");
-	private Library L;
+	//JFrame J = new JFrame("Admin Login");
 	
-	public FrmAdminLogin(Library L){
-		this.L=L;
+	private Library library;
+	
+	public FrmAdminLogin(Library lib){
+		this.library=lib;
 
-		J.setSize(600, 280);
-		J.setLocation(250,40);
-		J.setVisible(true);
-		J.setLayout(null);
+		this.setSize(600, 280);
+		this.setLocation(250,40);
+		this.setVisible(true);
+		this.setLayout(null);
 		
 		JButton btnBooks = new JButton("Books");
 		btnBooks.setBounds(140, 80, 90, 40);
-		J.add(btnBooks);
+		this.add(btnBooks);
 		
 		JButton btnCustomers = new JButton("Customers");
 		btnCustomers.setBounds(260, 80, 110, 40);
-		J.add(btnCustomers);
+		this.add(btnCustomers);
 		
 		JButton btnCategories = new JButton("Categories");
 		btnCategories.setBounds(400, 80, 110, 40);
-		J.add(btnCategories);
+		this.add(btnCategories);
 		
 		JButton btnClose = new JButton("Clsoe");
 		btnClose.setBounds(450, 190, 90, 40);
-		J.add(btnClose);
+		this.add(btnClose);
 		
 		btnBooks.addActionListener(new java.awt.event.ActionListener() {
 		    public void actionPerformed(java.awt.event.ActionEvent evt) {
-		    	FrmBooksManagement N = new FrmBooksManagement(L);
+		    	FrmBooksManagement frmBookManagement = new FrmBooksManagement(library);
 		    }
 		});
 		
 		btnCustomers.addActionListener(new java.awt.event.ActionListener() {
 		    public void actionPerformed(java.awt.event.ActionEvent evt) {
-		    	FrmUsersManagement N = new FrmUsersManagement();
+		    	FrmUsersManagement frmUserManagement = new FrmUsersManagement(library);
 		    }
 		});
 		
@@ -57,7 +60,7 @@ public class FrmAdminLogin extends JFrame {
 		
 		btnClose.addActionListener(new java.awt.event.ActionListener() {
 		    public void actionPerformed(java.awt.event.ActionEvent evt) {
-		    	J.setVisible(false);
+		    	FrmAdminLogin.this.setVisible(false);
 		    }
 		});
 		}
