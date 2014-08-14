@@ -24,7 +24,7 @@ public class FrmCustomerReturnBook extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
 	private final int N_Book_Table_Columns = 4;
-	private final int TBBook_BookObjColIndex = 2; 
+	private final int TBBook_BookObjColIndex = 3; 
 	private final String[] TBBookColumnTitle = {"ISBN", "Book Name", "Author", "bookObj"};
 	
 	private boolean isResponseTbBooksSelecetedChanged = true;
@@ -164,8 +164,8 @@ public class FrmCustomerReturnBook extends JFrame{
 		Object[] row = new Object[N_Book_Table_Columns];
 		row[0] = book.getIsbn();
 		row[1] = book.getBookName();
-		row[2] = book;
-		//row[3] = book;
+		row[2] = book.getAuthor();
+		row[3] = book;
 		return row; 
 	}
 	
