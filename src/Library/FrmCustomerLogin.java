@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.event.*;
 
 /**
+ * Frame for the customer to login
  * @author Run Yan
  * add 8/12/2014
  */
@@ -67,7 +68,7 @@ public class FrmCustomerLogin extends JFrame{
 							currentUser = library.login(user, pwd);
 							if(!currentUser.isAdmin()){
 								frmJf.setVisible(false);
-								new FrmCustomerInterface();
+								new FrmCustomerInterface(library, currentUser);
 							} else{
 								JOptionPane.showMessageDialog(frmJf, "Invalid username or password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
 							}

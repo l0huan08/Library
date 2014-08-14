@@ -11,6 +11,7 @@ import java.awt.event.*;
 import java.util.*;
 
 /**
+ * Frame to display rented books to the customer and return the rented books.
  * @author Run Yan
  * add 8/12/2014
  */
@@ -83,7 +84,7 @@ public class FrmCustomerReturnBook extends JFrame{
 		btnReturn.addMouseListener(new MouseAdapter()
 		{
 			public void mouseClicked(MouseEvent me){
-				double fine = 20;
+				double fine = library.fine(getISBN(), new Date());
 				new DlgCustomerReturnBookFinish(fine);
 				library.returnBook(getISBN());
 				refreshTable();

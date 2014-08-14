@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
+ * The message shown to the customer when the customer complete return books.
  * @author Run Yan
  * add 8/12/2014
 */

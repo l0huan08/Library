@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.event.*;
 
 /**
+ * Frame to guide customer
  * @author Run Yan
  * add 8/12/2014
  */
@@ -12,9 +13,14 @@ import java.awt.event.*;
 public class FrmCustomerInterface extends JFrame{
 	private JFrame frmJf;
 	private JButton btnBorrow, btnReturn, btnClose;
-	private Library l;
-	private User u;
+	private Library library;
+	private User user;
 	FrmCustomerInterface(){
+		this(null, null);
+	}
+	FrmCustomerInterface(Library l, User u){
+		this.library = l;
+		this.user = u;
 		frmJf = new JFrame("Customer Interface");
 		frmJf.setLocation(350, 50);
 		btnBorrow = new JButton("Borrow Book");
@@ -34,14 +40,21 @@ public class FrmCustomerInterface extends JFrame{
 		{
 			public void mouseClicked(MouseEvent me){
 				frmJf.setVisible(false);
-				new FrmCustomerReturnBook(l, u);
+				new FrmCustomerReturnBook(library, user);
 			}
 		});
 		btnClose.addMouseListener(new MouseAdapter()
 		{
 			public void mouseClicked(MouseEvent me){
 				frmJf.setVisible(false);
-				new FrmCustomerLogin(l, u);
+				new FrmCustomerLogin(library, user);
+			}
+		});
+		btnBorrow.addMouseListener(new MouseAdapter()
+		{
+			public void mouseClicked(MouseEvent me){
+				frmJf.setVisible(false);
+				new FrmBorrowBook(library, user);
 			}
 		});
 	}
