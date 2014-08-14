@@ -163,12 +163,9 @@ public class FrmBooksManagement extends JFrame {
 				  
 				table.addMouseListener(new MouseAdapter() {
 				  public void mouseClicked(MouseEvent e) {
-				      JTable target = (JTable)e.getSource();
-				      
-				      int row = target.getSelectedRow();
+				      JTable target = (JTable)e.getSource();		
 				      dtm.removeRow(row);
 				      FrmBooksManagement.this.library.deleteBook(table.getValueAt(row, 2).toString());
-	
 				  }
 				});
 		    }
@@ -178,8 +175,10 @@ public class FrmBooksManagement extends JFrame {
 		btnRefresh.setVisible(true);
 		btnRefresh.setBounds(250, 470, 120, 30);
 		this.add(btnRefresh);
+		
 		btnRefresh.addActionListener(new java.awt.event.ActionListener() {
 		    public void actionPerformed(java.awt.event.ActionEvent evt) {
+		    	System.out.println(lib.showBookList_all().size());
 		    	int j = table.getRowCount();
 		    	for (int i = 0 ; i < j; i++){
 			    	dtm.removeRow(0);			    	
