@@ -26,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
  * add 2014.8.12
  * edit by Li Huang 2014.8.13: add Add Customer, Remove Customer, Update Customer functions
  */
-public class FrmCustomersManagement extends JFrame{
+public class FrmUsersManagement extends JFrame{
 	//JFrame L = new JFrame();//del by Li Huang 2014.8.13
 	
 	private Library library;
@@ -64,11 +64,11 @@ public class FrmCustomersManagement extends JFrame{
             }
     }
 	
-	public FrmCustomersManagement(){
+	public FrmUsersManagement(){
 		this(null);
 	}
 	
-	public FrmCustomersManagement(Library library){
+	public FrmUsersManagement(Library library){
 		this.library=library;
 		
 		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //del by Li Huang 2014.8.13
@@ -126,7 +126,7 @@ public class FrmCustomersManagement extends JFrame{
 		//------------ Event Handlers ------------------------------------
 		btnClose.addActionListener(new java.awt.event.ActionListener() {
 		    public void actionPerformed(java.awt.event.ActionEvent evt) {
-		    	FrmCustomersManagement.this.dispose();
+		    	FrmUsersManagement.this.dispose();
 		    }
 		});
 		
@@ -253,7 +253,7 @@ public class FrmCustomersManagement extends JFrame{
 		lib.addUser(u1);
 		lib.addUser(u2);
 		
-		FrmCustomersManagement frame = new FrmCustomersManagement(lib);
+		FrmUsersManagement frame = new FrmUsersManagement(lib);
 		
 		frame.setVisible(true);
 	}
