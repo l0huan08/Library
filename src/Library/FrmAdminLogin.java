@@ -49,6 +49,7 @@ public class FrmAdminLogin extends JFrame {
 		btnCustomers.addActionListener(new java.awt.event.ActionListener() {
 		    public void actionPerformed(java.awt.event.ActionEvent evt) {
 		    	FrmUsersManagement frmUserManagement = new FrmUsersManagement(library);
+		    	frmUserManagement.setVisible(true);
 		    }
 		});
 		
