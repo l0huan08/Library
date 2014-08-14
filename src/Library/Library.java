@@ -4,8 +4,12 @@ import java.io.*;
 import java.text.*;
 import java.util.*;
 
-//Sen Li 
-
+/**
+ * Library class, manage books and users
+ * @author Sen Li
+ * add 2014.8.11
+ * edit by Run Yan 2014.8.14: fix bug at fine()
+ */
 public class Library {
 	
 	private ArrayList<Book> bookList;
@@ -318,8 +322,11 @@ public class Library {
 		while(bookItr.hasNext()){
 			Book tempBook = bookItr.next();
 			if(tempBook.getIsbn().equals(isbn)){
-				
-				double fine_amount = (returnDate.getTime() - tempBook.getLastRented().getTime())/1000*FINE_PER_SECOND;
+				//this book found
+				int overdue_time_seconds = (int)(returnDate.getTime() - tempBook.getLastRented().getTime() - OverdueTimeLimit )/1000;
+				if (overdue_time_seconds<0)
+					overdue_time_seconds=0;
+				double fine_amount = overdue_time_seconds*FINE_PER_SECOND;
 				return fine_amount;
 			}//end if
 		}//end while
