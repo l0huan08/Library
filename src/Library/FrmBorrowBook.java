@@ -172,6 +172,10 @@ public class FrmBorrowBook extends JFrame {
 		tbBooks.setBorder(new LineBorder(new Color(0, 0, 0)));
 		tbBooks.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tbBooks.setModel(tbBooksModel);
+		// hide the bookObj column
+		tbBooks.getColumnModel().getColumn(TBBook_BookObjColIndex).setMinWidth(0);
+		tbBooks.getColumnModel().getColumn(TBBook_BookObjColIndex).setMaxWidth(0);
+		tbBooks.getColumnModel().getColumn(TBBook_BookObjColIndex).setWidth(0);
 		
 		SelectionListener listener = new SelectionListener(tbBooks);
 		tbBooks.getSelectionModel().addListSelectionListener(listener);
