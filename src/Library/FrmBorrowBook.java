@@ -392,6 +392,9 @@ public class FrmBorrowBook extends JFrame {
 			break;
 		}
 		
+		if (data==null)
+			return;
+		
 		int nDataRows = data.length;
 		for (int i=0;i<nDataRows;i++){
 			this.tbBooksModel.addRow(data[i]);
