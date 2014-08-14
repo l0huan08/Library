@@ -10,8 +10,7 @@ import java.io.*;
  * */
 import java.util.Date;
 public class FrmLibrary extends JFrame{
-	FrmLibrary frmLibrary = new FrmLibrary();
-
+	//FrmLibrary frmLibrary = new FrmLibrary();
 	Library L = new Library();
 	
 	JLabel label1 = new JLabel("Welcome to Our Library System!");

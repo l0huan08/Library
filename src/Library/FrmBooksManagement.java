@@ -67,11 +67,6 @@ public class FrmBooksManagement extends JFrame {
 		btnClose.setBounds(880, 620, 100, 30);
 		this.add(btnClose);
 		
-		JButton btnRefresh = new JButton("Refresh");
-		btnRefresh.setVisible(true);
-		btnClose.setBounds(880, 620, 100, 30);
-		this.add(btnClose);
-		
 		btnReport.addActionListener(new java.awt.event.ActionListener() {
 		    public void actionPerformed(java.awt.event.ActionEvent evt) {
 		    	FrmBookReport N = new FrmBookReport();		    	
@@ -87,16 +82,21 @@ public class FrmBooksManagement extends JFrame {
 		
 		btnAdd.addActionListener(new java.awt.event.ActionListener() {
 		    public void actionPerformed(java.awt.event.ActionEvent evt) {
-		    	//FrmBooksManagement.this.setVisible(false);
-//		    	int size = table.getRowCount();  
+	    	FrmAddBooks N = new FrmAddBooks(L); 
+		    }
+		});
+		
+		JButton btnRefresh = new JButton("Refresh");
+		btnRefresh.setVisible(true);
+		btnClose.setBounds(880, 620, 100, 30);
+		this.add(btnClose);
+		
+		btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+		    public void actionPerformed(java.awt.event.ActionEvent evt) {
 	    	FrmAddBooks N = new FrmAddBooks(L); 
 		    }
 		});
 
-//		dtm.addRow(new Object[]{...});
-
-		
-		
 		}
 	
 		
