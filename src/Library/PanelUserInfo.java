@@ -176,6 +176,7 @@ public class PanelUserInfo extends JPanel {
 		txtId.setEditable(editable);
 		txtName.setEditable(editable);
 		txtPassword.setEditable(editable);
+		txtPhoneNo.setEditable(editable);
 		txtAddress.setEditable(editable);
 	}
 	
@@ -187,6 +188,7 @@ public class PanelUserInfo extends JPanel {
 		this.txtId.setText("");
 		this.txtName.setText("");
 		this.txtPassword.setText("");
+		this.txtPhoneNo.setText("");
 		this.txtAddress.setText("");
 	}
 	
