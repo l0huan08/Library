@@ -145,7 +145,7 @@ public class PanelBookInfo extends JPanel {
 		txtIsbn.setEditable(editable);
 		txtName.setEditable(editable);
 		txtAuthor.setEditable(editable);
-		cmbCategory.setEditable(editable);
+		cmbCategory.setEnabled(editable);
 	}
 	
 	/**
