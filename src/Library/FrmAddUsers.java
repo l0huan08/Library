@@ -14,11 +14,10 @@ public class FrmAddUsers extends JFrame {
 
 	private JButton addUser, close;
 	private PanelUserInfo infoPanel;
-	Library library;
 	private boolean bool_isActionAdd;
 
-	FrmAddUsers(Library lib) {
-		this.library = lib;
+	FrmAddUsers() {
+		//this.library = lib;
 		jf = new JFrame("Add user");
 
 		addUser = new JButton("Add");
@@ -75,7 +74,7 @@ public class FrmAddUsers extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		new FrmAddUsers(new Library());
+		new FrmAddUsers();
 	}
 
 	public boolean isActionAdd() {
