@@ -14,7 +14,7 @@ public class Library {
 	final String userListURL = "c:\\userList.dat";
 	static final int LIBRARY_OWNER_ID = 0; // ownerId of the library is 0. i.e. not rented.  
 	final long OverdueTimeLimit = 60*1000; // in millisecond
-	final long NewbookTimeLimit = 30*1000; // in millisecond
+	final long NewbookTimeLimit = 60*1000; // in millisecond
 	final int FINE_PER_SECOND = 1;
 	
 	Library(){ //constructor
