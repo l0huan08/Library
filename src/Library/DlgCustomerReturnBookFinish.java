@@ -18,7 +18,6 @@ public class DlgCustomerReturnBookFinish extends JDialog{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	//private JDialog this;
 	private JButton btnOK;
 	private JLabel lblMsg, lblFine;
 	
@@ -44,7 +43,6 @@ public class DlgCustomerReturnBookFinish extends JDialog{
 		this.setTitle("Book Returned");
 		this.setSize(450,210);
 		this.setResizable(false);
-		//this.setVisible(true);
 		
 		lblMsg.setBounds(115, 20, 220, 20);
 		lblMsg.setText("Book Returned!");

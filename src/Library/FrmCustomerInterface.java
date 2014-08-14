@@ -20,7 +20,6 @@ public class FrmCustomerInterface extends JFrame{
 	private Library library;
 	private User user;
 	
-	//private JFrame this;
 	private JButton btnBorrow, btnReturn, btnClose;
 	
 	FrmCustomerInterface(){

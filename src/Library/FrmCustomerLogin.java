@@ -19,7 +19,6 @@ public class FrmCustomerLogin extends JFrame{
 	private Library library;
 	private User currentUser;
 	
-	//private JFrame frmJf;
 	private JLabel lblUserName, lblPassWord;
 	private JTextField txtUserName;
 	private JPasswordField pwdPassWord;
@@ -33,7 +32,6 @@ public class FrmCustomerLogin extends JFrame{
 	}
 	
 	FrmCustomerLogin(){
-		//frmJf = new JFrame("Customer Login");
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setTitle("Customer Login");
 		this.setLayout(null);
@@ -102,7 +100,6 @@ public class FrmCustomerLogin extends JFrame{
 		btnClose.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent ae){
-				//FrmCustomerLogin.this.setVisible(false);
 				FrmCustomerLogin.this.dispose();
 			}
 		});

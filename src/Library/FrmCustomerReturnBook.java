@@ -32,7 +32,6 @@ public class FrmCustomerReturnBook extends JFrame{
 	private Library library;
 	private User user;
 	
-	//private JFrame this;
 	private JLabel lblMsg;
 	private JButton btnReturn, btnClose;
 	private JTable tbBooks;
