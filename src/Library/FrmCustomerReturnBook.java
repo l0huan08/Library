@@ -32,7 +32,7 @@ public class FrmCustomerReturnBook extends JFrame{
 	private Library library;
 	private User user;
 	
-	private JFrame frmJf;
+	//private JFrame this;
 	private JLabel lblMsg;
 	private JButton btnReturn, btnClose;
 	private JTable tbBooks;
@@ -50,9 +50,9 @@ public class FrmCustomerReturnBook extends JFrame{
 		this.library = l;
 		this.user = u;
 		
-		frmJf = new JFrame();
-		frmJf.setLayout(null);
-		frmJf.setLocation(350, 50);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setLayout(null);
+		this.setLocation(350, 50);
 		
 		pnlLeft = new JPanel();
 		pnlLeft.setLayout(null);
@@ -73,9 +73,7 @@ public class FrmCustomerReturnBook extends JFrame{
 		btnClose.setBounds(220, 400, 75, 30);
 		
 		tbBooksModel = new DefaultTableModel(
-				new Object[][] { {"huangli","example",new Book()},
-						{"haha","ex2",new Book()}
-				},
+				new Object[][]{},
 				TBBookColumnTitle
 		);
 		
@@ -102,27 +100,29 @@ public class FrmCustomerReturnBook extends JFrame{
 		pnlRight.setLayout(new BorderLayout());
 		pnlRight.add(pnlBookInfo,BorderLayout.CENTER);
 		
-		frmJf.setTitle("Return Book");
-		frmJf.add(pnlLeft);
-		frmJf.add(pnlRight);
-		frmJf.setSize(720, 500);
-		frmJf.setResizable(false);
-		frmJf.setVisible(true);
+		this.setTitle("Return Book");
+		this.add(pnlLeft);
+		this.add(pnlRight);
+		this.setSize(720, 500);
+		this.setResizable(false);
+		this.setVisible(true);
 		
 		btnReturn.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent ae){
 				if(getSelectedBook() == null){
-					JOptionPane.showMessageDialog(frmJf, "Please select a book!", "Return Failed", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(FrmCustomerReturnBook.this, "Please select a book!", "Return Failed", JOptionPane.WARNING_MESSAGE);
 				} else{
 					int n = JOptionPane.showConfirmDialog(
-						    frmJf,
+							FrmCustomerReturnBook.this,
 						    "Are you sure you want to return " + getSelectedBook().getBookName() + "?",
 						    "Return Confirm",
 						    JOptionPane.YES_NO_OPTION);
 					if(n == 0){
 						double fine = library.fine(getISBN(), new Date());
-						new DlgCustomerReturnBookFinish(fine);
+						DlgCustomerReturnBookFinish dlgReturnFinish=new DlgCustomerReturnBookFinish(fine);
+						dlgReturnFinish.setModal(true);
+						dlgReturnFinish.setVisible(true);
 						library.returnBook(getISBN());
 						refreshTable();
 					}
@@ -133,7 +133,7 @@ public class FrmCustomerReturnBook extends JFrame{
 		btnClose.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent ae){
-				frmJf.dispose();
+				FrmCustomerReturnBook.this.dispose();
 			}
 		});
 		

@@ -115,7 +115,7 @@ public class FrmBorrowBook extends JFrame {
 		this.customer=customer;
 		
 		setTitle("Borrow Book");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 593, 394);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -272,6 +272,7 @@ public class FrmBorrowBook extends JFrame {
 				
 				boolean suc = FrmBorrowBook.this.library.rentBook(FrmBorrowBook.this.customer.getUserId(), book.getIsbn());
 				DlgBorrowBookFinish dlgBorrowFinish = new DlgBorrowBookFinish(suc,book);
+				dlgBorrowFinish.setModal(true);
 				dlgBorrowFinish.setVisible(true);
 				FrmBorrowBook.this.refreshBookTableUI();
 			}	
