@@ -1,30 +1,23 @@
 package Library;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.Date;
 
 //Sen Li
 
+@SuppressWarnings("serial")
 public class FrmAddUsers extends JFrame {
 
 	private JFrame jf;
 
 	private JButton addUser, close;
-	private ImageIcon bookPic;
 	private PanelUserInfo infoPanel;
-	Library library;
 	private boolean bool_isActionAdd;
 
-	FrmAddUsers(Library lib) {
-		this.library = lib;
+	FrmAddUsers() {
+		//this.library = lib;
 		jf = new JFrame("Add user");
 
 		addUser = new JButton("Add");
@@ -32,13 +25,11 @@ public class FrmAddUsers extends JFrame {
 		close = new JButton("Cancel");
 		close.setBounds(325, 500, 100, 30);
 		infoPanel = new PanelUserInfo();
-		infoPanel.setBounds(20, 20, 400, 400 );
-		
+		infoPanel.setBounds(20, 20, 400, 400);
 
 		jf.add(addUser);
 		jf.add(close);
 		jf.add(infoPanel);
-	
 
 		jf.setSize(500, 600);
 		jf.setLayout(null);
@@ -47,8 +38,29 @@ public class FrmAddUsers extends JFrame {
 		addUser.addMouseListener(new MouseAdapter() // add new user
 		{
 			public void mouseClicked(MouseEvent me) {
-				bool_isActionAdd = true;
-				
+
+				Validator validator = new Validator();
+				if (validator.isUserIdValid(infoPanel.getIdText())
+						&& validator.isUserNameValid(infoPanel.getNameText())
+						&& validator.isUserPasswordValid(infoPanel
+								.getPasswordText())
+						&& validator.isUserPhoneNoValid(infoPanel
+								.getPhoneNoText())
+
+				) {
+					bool_isActionAdd = true;
+					JOptionPane.showMessageDialog(FrmAddUsers.this,
+							"New user added.", "OK", JOptionPane.PLAIN_MESSAGE);
+					FrmAddUsers.this.dispose();
+
+				}
+
+				else {
+					JOptionPane.showMessageDialog(FrmAddUsers.this,
+							"Invaild user information!", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
+
 			}// mouse clicked
 		});
 
@@ -56,26 +68,25 @@ public class FrmAddUsers extends JFrame {
 			public void mouseClicked(MouseEvent me) {
 				bool_isActionAdd = false;
 				jf.setVisible(false);
-				
+
 			}
 		});
 	}
 
 	public static void main(String[] args) {
-		new FrmAddUsers(new Library());
+		new FrmAddUsers();
 	}
-	
-	public boolean isActionAdd(){
-		
+
+	public boolean isActionAdd() {
+
 		return bool_isActionAdd;
-		
+
 	}
-	
-	public User getUser(){
+
+	public User getUser() { //return a user with info in the panel.
 		User tempUser = new User();
-		
-		
-		return tempBook;
+		infoPanel.WriteTo(tempUser);
+		return tempUser;
 	}
 
 }

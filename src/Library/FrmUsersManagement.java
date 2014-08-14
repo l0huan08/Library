@@ -4,12 +4,14 @@
 package Library;
 
 import java.awt.Color;
+import java.awt.Dialog;
 import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -24,12 +26,14 @@ import javax.swing.table.DefaultTableModel;
  * Customers Management Frame, Including Adding Updating and Deleting. 
  * @author Joe
  * add 2014.8.12
- * edit by Li Huang 2014.8.13: add Add Customer, Remove Customer, Update Customer functions
+ * edit by Li Huang 2014.8.13: add Add User, Remove User, Update User functions
+ * edit by Li Huang 2014.8.14: finish Remove User method.
  */
 public class FrmUsersManagement extends JFrame{
 	//JFrame L = new JFrame();//del by Li Huang 2014.8.13
 	
 	private Library library;
+	private Validator validator=new Validator();
 	
 	private PanelUserInfo pnlUserInfo;
 	private boolean isResponseTbUserSelecetedChanged=true;
@@ -130,7 +134,35 @@ public class FrmUsersManagement extends JFrame{
 		    }
 		});
 		
+		btnDelete.addActionListener(new java.awt.event.ActionListener() {
+		    public void actionPerformed(java.awt.event.ActionEvent evt) {
+		    	deleteSelectedUser();
+		    	refreshUserTableUI();
+		    }
+		});
 		
+		btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+		    public void actionPerformed(java.awt.event.ActionEvent evt) {
+		    	updateSelectedUser();
+		    	refreshUserTableUI();
+		    }
+		});
+		
+		btnAdd.addActionListener(new java.awt.event.ActionListener() {
+		    public void actionPerformed(java.awt.event.ActionEvent evt) {
+		    	FrmAddUsers frmAddUser =new FrmAddUsers();
+		    	frmAddUser.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+		    	frmAddUser.setVisible(true);
+		    	if (frmAddUser.isActionAdd()) {
+		    		User user = frmAddUser.getUser();
+		    		if (user != null)
+		    		{	
+		    			addUser(user);
+		    			refreshUserTableUI();
+		    		}
+		    	}
+		    }
+		});
 	}
 	
 	
@@ -214,6 +246,60 @@ public class FrmUsersManagement extends JFrame{
 		return isResponseTbUserSelecetedChanged;
 	}
 	
+	
+	private void deleteSelectedUser() {
+		User user =  getSelectedUser();
+		if (user==null) {
+			JOptionPane.showMessageDialog(null, "Please select a user to delete!");
+		}
+		
+		//need return value
+		boolean suc = this.library.deleteUser(user.getUserId());
+		if (!suc) {
+			JOptionPane.showMessageDialog(null, "User not exists.");
+		} else
+		{
+			JOptionPane.showMessageDialog(null, "user "+user.getUserName()+" deleted");
+		}
+	}
+	
+	private void updateSelectedUser() {
+		User user = getSelectedUser();
+		if (user == null) {
+			JOptionPane.showMessageDialog(null,
+				"Please select a user to update!");
+		}
+
+		User newUser = new User();
+		this.pnlUserInfo.WriteTo(newUser);
+		
+		boolean suc = this.library.updateUser(user.getUserId(), newUser);
+		
+		if (!suc) {
+			JOptionPane.showMessageDialog(null, "User not exists.");
+		} else {
+			JOptionPane.showMessageDialog(null, "user " + user.getUserName()
+					+ " updated");
+		}
+	}
+	
+	private void addUser(User user) {
+		if (user==null) {
+			JOptionPane.showMessageDialog(null, "Cannot add null user!");
+			return;
+		}
+		
+		if (! validator.isUserValid(user)) {
+			JOptionPane.showMessageDialog(null, "Cannot add invalid user!");
+			return;
+		}
+		
+		boolean suc = this.library.addUser(user);
+		if (!suc) {
+			JOptionPane.showMessageDialog(null, "Add user failed. Please check the user is valid!");
+			return;
+		}
+	}
 	
 	/**
 	 * Test
