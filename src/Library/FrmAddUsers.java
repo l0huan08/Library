@@ -21,6 +21,7 @@ public class FrmAddUsers extends JFrame {
 	private ImageIcon bookPic;
 	private PanelUserInfo infoPanel;
 	Library library;
+	private boolean bool_isActionAdd;
 
 	FrmAddUsers(Library lib) {
 		this.library = lib;
@@ -28,7 +29,7 @@ public class FrmAddUsers extends JFrame {
 
 		addUser = new JButton("Add");
 		addUser.setBounds(75, 500, 100, 30);
-		close = new JButton("Close");
+		close = new JButton("Cancel");
 		close.setBounds(325, 500, 100, 30);
 		infoPanel = new PanelUserInfo();
 		infoPanel.setBounds(20, 20, 400, 400 );
@@ -46,20 +47,35 @@ public class FrmAddUsers extends JFrame {
 		addUser.addMouseListener(new MouseAdapter() // add new user
 		{
 			public void mouseClicked(MouseEvent me) {
-
-			
+				bool_isActionAdd = true;
+				
 			}// mouse clicked
 		});
 
 		close.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent me) {
+				bool_isActionAdd = false;
 				jf.setVisible(false);
+				
 			}
 		});
 	}
 
 	public static void main(String[] args) {
 		new FrmAddUsers(new Library());
+	}
+	
+	public boolean isActionAdd(){
+		
+		return bool_isActionAdd;
+		
+	}
+	
+	public User getUser(){
+		User tempUser = new User();
+		
+		
+		return tempBook;
 	}
 
 }

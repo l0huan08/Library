@@ -32,7 +32,7 @@ public class FrmAddBooks extends JFrame {
 		choosePic.setBounds(300, 50, 150, 50);
 		add = new JButton("Add");
 		add.setBounds(75, 500, 100, 30);
-		close = new JButton("Close");
+		close = new JButton("Cancel");
 		close.setBounds(325, 500, 100, 30);
 		picturePanel = new JPanel();
 		picturePanel.setBackground(Color.BLACK);
@@ -134,7 +134,7 @@ public class FrmAddBooks extends JFrame {
 
 				}// switch
 
-				if (test.isIsbnValid(currentISBN)
+				if (test.isBookIsbnValid(currentISBN)
 						&& test.isContentValid(currentBookName)
 						&& test.isContentValid(currentAuthor)) {
 
