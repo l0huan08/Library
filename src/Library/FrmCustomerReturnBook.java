@@ -60,6 +60,7 @@ public class FrmCustomerReturnBook extends JFrame{
 		pnlRight = new JPanel();
 		
 		pnlBookInfo = new PanelBookInfo(library);
+		pnlBookInfo.setEditable(false);
 		
 		lblMsg = new JLabel();
 		lblMsg.setText("Rented Books:");
