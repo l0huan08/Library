@@ -22,47 +22,62 @@ public class FrmCustomerReturnBook extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private final String[] TBBookColumnTitle = {"ISBN", "Book Name","bookObj"};
-	private boolean isResponseTbBooksSelecetedChanged = true;
+	
 	private final int N_Book_Table_Columns = 3;
 	private final int TBBook_BookObjColIndex = 2; 
+	private final String[] TBBookColumnTitle = {"ISBN", "Book Name","bookObj"};
+	
+	private boolean isResponseTbBooksSelecetedChanged = true;
+	
 	private Library library;
 	private User user;
+	
 	private JFrame frmJf;
 	private JLabel lblMsg;
 	private JButton btnReturn, btnClose;
 	private JTable tbBooks;
 	private JPanel pnlLeft, pnlRight;
 	private PanelBookInfo pnlBookInfo;
-	private DefaultTableModel tbBooksModel;
 	private JScrollPane scrTbBook;
+	
+	private DefaultTableModel tbBooksModel;
 	
 	FrmCustomerReturnBook(){
 		this(null, null);
 	}
+	
 	FrmCustomerReturnBook(Library l, User u){
 		this.library = l;
 		this.user = u;
+		
 		frmJf = new JFrame();
 		frmJf.setLayout(null);
 		frmJf.setLocation(350, 50);
+		
 		pnlLeft = new JPanel();
-		pnlRight = new JPanel();
-		pnlBookInfo = new PanelBookInfo(library);
 		pnlLeft.setLayout(null);
+		
+		pnlRight = new JPanel();
+		
+		pnlBookInfo = new PanelBookInfo(library);
+		
 		lblMsg = new JLabel();
 		lblMsg.setText("Rented Books:");
 		lblMsg.setBounds(20, 20, 90, 10);
+		
 		btnReturn = new JButton("Return");
 		btnReturn.setBounds(80, 400, 75, 30);
+		
 		btnClose = new JButton("Close");
 		btnClose.setBounds(220, 400, 75, 30);
+		
 		tbBooksModel = new DefaultTableModel(
 				new Object[][] { {"huangli","example",new Book()},
 						{"haha","ex2",new Book()}
 				},
 				TBBookColumnTitle
 		);
+		
 		tbBooks = new JTable();
 		tbBooks.setModel(tbBooksModel);
 		tbBooks.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -73,23 +88,26 @@ public class FrmCustomerReturnBook extends JFrame{
 		scrTbBook=new JScrollPane(tbBooks);
 		scrTbBook.setSize(200, 200);
 		scrTbBook.setBounds(20, 35, 380, 330);
-		pnlLeft.add(scrTbBook);
 		
+		pnlLeft.add(scrTbBook);
 		pnlLeft.add(lblMsg);
 		pnlLeft.add(btnReturn);
 		pnlLeft.add(btnClose);
 		pnlLeft.setSize(600, 500);
 		pnlLeft.setBounds(5, 5, 400, 600);
+		
 		pnlRight.setSize(500, 500);
 		pnlRight.setBounds(450, 20, 400, 400);
 		pnlRight.setLayout(new BorderLayout());
 		pnlRight.add(pnlBookInfo,BorderLayout.CENTER);
+		
 		frmJf.setTitle("Return Book");
 		frmJf.add(pnlLeft);
 		frmJf.add(pnlRight);
 		frmJf.setSize(900, 500);
 		frmJf.setResizable(false);
 		frmJf.setVisible(true);
+		
 		btnReturn.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent ae){
@@ -103,18 +121,19 @@ public class FrmCustomerReturnBook extends JFrame{
 				}
 			}
 		});
+		
 		btnClose.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent ae){
 				frmJf.setVisible(false);
-				new FrmCustomerLogin();
+				FrmCustomerReturnBook.this.dispose();
 			}
 		});
-		
 		
 		//--- init ----
 		refreshTable();
 	}
+	
 	private void refreshTable(){
 		int n = tbBooksModel.getRowCount();
 		for(int i = 0;i < n;i++){
@@ -127,11 +146,13 @@ public class FrmCustomerReturnBook extends JFrame{
 			this.tbBooksModel.addRow(data[i]);
 		}
 	}
+	
 	private String getISBN(){
 		Book book = getSelectedBook();
 		String isbn = book.getIsbn();
 		return isbn;
 	}
+	
 	private Object[] createBookTableRowData(Book book){
 		Object[] row = new Object[N_Book_Table_Columns];
 		row[0] = book.getIsbn();
@@ -140,6 +161,7 @@ public class FrmCustomerReturnBook extends JFrame{
 		
 		return row; 
 	}
+	
 	private Object[][] getRentedBookTableData(){
 		if(this.library == null){
 			return null;
@@ -157,6 +179,7 @@ public class FrmCustomerReturnBook extends JFrame{
 			}
 		}
 	}
+	
 	private Book getSelectedBook() {
 		JTable table = this.tbBooks;
 		int selRow = table.getSelectedRow();
@@ -173,6 +196,7 @@ public class FrmCustomerReturnBook extends JFrame{
 	private boolean getResponseTbBooksSelectedChanged() {
 		return isResponseTbBooksSelecetedChanged;
 	}
+	
 	private class SelectionListener implements ListSelectionListener {
         JTable table;
         SelectionListener(JTable table) {
@@ -189,6 +213,7 @@ public class FrmCustomerReturnBook extends JFrame{
                 	pnlBookInfo.ReadFrom(book);
             }
     }
+	
 	public static void main(String[] args){
 		Library lib=new Library();
 		Book b1 = new Book();
