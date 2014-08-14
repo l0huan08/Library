@@ -60,34 +60,7 @@ public class FrmAdministratorLog extends JFrame {
 						&& loginPassWord.getText().equals("1")) {
 					JOptionPane.showMessageDialog(FrmAdministratorLog.this, "Login Confirmed");
 					FrmAdministratorLog.this.dispose();
-					
-//					JFrame F1C = new JFrame();
-//					F1C.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//					F1C.setSize(350, 200);
-//					F1C.setLocation(450, 300);
-//					F1C.setVisible(true);
-//					F1C.setTitle("Login Confirmed");
-//					F1C.setLayout(null);
-//
-//					JLabel label3 = new JLabel(
-//							"Hi Administrator, Welcome back!");
-//					label3.setBounds(70, 20, 200, 120);
-//					F1C.add(label3);
-//
-//					JButton BtnConfirm = new JButton("OK");
-//					BtnConfirm.setBounds(120, 110, 90, 25);
-//					F1C.add(BtnConfirm);
-//
-//					BtnConfirm
-//							.addActionListener(new java.awt.event.ActionListener() {
-//								public void actionPerformed(
-//										java.awt.event.ActionEvent evt) {
-//									FrmAdminLogin AdministratorLog = new FrmAdminLogin(
-//											FrmAdministratorLog.this.library);
-//									F1C.setVisible(false);
-//									// frmAdminLog.setVisible(false);
-//								}
-//							});
+					FrmAdminLogin n = new FrmAdminLogin(lib);
 				} else {
 					// Wrong info. provided
 					JOptionPane.showMessageDialog(FrmAdministratorLog.this, "Sorry, Worng Input!");
