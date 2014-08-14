@@ -15,6 +15,7 @@ public class Library {
 	static final int LIBRARY_OWNER_ID = 0; // ownerId of the library is 0. i.e. not rented.  
 	final long OverdueTimeLimit = 60*1000; // in millisecond
 	final long NewbookTimeLimit = 30*1000; // in millisecond
+	final int FINE_PER_SECOND = 1;
 	
 	Library(){ //constructor
 		bookList = new ArrayList<Book>();
@@ -303,6 +304,21 @@ public class Library {
 		}//end for
 		return tempBookList;
 		
+	}
+	
+	public double fine(String isbn, Date returnDate){
+		
+		Iterator<Book> bookItr = bookList.iterator();
+		while(bookItr.hasNext()){
+			Book tempBook = bookItr.next();
+			if(tempBook.getIsbn().equals(isbn)){
+				
+				double fine_amount = (returnDate.getTime() - tempBook.getLastRented().getTime())/1000*FINE_PER_SECOND;
+				return fine_amount;
+			}//end if
+		}//end while
+		
+		return 0.0;
 	}
 	
 		
