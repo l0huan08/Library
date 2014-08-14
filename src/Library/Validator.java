@@ -1,6 +1,6 @@
 package Library;
 
-public class Test {
+public class Validator {
 
 	/**
 	 * If str is null, or str=" ", or str="", or str contains

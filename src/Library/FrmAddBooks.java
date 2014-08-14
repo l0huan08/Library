@@ -103,7 +103,7 @@ public class FrmAddBooks extends JFrame {
 		{
 			public void mouseClicked(MouseEvent me) {
 
-				Test test = new Test();
+				Validator test = new Validator();
 
 				String currentISBN = jtf_isbn.getText();
 				String currentBookName = jtf_name.getText();

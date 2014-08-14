@@ -31,11 +31,12 @@ public class FrmAddUsers extends JFrame {
 		close = new JButton("Close");
 		close.setBounds(325, 500, 100, 30);
 		infoPanel = new PanelUserInfo();
-		infoPanel.setLocation(20, 20);
+		infoPanel.setBounds(20, 20, 400, 400 );
 		
 
 		jf.add(addUser);
 		jf.add(close);
+		jf.add(infoPanel);
 	
 
 		jf.setSize(500, 600);
@@ -58,7 +59,7 @@ public class FrmAddUsers extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		new FrmAddBooks(new Library());
+		new FrmAddUsers(new Library());
 	}
 
 }
