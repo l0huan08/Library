@@ -39,13 +39,11 @@ public class PanelUserInfo extends JPanel {
 	private JTextField txtName;
 	private JLabel lblPassword;
 	private JTextField txtPassword;
-	JLabel lblPhoneNo;
+	private JLabel lblPhoneNo;
 	private JTextField txtPhoneNo;
 	private JLabel lblAddress;
 	private JTextArea txtAddress;
-	
-	private Library library;
-	
+		
 	
 	/**
 	 * Create the panel.
@@ -148,10 +146,6 @@ public class PanelUserInfo extends JPanel {
 	}
 	
 	
-	public PanelUserInfo(Library library) {
-		this();
-		this.library=library;
-	}
 	
 	/**
 	 * Set whether this panel information is editable or read only
