@@ -127,8 +127,8 @@ public class Library {
 		}//end while
 	}//delete book
 	
-	void addUser(User user){
-		userList.add(user);
+	boolean addUser(User user){
+		return userList.add(user);
 	}
 	
 	boolean updateUser(int userId, User user){
