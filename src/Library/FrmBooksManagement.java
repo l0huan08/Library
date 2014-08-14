@@ -165,8 +165,7 @@ public class FrmBooksManagement extends JFrame {
 				  public void mouseClicked(MouseEvent e) {
 				      JTable target = (JTable)e.getSource();
 				      
-				      int row = target.getSelectedRow();   
-				      int column = target.getSelectedColumn();	// useless here
+				      int row = target.getSelectedRow();
 				      dtm.removeRow(row);
 				      FrmBooksManagement.this.library.deleteBook(table.getValueAt(row, 2).toString());
 	
