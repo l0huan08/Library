@@ -131,7 +131,10 @@ public class Library {
 		userList.add(user);
 	}
 	
-	void updateUser(int userId, User user){
+	boolean updateUser(int userId, User user){
+		if(user == null){
+			return false;
+		}
 		Iterator<User> userItr = userList.iterator();
 		int index = -1;
 		while(userItr.hasNext()){
@@ -139,9 +142,11 @@ public class Library {
 			index++;
 			if(tempUser.getUserId()==userId){
 				userList.set(index, user);
-				break;
+				return true;
 			}//end if
 		}//end while
+		
+		return false;
 	}//update user
 	
 	boolean deleteUser(int userId){
