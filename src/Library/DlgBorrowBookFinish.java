@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
@@ -38,6 +39,7 @@ public class DlgBorrowBookFinish extends JDialog {
 	 * Create the dialog.
 	 */
 	public DlgBorrowBookFinish(boolean isSuccess, Book book) {
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Borrow Book Finish");
 		setBounds(100, 100, 357, 336);
 		getContentPane().setLayout(new BorderLayout());

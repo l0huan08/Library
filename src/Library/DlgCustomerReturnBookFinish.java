@@ -1,6 +1,7 @@
 package Library;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.text.*;
@@ -11,13 +12,13 @@ import java.text.*;
  * add 8/12/2014
 */
 
-public class DlgCustomerReturnBookFinish extends JFrame{
+public class DlgCustomerReturnBookFinish extends JDialog{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private JDialog dlgJd;
+	//private JDialog this;
 	private JButton btnOK;
 	private JLabel lblMsg, lblFine;
 	
@@ -26,8 +27,9 @@ public class DlgCustomerReturnBookFinish extends JFrame{
 	}
 	
 	DlgCustomerReturnBookFinish(double fine){
-		dlgJd = new JDialog();
-		dlgJd.setLocation(350, 50);
+		
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setLocation(350, 50);
 		
 		btnOK = new JButton("OK");
 		btnOK.setBounds(195, 100, 60, 30);
@@ -35,14 +37,14 @@ public class DlgCustomerReturnBookFinish extends JFrame{
 		lblMsg = new JLabel();
 		lblFine = new JLabel();
 		
-		dlgJd.setLayout(null);
-		dlgJd.add(lblMsg);
-		dlgJd.add(lblFine);
-		dlgJd.add(btnOK);
-		dlgJd.setTitle("Book Returned");
-		dlgJd.setSize(450,210);
-		dlgJd.setResizable(false);
-		dlgJd.setVisible(true);
+		this.setLayout(null);
+		this.add(lblMsg);
+		this.add(lblFine);
+		this.add(btnOK);
+		this.setTitle("Book Returned");
+		this.setSize(450,210);
+		this.setResizable(false);
+		//this.setVisible(true);
 		
 		lblMsg.setBounds(115, 20, 220, 20);
 		lblMsg.setText("Book Returned!");
@@ -60,7 +62,6 @@ public class DlgCustomerReturnBookFinish extends JFrame{
 		
 		btnOK.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent ae){
-				dlgJd.setVisible(false);
 				DlgCustomerReturnBookFinish.this.dispose();
 			}
 		});

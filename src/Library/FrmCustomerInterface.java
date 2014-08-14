@@ -2,6 +2,7 @@ package Library;
 
 import javax.swing.*;
 
+import java.awt.*;
 import java.awt.event.*;
 
 /**
@@ -61,7 +62,7 @@ public class FrmCustomerInterface extends JFrame{
 		{
 			public void actionPerformed(ActionEvent ae){
 				FrmCustomerInterface.this.dispose();
-				new FrmCustomerLogin();
+				new FrmCustomerLogin(library, user);
 			}
 		});
 		
@@ -70,6 +71,14 @@ public class FrmCustomerInterface extends JFrame{
 			public void actionPerformed(ActionEvent ae){
 				FrmBorrowBook borrow = new FrmBorrowBook(library, user);
 				borrow.setVisible(true);
+			}
+		});
+		
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				FrmCustomerInterface.this.dispose();
+				new FrmCustomerLogin(library, user);
 			}
 		});
 	}
