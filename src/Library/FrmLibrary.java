@@ -30,7 +30,7 @@ public class FrmLibrary extends JFrame{
 		book1.setLastRented(new Date());
 		book1.setOwnerId(Library.LIBRARY_OWNER_ID);
 		book1.setRented(false);		
-		L.bookList.add(book1);
+		L.addBook(book1);
 		
 		Book book2 = new Book();
 		book2.setBookName("WWII");
@@ -41,7 +41,7 @@ public class FrmLibrary extends JFrame{
 		book2.setLastRented(new Date());
 		book2.setOwnerId(Library.LIBRARY_OWNER_ID);
 		book2.setRented(false);
-		L.bookList.add(book2);
+		L.addBook(book2);
 		
 		this.setSize(600, 600);
 		this.setLocation(350, 50);
