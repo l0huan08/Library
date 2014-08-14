@@ -9,17 +9,21 @@ import java.util.*;
  * @author Sen Li
  * add 2014.8.11
  * edit by Run Yan 2014.8.14: fix bug at fine()
+ * make all the member variables private
+ * add copyBookImage() and addBook(book,srcBookImgPath,srcBookImgFilename) methods
  */
 public class Library {
 	
+	public static final int LIBRARY_OWNER_ID = 0; // ownerId of the library is 0. i.e. not rented.  
+	private final String bookListURL = "c:\\BookList.dat";
+	private final String userListURL = "c:\\userList.dat";
+	private final long OverdueTimeLimit = 60*1000; // in millisecond
+	private final long NewbookTimeLimit = 60*1000; // in millisecond
+	private final int FINE_PER_SECOND = 1;
+	private final String DEFAULT_BOOK_IMAGE_PATH =  "./images/";
+	
 	private ArrayList<Book> bookList;
 	private ArrayList<User> userList;
-	final String bookListURL = "c:\\BookList.dat";
-	final String userListURL = "c:\\userList.dat";
-	static final int LIBRARY_OWNER_ID = 0; // ownerId of the library is 0. i.e. not rented.  
-	final long OverdueTimeLimit = 60*1000; // in millisecond
-	final long NewbookTimeLimit = 60*1000; // in millisecond
-	final int FINE_PER_SECOND = 1;
 	
 	Library(){ //constructor
 		bookList = new ArrayList<Book>();
@@ -93,16 +97,75 @@ public class Library {
 	}
 	
 	String getBookImgFileFullName(String isbn){
-		
-		return isbn + ".jpg"; //Extension .jpg
-		
+		return DEFAULT_BOOK_IMAGE_PATH+isbn + ".jpg"; //Extension .jpg
 	}
 	
+	/**
+	 * Copy the book image file into the default Book Image folder.
+	 * @param srcImgPath  original image file path e.g. D:/img1
+	 * @param srcImgFileName original image filename,  e.g. abc.jpg
+	 * @param newImgFilename new image filename, without extension,  e.g.  1234
+	 * @return if success copy the file, return true; else return false;
+	 * e.g. Will copy D:/img1/abc.jpg into DEFAULT_BOOK_IMG_PATH/1234.jpg. 
+	 * @throws Exception
+	 */
+	public boolean copyBookImage(String srcImgPath, String srcImgFileName, String newImgFilename)
+	{
+		String srcPath = srcImgPath + srcImgFileName;
+		FileInputStream fi;
+		try {
+			fi = new FileInputStream(srcPath);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return false;
+		}
+		BufferedInputStream in = new BufferedInputStream(fi);
+		newImgFilename = srcImgFileName.replaceAll(srcImgFileName,
+				newImgFilename) + ".jpg";
+		File destDir = new File(DEFAULT_BOOK_IMAGE_PATH);
+		if (!destDir.exists()) {
+			destDir.mkdir();
+		}
+		String destPath = destDir.toString() + "\\" + newImgFilename;
+		FileOutputStream fo;
+		try {
+			fo = new FileOutputStream(destPath);
+
+			BufferedOutputStream out = new BufferedOutputStream(fo);
+			byte[] buf = new byte[1024];
+			int len = in.read(buf);
+			while (len != -1) {
+				out.write(buf, 0, len);
+				len = in.read(buf);
+			}
+			out.close();
+			fo.close();
+			in.close();
+			fi.close();
+			return true;
+			
+		} catch (Exception e) {
+			return false;
+		}
+	}
 	
 	void addBook(Book b){
 		b.setAddedDate(new Date());
 		bookList.add(b);
 		
+	}//add book
+	
+	/**
+	 * add a book into library, and also copy its image file into the default book image folder.
+	 * add by Li Huang 2014.8.14
+	 * @param b Book
+	 * @param srcBookImgPath original book image file path e.g. D:/img1
+	 * @param srcBookImgFileName original image filename,  e.g. abc.jpg
+	 */
+	void addBook(Book b, String srcBookImgPath, String srcBookImgFileName){
+		b.setAddedDate(new Date());
+		copyBookImage(srcBookImgPath,srcBookImgFileName,b.getIsbn());
+		bookList.add(b);
 	}//add book
 	
 	void updateBook(String isbn, Book b){
