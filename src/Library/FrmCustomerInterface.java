@@ -59,8 +59,7 @@ public class FrmCustomerInterface extends JFrame{
 		btnClose.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent ae){
-				frmJf.setVisible(false);
-				FrmCustomerInterface.this.dispose();
+				frmJf.dispose();
 				new FrmCustomerLogin();
 			}
 		});
@@ -72,9 +71,5 @@ public class FrmCustomerInterface extends JFrame{
 				borrow.setVisible(true);
 			}
 		});
-	}
-	
-	public static void main(String[] args){
-		new FrmCustomerInterface();
 	}
 }

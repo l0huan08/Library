@@ -49,13 +49,12 @@ public class DlgCustomerReturnBookFinish extends JFrame{
 		lblMsg.setFont(new Font("Arial", Font.BOLD, 28));
 		
 		if(fine != 0){
-			DecimalFormat format = new DecimalFormat("#.00");
-			lblFine.setText("Please pay late fee: $" + format.format(fine) + ".");
+			lblFine.setText("Please pay late fee: $" + new DecimalFormat("#.00").format(fine) + ".");
 		} else{
 			lblFine.setText("");
 		}
 		
-		lblFine.setBounds(70, 50, 300, 30);
+		lblFine.setBounds(70, 50, 500, 30);
 		lblFine.setFont(new Font("Arial", Font.PLAIN, 24));
 		lblFine.setForeground(Color.red);
 		
@@ -65,9 +64,5 @@ public class DlgCustomerReturnBookFinish extends JFrame{
 				DlgCustomerReturnBookFinish.this.dispose();
 			}
 		});
-	}
-	
-	public static void main(String[] args){
-		new DlgCustomerReturnBookFinish();
 	}
 }

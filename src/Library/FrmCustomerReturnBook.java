@@ -23,9 +23,9 @@ public class FrmCustomerReturnBook extends JFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private final int N_Book_Table_Columns = 3;
+	private final int N_Book_Table_Columns = 4;
 	private final int TBBook_BookObjColIndex = 2; 
-	private final String[] TBBookColumnTitle = {"ISBN", "Book Name","bookObj"};
+	private final String[] TBBookColumnTitle = {"ISBN", "Book Name", "Author", "bookObj"};
 	
 	private boolean isResponseTbBooksSelecetedChanged = true;
 	
@@ -64,7 +64,7 @@ public class FrmCustomerReturnBook extends JFrame{
 		
 		lblMsg = new JLabel();
 		lblMsg.setText("Rented Books:");
-		lblMsg.setBounds(20, 20, 90, 10);
+		lblMsg.setBounds(20, 20, 90, 30);
 		
 		btnReturn = new JButton("Return");
 		btnReturn.setBounds(80, 400, 75, 30);
@@ -88,7 +88,7 @@ public class FrmCustomerReturnBook extends JFrame{
 		
 		scrTbBook=new JScrollPane(tbBooks);
 		scrTbBook.setSize(200, 200);
-		scrTbBook.setBounds(20, 35, 380, 330);
+		scrTbBook.setBounds(20, 55, 380, 330);
 		
 		pnlLeft.add(scrTbBook);
 		pnlLeft.add(lblMsg);
@@ -98,14 +98,14 @@ public class FrmCustomerReturnBook extends JFrame{
 		pnlLeft.setBounds(5, 5, 400, 600);
 		
 		pnlRight.setSize(500, 500);
-		pnlRight.setBounds(450, 20, 400, 400);
+		pnlRight.setBounds(450, 20, 240, 400);
 		pnlRight.setLayout(new BorderLayout());
 		pnlRight.add(pnlBookInfo,BorderLayout.CENTER);
 		
 		frmJf.setTitle("Return Book");
 		frmJf.add(pnlLeft);
 		frmJf.add(pnlRight);
-		frmJf.setSize(900, 500);
+		frmJf.setSize(720, 500);
 		frmJf.setResizable(false);
 		frmJf.setVisible(true);
 		
@@ -115,10 +115,17 @@ public class FrmCustomerReturnBook extends JFrame{
 				if(getSelectedBook() == null){
 					JOptionPane.showMessageDialog(frmJf, "Please select a book!", "Return Failed", JOptionPane.WARNING_MESSAGE);
 				} else{
-					double fine = library.fine(getISBN(), new Date());
-					new DlgCustomerReturnBookFinish(fine);
-					library.returnBook(getISBN());
-					refreshTable();
+					int n = JOptionPane.showConfirmDialog(
+						    frmJf,
+						    "Are you sure you want to return " + getSelectedBook().getBookName() + "?",
+						    "Return Confirm",
+						    JOptionPane.YES_NO_OPTION);
+					if(n == 0){
+						double fine = library.fine(getISBN(), new Date());
+						new DlgCustomerReturnBookFinish(fine);
+						library.returnBook(getISBN());
+						refreshTable();
+					}
 				}
 			}
 		});
@@ -126,8 +133,7 @@ public class FrmCustomerReturnBook extends JFrame{
 		btnClose.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent ae){
-				frmJf.setVisible(false);
-				FrmCustomerReturnBook.this.dispose();
+				frmJf.dispose();
 			}
 		});
 		
@@ -159,7 +165,7 @@ public class FrmCustomerReturnBook extends JFrame{
 		row[0] = book.getIsbn();
 		row[1] = book.getBookName();
 		row[2] = book;
-		
+		//row[3] = book;
 		return row; 
 	}
 	
@@ -215,29 +221,4 @@ public class FrmCustomerReturnBook extends JFrame{
             }
     }
 	
-	public static void main(String[] args){
-		Library lib=new Library();
-		Book b1 = new Book();
-		Book b2 = new Book();
-		b1.setIsbn("111");
-		b1.setBookName("book1");
-		b1.setCategory(Category.HISTORY);
-		
-		b2.setIsbn("222");
-		b2.setBookName("book2");
-		b2.setCategory(Category.COOKING);
-		
-		lib.addBook(b1);
-		lib.addBook(b2);
-		
-		User u1 = new User();
-		u1.setUserName("huangli");
-		u1.setUserId(123);
-		
-		lib.addUser(u1);
-		lib.rentBook(u1.getUserId(), b1.getIsbn());
-		lib.rentBook(u1.getUserId(), b2.getIsbn());
-		
-		new FrmCustomerReturnBook(lib, u1);
-	}
 }

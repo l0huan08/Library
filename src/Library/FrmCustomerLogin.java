@@ -101,7 +101,7 @@ public class FrmCustomerLogin extends JFrame{
 		{
 			public void actionPerformed(ActionEvent ae){
 				frmJf.setVisible(false);
-				FrmCustomerLogin.this.dispose();
+				frmJf.dispose();
 			}
 		});
 	}
@@ -112,15 +112,18 @@ public class FrmCustomerLogin extends JFrame{
 		Book b1 = new Book();
 		Book b2 = new Book();
 		Book b3 = new Book();
-		b1.setIsbn("111");
-		b1.setBookName("book1");
-		b1.setCategory(Category.HISTORY);
-		b2.setIsbn("222");
-		b2.setBookName("book2");
+		b1.setIsbn("0778801314");
+		b1.setBookName("Ball Complete Book of Home Preserving");
+		b1.setAuthor("Judi Kingry");
+		b1.setCategory(Category.COOKING);
+		b2.setIsbn("0736430512");
+		b2.setBookName("Frozen Little Golden Book");
+		b2.setAuthor("RH Disney");
 		b2.setCategory(Category.CHILDREN);
-		b3.setIsbn("333");
-		b3.setBookName("book3");
-		b3.setCategory(Category.CHILDREN);
+		b3.setIsbn("1476751447");
+		b3.setBookName("Hard Choices");
+		b3.setAuthor("Hillary Rodham Clinton");
+		b3.setCategory(Category.HISTORY);
 		u1.setUserId(1);
 		u1.setPassword("123");
 		u1.setUserName("user");
