@@ -2,10 +2,6 @@
 package Library;
 
 import java.awt.*;
-import java.awt.image.*;
-import java.io.*;
-import javax.imageio.*;
-
 import javax.swing.*;
 import javax.swing.GroupLayout.*;
 import javax.swing.LayoutStyle.*;
@@ -16,6 +12,7 @@ import javax.swing.border.*;
  * Panel to show Customer Info
  * @author Li Huang
  * add 2014.8.13
+ * edit by Li Huang 2014.8.14   add text fields Getters for validation.
  */
 public class PanelUserInfo extends JPanel {
 
@@ -44,6 +41,30 @@ public class PanelUserInfo extends JPanel {
 	private JLabel lblAddress;
 	private JTextArea txtAddress;
 		
+	//---------- Getters ---------------------
+	public boolean isAdmin() {
+		return getIsAdminFromCmbIndex(cmbUserType.getSelectedIndex());
+	}
+	
+	public String getIdText() {
+		return txtId.getText();
+	}
+	
+	public String getNameText() {
+		return txtName.getText();
+	}
+	
+	public String getPasswordText() {
+		return txtPassword.getText();
+	}
+	
+	public String getPhoneNoText() {
+		return txtPhoneNo.getText();
+	}
+	
+	public String getAddressText() {
+		return txtAddress.getText();
+	}
 	
 	/**
 	 * Create the panel.

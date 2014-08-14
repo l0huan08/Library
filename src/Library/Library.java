@@ -14,7 +14,7 @@ public class Library {
 	final String userListURL = "c:\\userList.dat";
 	static final int LIBRARY_OWNER_ID = 0; // ownerId of the library is 0. i.e. not rented.  
 	final long OverdueTimeLimit = 60*1000; // in millisecond
-	final long NewbookTimeLimit = 30*1000; // in millisecond
+	final long NewbookTimeLimit = 60*1000; // in millisecond
 	final int FINE_PER_SECOND = 1;
 	
 	Library(){ //constructor
@@ -127,11 +127,14 @@ public class Library {
 		}//end while
 	}//delete book
 	
-	void addUser(User user){
-		userList.add(user);
+	boolean addUser(User user){
+		return userList.add(user);
 	}
 	
-	void updateUser(int userId, User user){
+	boolean updateUser(int userId, User user){
+		if(user == null){
+			return false;
+		}
 		Iterator<User> userItr = userList.iterator();
 		int index = -1;
 		while(userItr.hasNext()){
@@ -139,12 +142,14 @@ public class Library {
 			index++;
 			if(tempUser.getUserId()==userId){
 				userList.set(index, user);
-				break;
+				return true;
 			}//end if
 		}//end while
+		
+		return false;
 	}//update user
 	
-	void deleteUser(int userId){
+	boolean deleteUser(int userId){
 		
 		Iterator<User> userItr = userList.iterator();
 		int index = -1;
@@ -153,9 +158,10 @@ public class Library {
 			index++;
 			if(tempUser.getUserId()==userId){
 				userList.remove(index);
-				break;
+				return true;
 			}//end if
 		}//end while
+		return false;
 				
 	}//delete user
 	
