@@ -14,13 +14,25 @@ import java.util.List;
 //		Also leads to books report Frame (Rented, In Library and Overdue)
 
 public class FrmBooksManagement extends JFrame {
-	private Library L;
-	String [] cb_Status = {"Rented", "Not rented"};
-	JComboBox tStatus = new JComboBox(cb_Status);
-	int row;
+	private Library library;
 	
-	public FrmBooksManagement(Library L){
-		this.L=L;
+	private int row;
+	
+	private final String[] cb_Status = {"Rented", "Not rented"};
+	private JComboBox tStatus = new JComboBox(cb_Status);
+	
+	private JLabel lStatus; 
+	JLabel lISBN; 
+	JTextField tISBN;
+	JLabel lName;
+	JTextField tName;
+	JLabel lAuthor;
+	JTextField tAuthor;
+	JTable table;
+	DefaultTableModel dtm;
+	
+	public FrmBooksManagement(Library lib){
+		this.library=lib;
 
 		//In the Requirement Document, Administrator is supposed to notify all the customers about the new books arriving.
 		//In this Frame, there is no certain button does that. Instead, as soon as a new book is added, all customers would
@@ -32,14 +44,14 @@ public class FrmBooksManagement extends JFrame {
 		this.setTitle("Books Management");	
 		this.setLayout(null);
 	
-	    Object rowData[][] =getAllBookTableData(L);
+	    Object rowData[][] =getAllBookTableData(lib);
 		
 	    String columnNames[] = { "bookName", "author", "isbn",
 	    						 "lastRented", "AddedDate", "isRented",
 	    						 "ownerId", "category" };
 	    
-	    DefaultTableModel dtm = new DefaultTableModel(rowData, columnNames);
-	    JTable table = new JTable(dtm);
+	    dtm = new DefaultTableModel(rowData, columnNames);
+	    table = new JTable(dtm);
 	    
 	    JScrollPane scrollPane = new JScrollPane(table);
 	    scrollPane.setBounds(50, 50, 600, 400);
@@ -70,7 +82,7 @@ public class FrmBooksManagement extends JFrame {
 		btnClose.setBounds(880, 620, 100, 30);
 		this.add(btnClose);
 		
-		JLabel lStatus = new JLabel();
+		lStatus = new JLabel();
 		lStatus.setVisible(true);
 		lStatus.setText("Status:");
 		lStatus.setBounds(705, 103, 50, 25);
@@ -81,35 +93,35 @@ public class FrmBooksManagement extends JFrame {
 		tStatus.setBounds(750, 100, 200, 25);
 		this.add(tStatus);
 		
-		JLabel lISBN = new JLabel();
+		lISBN = new JLabel();
 		lISBN.setVisible(true);
 		lISBN.setText("ISBN:");
 		lISBN.setBounds(709, 143, 50, 25);
 		this.add(lISBN);
 		
-		JTextField tISBN = new JTextField();
+		tISBN = new JTextField();
 		tISBN.setVisible(true);
 		tISBN.setBounds(750, 140, 200, 25);
 		this.add(tISBN);
 		
-		JLabel lName = new JLabel();
+		lName = new JLabel();
 		lName.setVisible(true);
 		lName.setText("Book Name:");
 		lName.setBounds(675, 182, 70, 30);
 		this.add(lName);
 		
-		JTextField tName = new JTextField();
+		tName = new JTextField();
 		tName.setVisible(true);
 		tName.setBounds(750, 180, 200, 25);
 		this.add(tName);
 		
-		JLabel lAuthor = new JLabel();
+		lAuthor = new JLabel();
 		lAuthor.setVisible(true);
 		lAuthor.setText("Author Name:");
 		lAuthor.setBounds(665, 222, 80, 25);
 		this.add(lAuthor);
 		
-		JTextField tAuthor = new JTextField();
+		tAuthor = new JTextField();
 		tAuthor.setVisible(true);
 		tAuthor.setBounds(750, 220, 200, 25);
 		this.add(tAuthor);
@@ -129,7 +141,7 @@ public class FrmBooksManagement extends JFrame {
 		
 		btnAdd.addActionListener(new java.awt.event.ActionListener() {
 		    public void actionPerformed(java.awt.event.ActionEvent evt) {
-	    	FrmAddBooks N = new FrmAddBooks(L); 
+	    	FrmAddBooks frmAddBooks = new FrmAddBooks(FrmBooksManagement.this.library); 
 		    }
 		});
 		
@@ -156,7 +168,7 @@ public class FrmBooksManagement extends JFrame {
 				      int row = target.getSelectedRow();   
 				      int column = target.getSelectedColumn();	// useless here
 				      dtm.removeRow(row);
-				      L.deleteBook(table.getValueAt(row, 2).toString());
+				      FrmBooksManagement.this.library.deleteBook(table.getValueAt(row, 2).toString());
 	
 				  }
 				});
@@ -173,8 +185,11 @@ public class FrmBooksManagement extends JFrame {
 		    	for (int i = 0 ; i < j; i++){
 			    	dtm.removeRow(0);			    	
 		    	}
-		    	for (int i = 0 ; i < L.showBookList_all().size(); i++){
-		    		dtm.addRow(createBookTableRowData(L.showBookList_all().get(i)));
+		    	ArrayList<Book> books =  FrmBooksManagement.this.library.showBookList_all();
+		    	int nBook = books.size();
+		    	
+		    	for (int i = 0 ; i < nBook; i++){
+		    		dtm.addRow( createBookTableRowData(books.get(i)) );
 		    	}
 		    }
 		});
@@ -182,12 +197,12 @@ public class FrmBooksManagement extends JFrame {
 		btnUpdate.addActionListener(new java.awt.event.ActionListener() {
 		    public void actionPerformed(java.awt.event.ActionEvent evt) {
 					      String oldISBN = table.getValueAt(row, 2).toString();
-					      Book tempBook = L.getBookByISBN(oldISBN);				      
+					      Book tempBook = FrmBooksManagement.this.library.getBookByISBN(oldISBN);				      
 					      tempBook.setBookName(tName.getText());
 					      tempBook.setAuthor(tAuthor.getText());
 					      tempBook.setIsbn(tISBN.getText());
 					      tempBook.setRented(tStatus.getSelectedIndex()==0? true:false);
-					      L.updateBook(oldISBN, tempBook);
+					      FrmBooksManagement.this.library.updateBook(oldISBN, tempBook);
 		    }
 		});
 
