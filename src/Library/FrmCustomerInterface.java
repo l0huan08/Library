@@ -19,7 +19,7 @@ public class FrmCustomerInterface extends JFrame{
 	private Library library;
 	private User user;
 	
-	private JFrame frmJf;
+	//private JFrame this;
 	private JButton btnBorrow, btnReturn, btnClose;
 	
 	FrmCustomerInterface(){
@@ -29,8 +29,9 @@ public class FrmCustomerInterface extends JFrame{
 		this.library = l;
 		this.user = u;
 		
-		frmJf = new JFrame("Customer Interface");
-		frmJf.setLocation(350, 50);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setTitle("Customer Interface");
+		this.setLocation(350, 50);
 		
 		btnBorrow = new JButton("Borrow Book");
 		btnBorrow.setBounds(20, 20, 130, 30);
@@ -41,13 +42,13 @@ public class FrmCustomerInterface extends JFrame{
 		btnClose = new JButton("Close");
 		btnClose.setBounds(125, 80, 130, 30);
 		
-		frmJf.setLayout(null);
-		frmJf.add(btnBorrow);
-		frmJf.add(btnReturn);
-		frmJf.add(btnClose);
-		frmJf.setSize(400, 200);
-		frmJf.setResizable(false);
-		frmJf.setVisible(true);
+		this.setLayout(null);
+		this.add(btnBorrow);
+		this.add(btnReturn);
+		this.add(btnClose);
+		this.setSize(400, 200);
+		this.setResizable(false);
+		this.setVisible(true);
 		
 		btnReturn.addActionListener(new ActionListener()
 		{
@@ -59,7 +60,7 @@ public class FrmCustomerInterface extends JFrame{
 		btnClose.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent ae){
-				frmJf.dispose();
+				FrmCustomerInterface.this.dispose();
 				new FrmCustomerLogin();
 			}
 		});

@@ -19,7 +19,7 @@ public class FrmCustomerLogin extends JFrame{
 	private Library library;
 	private User currentUser;
 	
-	private JFrame frmJf;
+	//private JFrame frmJf;
 	private JLabel lblUserName, lblPassWord;
 	private JTextField txtUserName;
 	private JPasswordField pwdPassWord;
@@ -33,9 +33,11 @@ public class FrmCustomerLogin extends JFrame{
 	}
 	
 	FrmCustomerLogin(){
-		frmJf = new JFrame("Customer Login");
-		frmJf.setLayout(null);
-		frmJf.setLocation(250, 40);
+		//frmJf = new JFrame("Customer Login");
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setTitle("Customer Login");
+		this.setLayout(null);
+		this.setLocation(250, 40);
 		
 		lblUserName = new JLabel();
 		lblUserName.setText("Username:");
@@ -57,15 +59,15 @@ public class FrmCustomerLogin extends JFrame{
 		btnClose = new JButton("Close");
 		btnClose.setBounds(340, 160, 75, 30);
 		
-		frmJf.add(lblUserName);
-		frmJf.add(txtUserName);
-		frmJf.add(lblPassWord);
-		frmJf.add(pwdPassWord);
-		frmJf.add(btnLogin);
-		frmJf.add(btnClose);
-		frmJf.setResizable(false);
-		frmJf.setSize(600, 280);
-		frmJf.setVisible(true);
+		this.add(lblUserName);
+		this.add(txtUserName);
+		this.add(lblPassWord);
+		this.add(pwdPassWord);
+		this.add(btnLogin);
+		this.add(btnClose);
+		this.setResizable(false);
+		this.setSize(600, 280);
+		this.setVisible(true);
 		
 		btnLogin.addActionListener(new ActionListener()
 		{
@@ -73,23 +75,23 @@ public class FrmCustomerLogin extends JFrame{
 				pwd = new String(pwdPassWord.getPassword());
 				user = txtUserName.getText();
 				if(user.length() == 0){
-					JOptionPane.showMessageDialog(frmJf, "Please enter your username.", "Login Failed", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(FrmCustomerLogin.this, "Please enter your username.", "Login Failed", JOptionPane.ERROR_MESSAGE);
 				} else{
 					if(pwd.length() == 0){
-						JOptionPane.showMessageDialog(frmJf, "Please enter your password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(FrmCustomerLogin.this, "Please enter your password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
 					} else{
 						if(library.login(user, pwd) != null){
 							currentUser = library.login(user, pwd);
 							if(!currentUser.isAdmin()){
-								JOptionPane.showMessageDialog(frmJf, "Welcome, " + currentUser.getUserName() + "!", "Welcome", JOptionPane.INFORMATION_MESSAGE);
-								frmJf.setVisible(false);
+								JOptionPane.showMessageDialog(FrmCustomerLogin.this, "Welcome, " + currentUser.getUserName() + "!", "Welcome", JOptionPane.INFORMATION_MESSAGE);
+								FrmCustomerLogin.this.dispose();
 								new FrmCustomerInterface(library, currentUser);
 							} else{
-								JOptionPane.showMessageDialog(frmJf, "Invalid username or password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
+								JOptionPane.showMessageDialog(FrmCustomerLogin.this, "Invalid username or password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
 								pwdPassWord.setText("");
 							}
 						} else{
-							JOptionPane.showMessageDialog(frmJf, "Invalid username or password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(FrmCustomerLogin.this, "Invalid username or password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
 							pwdPassWord.setText("");
 						}
 					}
@@ -100,8 +102,8 @@ public class FrmCustomerLogin extends JFrame{
 		btnClose.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent ae){
-				frmJf.setVisible(false);
-				frmJf.dispose();
+				//FrmCustomerLogin.this.setVisible(false);
+				FrmCustomerLogin.this.dispose();
 			}
 		});
 	}
@@ -109,6 +111,7 @@ public class FrmCustomerLogin extends JFrame{
 	public static void main(String[] args){
 		Library l = new Library();
 		User u1 = new User();
+		User u2 = new User();
 		Book b1 = new Book();
 		Book b2 = new Book();
 		Book b3 = new Book();
@@ -128,7 +131,14 @@ public class FrmCustomerLogin extends JFrame{
 		u1.setPassword("123");
 		u1.setUserName("user");
 		u1.setAdmin(false);
+		
+		u2.setUserId(2);
+		u2.setPassword("123");
+		u2.setUserName("admin");
+		u2.setAdmin(true);
+		
 		l.addUser(u1);
+		l.addUser(u2);
 		l.addBook(b1);
 		l.addBook(b2);
 		l.addBook(b3);
