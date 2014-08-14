@@ -42,7 +42,8 @@ public class PanelBookInfo extends JPanel {
 	public PanelBookInfo() {
 		setBorder(new TitledBorder(null, "BookInfo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		
-		lblBookImg = new JLabel("lblBookImg");
+		lblBookImg = new JLabel("No Image");
+		lblBookImg.setBorder(new LineBorder(Color.black));
 		
 		JPanel panel = new JPanel();
 		
@@ -169,17 +170,15 @@ public class PanelBookInfo extends JPanel {
 			return;
 		
 		//update book img
+		String bookImgPath = null;
 		if (this.library!=null) {
-			String bookImgPath = this.library.getBookImgFileFullName(book.getIsbn());
-			ImageIcon bookImgIcon=new ImageIcon(bookImgPath);
-			this.lblBookImg.setIcon(bookImgIcon);
+			bookImgPath = this.library.getBookImgFileFullName(book.getIsbn());
 		} else {
-			String bookImgPath = "D:/images.jpg";
-			
-			// Cannot stretch
-			ImageIcon bookImgIcon=CreateStretchImageIcon(bookImgPath,lblBookImg.getWidth(),lblBookImg.getHeight());
-			this.lblBookImg.setIcon(bookImgIcon);
+			bookImgPath = "D:/images.jpg";
 		}
+		
+		ImageIcon bookImgIcon = CreateStretchImageIcon(bookImgPath,lblBookImg.getWidth(),lblBookImg.getHeight());
+		this.lblBookImg.setIcon(bookImgIcon);
 		
 		this.txtStatus.setText(getTxtStatusString(book.isRented()));
 		this.txtIsbn.setText(book.getIsbn());
@@ -222,6 +221,7 @@ public class PanelBookInfo extends JPanel {
 		    img = ImageIO.read(new File(imgPath));
 		} catch (IOException e) {
 		    e.printStackTrace();
+		    return null;
 		}
 		
 		Image scaledImg = img.getScaledInstance(width, height,
