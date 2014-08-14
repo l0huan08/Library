@@ -13,7 +13,7 @@ import java.awt.event.*;
 public class FrmAdministratorLog extends JFrame {
 	public FrmAdministratorLog() {}
 	
-	FrmAdministratorLog frmAdminLog = new FrmAdministratorLog();
+//	FrmAdministratorLog frmAdminLog = new FrmAdministratorLog();
 	
 	private Library L;
 	public FrmAdministratorLog(Library L){
@@ -71,7 +71,7 @@ public class FrmAdministratorLog extends JFrame {
 				    public void actionPerformed(java.awt.event.ActionEvent evt) {
 				    	FrmAdminLogin AdministratorLog = new FrmAdminLogin(L);
 				    	F1C.setVisible(false);
-				    	frmAdminLog.setVisible(false);
+//				    	frmAdminLog.setVisible(false);
 				    }
 				});
 	    	}else {	

@@ -327,5 +327,19 @@ public class Library {
 		return 0.0;
 	}
 	
+	public Book getBookByISBN(String isbn){
+		
+		Iterator<Book> bookItr = bookList.iterator();
+		while(bookItr.hasNext()){
+			Book tempBook = bookItr.next();
+			if(tempBook.getIsbn().equals(isbn)){
+				return tempBook;
+			}//end if
+			
+		}//end while
+		
+		return new Book();
+	}
+	
 		
 }

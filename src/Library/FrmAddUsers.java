@@ -10,15 +10,13 @@ import java.awt.event.MouseEvent;
 @SuppressWarnings("serial")
 public class FrmAddUsers extends JFrame {
 
-	private JFrame jf;
-
 	private JButton addUser, close;
 	private PanelUserInfo infoPanel;
 	private boolean bool_isActionAdd;
 
 	FrmAddUsers() {
-		//this.library = lib;
-		jf = new JFrame("Add user");
+		
+		this.setTitle("Add Users");
 
 		addUser = new JButton("Add");
 		addUser.setBounds(75, 500, 100, 30);
@@ -26,14 +24,14 @@ public class FrmAddUsers extends JFrame {
 		close.setBounds(325, 500, 100, 30);
 		infoPanel = new PanelUserInfo();
 		infoPanel.setBounds(20, 20, 400, 400);
+	
+		this.add(addUser);
+		this.add(close);
+		this.add(infoPanel);
 
-		jf.add(addUser);
-		jf.add(close);
-		jf.add(infoPanel);
-
-		jf.setSize(500, 600);
-		jf.setLayout(null);
-		jf.setVisible(true);
+		this.setSize(500, 600);
+		this.setLayout(null);
+		this.setVisible(true);
 
 		addUser.addMouseListener(new MouseAdapter() // add new user
 		{
@@ -42,10 +40,8 @@ public class FrmAddUsers extends JFrame {
 				Validator validator = new Validator();
 				if (validator.isUserIdValid(infoPanel.getIdText())
 						&& validator.isUserNameValid(infoPanel.getNameText())
-						&& validator.isUserPasswordValid(infoPanel
-								.getPasswordText())
-						&& validator.isUserPhoneNoValid(infoPanel
-								.getPhoneNoText())
+						&& validator.isUserPasswordValid(infoPanel.getPasswordText())
+						&& validator.isUserPhoneNoValid(infoPanel.getPhoneNoText())
 
 				) {
 					bool_isActionAdd = true;
@@ -67,7 +63,7 @@ public class FrmAddUsers extends JFrame {
 		close.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent me) {
 				bool_isActionAdd = false;
-				jf.setVisible(false);
+				FrmAddUsers.this.setVisible(false);
 
 			}
 		});

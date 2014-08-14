@@ -64,6 +64,3 @@ public class FrmAdminLogin extends JFrame {
 	
 	public FrmAdminLogin() {}
 }
-
-
-

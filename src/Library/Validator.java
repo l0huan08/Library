@@ -87,7 +87,7 @@ public class Validator {
 	}
 
 	public boolean isUserNameValid(String str) {
-		final String invalidChars = "[ @#$%^&*=+~`|\\/?.,\';:\"]";
+		final String invalidChars = "[@#$%^&*=+~`|\\/?.,\';:\"]";
 
 		if (str == null)
 			return false;
