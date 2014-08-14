@@ -15,6 +15,9 @@ import java.util.List;
 
 public class FrmBooksManagement extends JFrame {
 	private Library L;
+	String [] cb_Status = {"Rented", "Not rented"};
+	JComboBox tStatus = new JComboBox(cb_Status);
+	int row;
 	
 	public FrmBooksManagement(Library L){
 		this.L=L;
@@ -73,7 +76,7 @@ public class FrmBooksManagement extends JFrame {
 		lStatus.setBounds(705, 103, 50, 25);
 		this.add(lStatus);
 		
-		JTextField tStatus = new JTextField();
+		
 		tStatus.setVisible(true);
 		tStatus.setBounds(750, 100, 200, 25);
 		this.add(tStatus);
@@ -160,24 +163,6 @@ public class FrmBooksManagement extends JFrame {
 		    }
 		});
 		
-		btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-    public void actionPerformed(java.awt.event.ActionEvent evt) {
-
-				  
-				table.addMouseListener(new MouseAdapter() {
-				  public void mouseClicked(MouseEvent e) {
-				      JTable target = (JTable)e.getSource();
-				      
-				      int row = target.getSelectedRow();  
-				      Book tempBook = new Book();
-				     //set new information:
-//				      tempBook.
-				    
-				  }
-				});
-		    }
-		});
-		
 		JButton btnRefresh = new JButton("Refresh");
 		btnRefresh.setVisible(true);
 		btnRefresh.setBounds(250, 470, 120, 30);
@@ -194,15 +179,28 @@ public class FrmBooksManagement extends JFrame {
 		    }
 		});
 		
+		btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+		    public void actionPerformed(java.awt.event.ActionEvent evt) {
+					      String oldISBN = table.getValueAt(row, 2).toString();
+					      Book tempBook = L.getBookByISBN(oldISBN);				      
+					      tempBook.setBookName(tName.getText());
+					      tempBook.setAuthor(tAuthor.getText());
+					      tempBook.setIsbn(tISBN.getText());
+					      tempBook.setRented(tStatus.getSelectedIndex()==0? true:false);
+					      L.updateBook(oldISBN, tempBook);
+		    }
+		});
+
+		
 		table.addMouseListener(new MouseAdapter() {
 			  public void mouseClicked(MouseEvent e) {
 			      JTable target = (JTable)e.getSource();
-			      int row = target.getSelectedRow();   
-			      int column = target.getSelectedColumn();	// useless for here
+			      row = target.getSelectedRow();   
+			      
 			      // Status
 			      if(table.getValueAt(row, 6) == "0"){
-			    	  tStatus.setText("Not Rented");
-			      }else{ tStatus.setText("Rented"); }
+			    	  tStatus.setSelectedIndex(1);
+			      }else{ tStatus.setSelectedIndex(0); }
 			      
 			      // ISBN (ID Number)
 			      tISBN.setText(table.getValueAt(row, 2).toString());
@@ -212,6 +210,8 @@ public class FrmBooksManagement extends JFrame {
 			      
 			      // Book Author
 			      tAuthor.setText(table.getValueAt(row, 1).toString());
+			      
+			      
 
 			  }
 			});
