@@ -10,8 +10,11 @@ import java.awt.event.*;
  * add 8/12/2014
  */
 
-@SuppressWarnings("serial")
 public class FrmCustomerLogin extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JFrame frmJf;
 	private JLabel lblUserName, lblPassWord;
 	private JTextField txtUserName;
@@ -53,9 +56,9 @@ public class FrmCustomerLogin extends JFrame{
 		frmJf.setResizable(false);
 		frmJf.setSize(600, 280);
 		frmJf.setVisible(true);
-		btnLogin.addMouseListener(new MouseAdapter()
+		btnLogin.addActionListener(new ActionListener()
 		{
-			public void mouseClicked(MouseEvent me){
+			public void actionPerformed(ActionEvent ae){
 				pwd = new String(pwdPassWord.getPassword());
 				user = txtUserName.getText();
 				if(user.length() == 0){
@@ -79,9 +82,9 @@ public class FrmCustomerLogin extends JFrame{
 				}
 			}
 		});   
-		btnClose.addMouseListener(new MouseAdapter()
+		btnClose.addActionListener(new ActionListener()
 		{
-			public void mouseClicked(MouseEvent me){
+			public void actionPerformed(ActionEvent ae){
 				frmJf.setVisible(false);
 				new FrmLibrary();
 			}

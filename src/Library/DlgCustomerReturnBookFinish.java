@@ -9,8 +9,12 @@ import java.awt.event.*;
  * @author Run Yan
  * add 8/12/2014
 */
-@SuppressWarnings("serial")
+
 public class DlgCustomerReturnBookFinish extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JDialog dlgJd;
 	private JButton btnOK;
 	private JLabel lblMsg, lblFine;
@@ -43,8 +47,8 @@ public class DlgCustomerReturnBookFinish extends JFrame{
 		dlgJd.setSize(450,210);
 		dlgJd.setResizable(false);
 		dlgJd.setVisible(true);
-		btnOK.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent me){
+		btnOK.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent ae){
 				dlgJd.setVisible(false);
 			}
 		});

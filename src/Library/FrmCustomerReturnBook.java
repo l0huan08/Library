@@ -16,9 +16,13 @@ import java.util.*;
  * add 8/12/2014
  */
 
-@SuppressWarnings("serial")
+
 public class FrmCustomerReturnBook extends JFrame{
-	private final String[] TBBookColumnTitle = {"isbn", "name","bookObj"};
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private final String[] TBBookColumnTitle = {"ISBN", "Book Name","bookObj"};
 	private boolean isResponseTbBooksSelecetedChanged = true;
 	private final int N_Book_Table_Columns = 3;
 	private final int TBBook_BookObjColIndex = 2; 
@@ -31,6 +35,7 @@ public class FrmCustomerReturnBook extends JFrame{
 	private JPanel pnlLeft, pnlRight;
 	private PanelBookInfo pnlBookInfo;
 	private DefaultTableModel tbBooksModel;
+	private JScrollPane scrTbBook;
 	
 	FrmCustomerReturnBook(){
 		this(null, null);
@@ -62,11 +67,15 @@ public class FrmCustomerReturnBook extends JFrame{
 		tbBooks.setModel(tbBooksModel);
 		tbBooks.setBorder(new LineBorder(new Color(0, 0, 0)));
 		tbBooks.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tbBooks.setBounds(20, 35, 380, 330);
 		SelectionListener listener = new SelectionListener(tbBooks);
 		tbBooks.getSelectionModel().addListSelectionListener(listener);
+		
+		scrTbBook=new JScrollPane(tbBooks);
+		scrTbBook.setSize(200, 200);
+		scrTbBook.setBounds(20, 35, 380, 330);
+		pnlLeft.add(scrTbBook);
+		
 		pnlLeft.add(lblMsg);
-		pnlLeft.add(tbBooks);
 		pnlLeft.add(btnReturn);
 		pnlLeft.add(btnClose);
 		pnlLeft.setSize(600, 500);
@@ -81,18 +90,22 @@ public class FrmCustomerReturnBook extends JFrame{
 		frmJf.setSize(900, 500);
 		frmJf.setResizable(false);
 		frmJf.setVisible(true);
-		btnReturn.addMouseListener(new MouseAdapter()
+		btnReturn.addActionListener(new ActionListener()
 		{
-			public void mouseClicked(MouseEvent me){
-				double fine = library.fine(getISBN(), new Date());
-				new DlgCustomerReturnBookFinish(fine);
-				library.returnBook(getISBN());
-				refreshTable();
+			public void actionPerformed(ActionEvent ae){
+				if(getSelectedBook() == null){
+					JOptionPane.showMessageDialog(frmJf, "Please select a book!", "Return Failed", JOptionPane.WARNING_MESSAGE);
+				} else{
+					double fine = library.fine(getISBN(), new Date());
+					new DlgCustomerReturnBookFinish(fine);
+					library.returnBook(getISBN());
+					refreshTable();
+				}
 			}
 		});
-		btnClose.addMouseListener(new MouseAdapter()
+		btnClose.addActionListener(new ActionListener()
 		{
-			public void mouseClicked(MouseEvent me){
+			public void actionPerformed(ActionEvent ae){
 				frmJf.setVisible(false);
 				new FrmCustomerLogin();
 			}
@@ -170,7 +183,7 @@ public class FrmCustomerReturnBook extends JFrame{
         			return;
         		}
                 Book book = getSelectedBook();
-                if (book==null)
+                if (book == null)
                 	pnlBookInfo.clear();
                 else
                 	pnlBookInfo.ReadFrom(book);

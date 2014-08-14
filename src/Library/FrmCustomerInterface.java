@@ -9,8 +9,11 @@ import java.awt.event.*;
  * add 8/12/2014
  */
 
-@SuppressWarnings("serial")
 public class FrmCustomerInterface extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JFrame frmJf;
 	private JButton btnBorrow, btnReturn, btnClose;
 	private Library library;
@@ -36,23 +39,23 @@ public class FrmCustomerInterface extends JFrame{
 		frmJf.setSize(400, 200);
 		frmJf.setResizable(false);
 		frmJf.setVisible(true);
-		btnReturn.addMouseListener(new MouseAdapter()
+		btnReturn.addActionListener(new ActionListener()
 		{
-			public void mouseClicked(MouseEvent me){
+			public void actionPerformed(ActionEvent ae){
 				frmJf.setVisible(false);
 				new FrmCustomerReturnBook(library, user);
 			}
 		});
-		btnClose.addMouseListener(new MouseAdapter()
+		btnClose.addActionListener(new ActionListener()
 		{
-			public void mouseClicked(MouseEvent me){
+			public void actionPerformed(ActionEvent ae){
 				frmJf.setVisible(false);
 				new FrmCustomerLogin(library, user);
 			}
 		});
-		btnBorrow.addMouseListener(new MouseAdapter()
+		btnBorrow.addActionListener(new ActionListener()
 		{
-			public void mouseClicked(MouseEvent me){
+			public void actionPerformed(ActionEvent ae){
 				frmJf.setVisible(false);
 				new FrmBorrowBook(library, user);
 			}
