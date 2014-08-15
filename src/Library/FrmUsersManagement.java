@@ -3,10 +3,6 @@
 
 package Library;
 
-import java.awt.Color;
-import java.awt.Dialog;
-import java.awt.Frame;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -15,7 +11,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -30,6 +25,10 @@ import javax.swing.table.DefaultTableModel;
  * edit by Li Huang 2014.8.14: finish Remove User method.
  */
 public class FrmUsersManagement extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//JFrame L = new JFrame();//del by Li Huang 2014.8.13
 	
 	private Library library;
@@ -50,10 +49,10 @@ public class FrmUsersManagement extends JFrame{
 	 *
 	 */
 	private class SelectionListener implements ListSelectionListener {
-        JTable table;
+        //JTable table;
 
         SelectionListener(JTable table) {
-            this.table = table;
+            //this.table = table;
         }
         
         @Override
@@ -83,9 +82,7 @@ public class FrmUsersManagement extends JFrame{
 		this.setLayout(null);
 		
 		/// TbUser
-		Object rowData[][] = { { "004", "SomeOne" },
-							   { "002", "SomeTwo" },
-		};
+		Object rowData[][] = {};
 		tbUserModel = new DefaultTableModel(rowData,
 				TBUserColumnTitle);
 		tbUser= new JTable();
@@ -150,11 +147,15 @@ public class FrmUsersManagement extends JFrame{
 		
 		btnAdd.addActionListener(new java.awt.event.ActionListener() {
 		    public void actionPerformed(java.awt.event.ActionEvent evt) {
-		    	FrmAddUsers frmAddUser =new FrmAddUsers();
-		    	frmAddUser.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
-		    	frmAddUser.setVisible(true);
-		    	if (frmAddUser.isActionAdd()) {
-		    		User user = frmAddUser.getUser();
+		    	FrmAddUsers dlgAddUser =new FrmAddUsers();
+		    	dlgAddUser.setModal(true);
+		    	
+		    	// When frmAddUser closed (User clicked "Add" button, then this frame will add the user into Library)
+		    	//dlgAddUser.addWindowListener(new FrmAddUserClosedListener(dlgAddUser));
+		    	dlgAddUser.setVisible(true);
+		    	
+				if (dlgAddUser.isActionAdd()) {
+		    		User user = dlgAddUser.getUser();
 		    		if (user != null)
 		    		{	
 		    			addUser(user);
@@ -165,8 +166,6 @@ public class FrmUsersManagement extends JFrame{
 		});
 	}
 	
-	
-
 	/**
 	 * Get current selected user
 	 * @return current selected user in the User Table,if no user is selected, return null
@@ -174,7 +173,6 @@ public class FrmUsersManagement extends JFrame{
 	private User getSelectedUser() {
 		JTable table = this.tbUser;
 		int selRow = table.getSelectedRow();
-        //String isbn = (String)table.getValueAt(selRow, TBBook_IsbnColIndex);
 		if (selRow<0) //no selection
 			return null;
         User user = (User)table.getValueAt(selRow, TBUser_UserObjColIndex);

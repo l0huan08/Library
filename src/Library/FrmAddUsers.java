@@ -5,11 +5,21 @@ import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-//Sen Li
 
-@SuppressWarnings("serial")
-public class FrmAddUsers extends JFrame {
+/**
+ * The Dialog to add new user. Can enter user infomation here.
+ * @author Sen Li
+ * add 2014.8.14
+ * edit by Li Huang 2014.8.14: change its base class to JDialog. 
+ *   Set it default visible = false .
+ */
+public class FrmAddUsers extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private JButton addUser, close;
 	private PanelUserInfo infoPanel;
 	private boolean bool_isActionAdd;
@@ -31,7 +41,7 @@ public class FrmAddUsers extends JFrame {
 
 		this.setSize(500, 600);
 		this.setLayout(null);
-		this.setVisible(true);
+		//this.setVisible(true); //del by Li Huang 2014.8.14
 
 		addUser.addMouseListener(new MouseAdapter() // add new user
 		{
@@ -47,6 +57,7 @@ public class FrmAddUsers extends JFrame {
 					bool_isActionAdd = true;
 					JOptionPane.showMessageDialog(FrmAddUsers.this,
 							"New user added.", "OK", JOptionPane.PLAIN_MESSAGE);
+					//FrmAddUsers.this.setVisible(false); //modify by Li Huang 2014.8.14: dirctedly dispose this window
 					FrmAddUsers.this.dispose();
 
 				}
@@ -63,8 +74,8 @@ public class FrmAddUsers extends JFrame {
 		close.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent me) {
 				bool_isActionAdd = false;
-				FrmAddUsers.this.setVisible(false);
-
+				//FrmAddUsers.this.setVisible(false); //modify by Li Huang 2014.8.14: dirctedly dispose this window
+				FrmAddUsers.this.dispose();
 			}
 		});
 	}
