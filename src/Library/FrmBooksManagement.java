@@ -1,11 +1,14 @@
 package Library;
 
+import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*; //javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
+import java.io.*;
 import java.util.*;
+import java.util.List;
 
 //Joe, Books Management Frame, Including Adding Updating and Deleting. 
 //		Also leads to books report Frame (Rented, In Library and Overdue)
@@ -27,7 +30,14 @@ public class FrmBooksManagement extends JFrame {
 	JTextField tAuthor;
 	JTable table;
 	DefaultTableModel dtm;
-
+	JButton btnAdd;
+	JButton btnUpdate;
+	JButton btnDelete;
+	JButton btnClose;
+	JButton btnRented;
+	JButton btnNotRented;
+	JButton btnOverDue;
+	
 	public FrmBooksManagement(Library lib) {
 		this.library = lib;
 
@@ -56,37 +66,37 @@ public class FrmBooksManagement extends JFrame {
 		scrollPane.setBounds(50, 50, 600, 400);
 		this.add(scrollPane);
 
-		JButton btnAdd = new JButton("Add");
+		btnAdd = new JButton("Add");
 		btnAdd.setVisible(true);
 		btnAdd.setBounds(110, 520, 120, 30);
 		this.add(btnAdd);
 
-		JButton btnUpdate = new JButton("Update");
+		btnUpdate = new JButton("Update");
 		btnUpdate.setVisible(true);
 		btnUpdate.setBounds(250, 520, 120, 30);
 		this.add(btnUpdate);
 
-		JButton btnDelete = new JButton("Delete");
+		btnDelete = new JButton("Delete");
 		btnDelete.setVisible(true);
 		btnDelete.setBounds(390, 520, 120, 30);
 		this.add(btnDelete);
 
-		JButton btnClose = new JButton("Close");
+		btnClose = new JButton("Close");
 		btnClose.setVisible(true);
 		btnClose.setBounds(880, 620, 100, 30);
 		this.add(btnClose);
 		
-		JButton btnRented = new JButton("Rented");
+		btnRented = new JButton("Rented");
 		btnRented.setVisible(true);
 		btnRented.setBounds(110, 15, 120, 30);
 		this.add(btnRented);
 		
-		JButton btnNotRented = new JButton("Not Rented");
+		btnNotRented = new JButton("Not Rented");
 		btnNotRented.setVisible(true);
 		btnNotRented.setBounds(270, 15, 120, 30);
 		this.add(btnNotRented);
 		
-		JButton btnOverDue = new JButton("OverDue");
+		btnOverDue = new JButton("OverDue");
 		btnOverDue.setVisible(true);
 		btnOverDue.setBounds(430, 15, 120, 30);
 		this.add(btnOverDue);
@@ -143,9 +153,7 @@ public class FrmBooksManagement extends JFrame {
 
 		btnAdd.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				DlgAddBooks n = new DlgAddBooks(FrmBooksManagement.this.library);
-				n.setModal(true);
-				n.setVisible(true);
+				DlgAddBooks n = new DlgAddBooks(FrmBooksManagement.this.library); 
 			}
 		});
 
@@ -269,7 +277,12 @@ public class FrmBooksManagement extends JFrame {
 
 				// Book Author
 				tAuthor.setText(table.getValueAt(row, 1).toString());
-
+				
+				// Book Rented or not
+				if(table.getValueAt(row, 5).toString()=="false"){
+					tStatus.setSelectedIndex(1);// not rented
+				}else{tStatus.setSelectedIndex(0);}
+				
 			}
 		});
 
