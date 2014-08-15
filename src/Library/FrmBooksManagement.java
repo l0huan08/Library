@@ -23,6 +23,16 @@ public class FrmBooksManagement extends JFrame {
 	private final String[] cb_Status = { "Rented", "Not rented" };
 	private JComboBox tStatus = new JComboBox(cb_Status);
 
+	// Record current what type of view will be shown in book table
+	private enum ViewBookType {
+		All,
+		Rented,
+		NotRented,
+		Overdue
+	}
+	
+	private ViewBookType viewBookType=ViewBookType.All;
+	
 	private JLabel lStatus;
 	JLabel lISBN;
 	JTextField tISBN;
@@ -39,15 +49,34 @@ public class FrmBooksManagement extends JFrame {
 	JButton btnRented;
 	JButton btnNotRented;
 	JButton btnOverDue;
-	JButton btnRefresh;
+	JButton btnAll;
 	
 	public void Refresh(){
 		int j = table.getRowCount();
 		for (int i = 0; i < j; i++) {
 			dtm.removeRow(0);
 		}
-		ArrayList<Book> books = FrmBooksManagement.this.library
-				.showBookList_all();
+		ArrayList<Book> books = null;
+		
+		// according to current type of view
+		switch (viewBookType) {
+		case All:
+			books= FrmBooksManagement.this.library.showBookList_all();
+			break;
+		case Rented:
+			books=FrmBooksManagement.this.library.showBookList_rented();
+			break;
+		case NotRented:
+			books=FrmBooksManagement.this.library.showBookList_remainder();
+			break;
+		case Overdue:
+			books=FrmBooksManagement.this.library.showBookList_overdue();
+			break;
+		default:
+			books=FrmBooksManagement.this.library.showBookList_all();
+			break;
+		}
+		
 		int nBook = books.size();
 
 		for (int i = 0; i < nBook; i++) {
@@ -106,19 +135,24 @@ public class FrmBooksManagement extends JFrame {
 		
 		btnRented = new JButton("Rented");
 		btnRented.setVisible(true);
-		btnRented.setBounds(110, 15, 120, 30);
+		btnRented.setBounds(50, 15, 120, 30);
 		this.add(btnRented);
 		
 		btnNotRented = new JButton("Not Rented");
 		btnNotRented.setVisible(true);
-		btnNotRented.setBounds(270, 15, 120, 30);
+		btnNotRented.setBounds(210, 15, 120, 30);
 		this.add(btnNotRented);
 		
 		btnOverDue = new JButton("OverDue");
 		btnOverDue.setVisible(true);
-		btnOverDue.setBounds(430, 15, 120, 30);
+		btnOverDue.setBounds(370, 15, 120, 30);
 		this.add(btnOverDue);
-
+		
+		btnAll = new JButton("All");
+		btnAll.setVisible(true);
+		btnAll.setBounds(530,  15, 120, 30);
+		this.add(btnAll);
+		
 		lStatus = new JLabel();
 		lStatus.setVisible(true);
 		lStatus.setText("Status:");
@@ -189,27 +223,24 @@ public class FrmBooksManagement extends JFrame {
 				Refresh();
 			}
 		});
-
-		btnRefresh = new JButton("Refresh");
-		btnRefresh.setVisible(true);
-		btnRefresh.setBounds(250, 470, 120, 30);
-		this.add(btnRefresh);
-		
 		
 
-		btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+		btnAll.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				int j = table.getRowCount();
-				for (int i = 0; i < j; i++) {
-					dtm.removeRow(0);
-				}
-				ArrayList<Book> books = FrmBooksManagement.this.library
-						.showBookList_all();
-				int nBook = books.size();
-
-				for (int i = 0; i < nBook; i++) {
-					dtm.addRow(createBookTableRowData(books.get(i)));
-				}
+				//modify by Li Huang 2014.8.15
+//				int j = table.getRowCount();
+//				for (int i = 0; i < j; i++) {
+//					dtm.removeRow(0);
+//				}
+//				ArrayList<Book> books = FrmBooksManagement.this.library
+//						.showBookList_all();
+//				int nBook = books.size();
+//
+//				for (int i = 0; i < nBook; i++) {
+//					dtm.addRow(createBookTableRowData(books.get(i)));
+//				}
+				viewBookType = ViewBookType.All;
+				Refresh();
 			}
 		});
 		
@@ -217,53 +248,61 @@ public class FrmBooksManagement extends JFrame {
 		
 		btnRented.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				int j = table.getRowCount();
-				for (int i = 0; i < j; i++) {
-					dtm.removeRow(0);
-				}
-				ArrayList<Book> books = FrmBooksManagement.this.library
-						.showBookList_all();
-				int nBook = books.size();
-
-				for (int i = 0; i < nBook; i++) {
-					if(!books.get(i).isRented()){continue;}
-					dtm.addRow(createBookTableRowData(books.get(i)));
-				}
+				//modify by Li Huang 2014.8.15
+//				int j = table.getRowCount();
+//				for (int i = 0; i < j; i++) {
+//					dtm.removeRow(0);
+//				}
+//				ArrayList<Book> books = FrmBooksManagement.this.library
+//						.showBookList_all();
+//				int nBook = books.size();
+//
+//				for (int i = 0; i < nBook; i++) {
+//					if(!books.get(i).isRented()){continue;}
+//					dtm.addRow(createBookTableRowData(books.get(i)));
+//				}
+				viewBookType = ViewBookType.Rented;
+				Refresh();
 			}
 		});		
 		
 		btnNotRented.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				int j = table.getRowCount();
-				for (int i = 0; i < j; i++) {
-					dtm.removeRow(0);
-				}
-				ArrayList<Book> books = FrmBooksManagement.this.library
-						.showBookList_all();
-				int nBook = books.size();
-
-				for (int i = 0; i < nBook; i++) {
-					if(books.get(i).isRented()){continue;}
-					dtm.addRow(createBookTableRowData(books.get(i)));
-				}
+				//modify by Li Huang 2014.8.15
+//				int j = table.getRowCount();
+//				for (int i = 0; i < j; i++) {
+//					dtm.removeRow(0);
+//				}
+//				ArrayList<Book> books = FrmBooksManagement.this.library
+//						.showBookList_all();
+//				int nBook = books.size();
+//
+//				for (int i = 0; i < nBook; i++) {
+//					if(books.get(i).isRented()){continue;}
+//					dtm.addRow(createBookTableRowData(books.get(i)));
+//				}
+				viewBookType = ViewBookType.NotRented;
+				Refresh();
 			}
 			
 		});
 		
 		btnOverDue.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				int j = table.getRowCount();
-				for (int i = 0; i < j; i++) {
-					dtm.removeRow(0);
-				}
-				ArrayList<Book> books = FrmBooksManagement.this.library
-						.showBookList_all();
-				int nBook = books.size();
-				int o_size = library.showBookList_overdue().size();
-				for (int i = 0; i < o_size; i++) {
-//					if(books.get(i).isRented()){continue;}
-					dtm.addRow(createBookTableRowData(library.showBookList_overdue().get(i)));
-				}
+//				int j = table.getRowCount();
+//				for (int i = 0; i < j; i++) {
+//					dtm.removeRow(0);
+//				}
+//				ArrayList<Book> books = FrmBooksManagement.this.library
+//						.showBookList_all();
+//				int nBook = books.size();
+//				int o_size = library.showBookList_overdue().size();
+//				for (int i = 0; i < o_size; i++) {
+////					if(books.get(i).isRented()){continue;}
+//					dtm.addRow(createBookTableRowData(library.showBookList_overdue().get(i)));
+//				}
+				viewBookType = ViewBookType.Overdue;
+				Refresh();
 			}
 		});
 
