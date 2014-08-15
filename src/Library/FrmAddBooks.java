@@ -12,22 +12,34 @@ import java.io.IOException;
 import java.util.Date;
 
 //Sen Li
+/**
+ * Add Book Frame
+ * @author Sen Li
+ * add 2014.8.11
+ * edit by Li Huang 2014.8.15 Change base class to JDialog to allow showing in Modal way 
+ */
+public class FrmAddBooks extends JDialog {
 
-public class FrmAddBooks extends JFrame {
-
-	private JFrame jf;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	//private JFrame jf;
 	private JPanel picturePanel;
 	private JButton choosePic, add, close;
 	private JTextField jtf_isbn, jtf_name, jtf_author;
 	private JLabel jl_isbn, jl_name, jl_author, jl_category, picLabel;
 	private JComboBox cb_category;
 	private String picPath, picDirectory, picFileName;
-	private ImageIcon bookPic;
-	Library library;
+	//private ImageIcon bookPic;
+	private Library library;
 	
 	FrmAddBooks(Library lib) {
 		this.library = lib;
-		jf = new JFrame("Add book");
+		
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setTitle("Add book");
+		
 		choosePic = new JButton("Choose picture");
 		choosePic.setBounds(300, 50, 150, 50);
 		add = new JButton("Add");
@@ -63,22 +75,22 @@ public class FrmAddBooks extends JFrame {
 		jl_category = new JLabel("Category");
 		jl_category.setBounds(40, 450, 100, 25);
 
-		jf.add(choosePic);
-		jf.add(add);
-		jf.add(close);
-		jf.add(picturePanel);
-		jf.add(jtf_isbn);
-		jf.add(jtf_name);
-		jf.add(jtf_author);
-		jf.add(jl_isbn);
-		jf.add(jl_name);
-		jf.add(jl_author);
-		jf.add(cb_category);
-		jf.add(jl_category);
+		this.add(choosePic);
+		this.add(add);
+		this.add(close);
+		this.add(picturePanel);
+		this.add(jtf_isbn);
+		this.add(jtf_name);
+		this.add(jtf_author);
+		this.add(jl_isbn);
+		this.add(jl_name);
+		this.add(jl_author);
+		this.add(cb_category);
+		this.add(jl_category);
 
-		jf.setSize(500, 600);
-		jf.setLayout(null);
-		jf.setVisible(true);
+		this.setSize(500, 600);
+		this.setLayout(null);
+		this.setVisible(true);
 
 		choosePic.addMouseListener(new MouseAdapter() // choose a picture
 				{
@@ -167,6 +179,7 @@ public class FrmAddBooks extends JFrame {
 						JOptionPane.showMessageDialog(FrmAddBooks.this,
 								"New book added.", "OK",
 								JOptionPane.PLAIN_MESSAGE);
+						FrmAddBooks.this.dispose(); // add by Li Huang 2014.8.15
 					}
 
 				}
@@ -182,7 +195,8 @@ public class FrmAddBooks extends JFrame {
 
 		close.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent me) {
-				jf.setVisible(false);
+				//FrmAddBooks.this.setVisible(false); //modify by Li Huang. use dispose() to totally dispose this window 
+				FrmAddBooks.this.dispose();
 			}
 		});
 	}
