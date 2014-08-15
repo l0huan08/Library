@@ -303,7 +303,7 @@ public class FrmUsersManagement extends JFrame{
 	 * Test
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void test(String[] args) {
 		Library lib=new Library();
 		Book b1 = new Book();
 		Book b2 = new Book();

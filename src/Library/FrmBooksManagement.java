@@ -1,14 +1,11 @@
 package Library;
 
-import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*; //javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
-import java.io.*;
 import java.util.*;
-import java.util.List;
 
 //Joe, Books Management Frame, Including Adding Updating and Deleting. 
 //		Also leads to books report Frame (Rented, In Library and Overdue)

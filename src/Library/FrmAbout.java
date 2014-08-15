@@ -101,7 +101,7 @@ public class FrmAbout extends JDialog{
 		return new Color(r,g,b);
 	}
 	
-	public static void main(String args[]) {
+	public static void test(String args[]) {
 		new FrmAbout();
 	}
 }

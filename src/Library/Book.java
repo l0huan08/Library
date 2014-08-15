@@ -3,10 +3,13 @@ package Library;
 import java.io.Serializable;
 import java.util.*;
 
-@SuppressWarnings("serial")
 public class Book implements Serializable {
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String bookName;
 	private String author;
 	private String isbn;

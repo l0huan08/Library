@@ -106,7 +106,7 @@ public class FrmCustomerLogin extends JFrame{
 		});
 	}
 	
-	public static void main(String[] args){
+	public static void test(String[] args){
 		Library l = new Library();
 		User u1 = new User();
 		User u2 = new User();

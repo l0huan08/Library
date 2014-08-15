@@ -15,6 +15,10 @@ import javax.swing.*;
 public class FrmAdminInterface extends JFrame {
 	//JFrame J = new JFrame("Admin Login");
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Library library;
 	
 	public FrmAdminInterface(Library lib){

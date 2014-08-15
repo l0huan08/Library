@@ -80,10 +80,6 @@ public class DlgAddUsers extends JDialog {
 		});
 	}
 
-	public static void main(String[] args) {
-		new DlgAddUsers();
-	}
-
 	public boolean isActionAdd() {
 
 		return bool_isActionAdd;
@@ -94,6 +90,11 @@ public class DlgAddUsers extends JDialog {
 		User tempUser = new User();
 		infoPanel.WriteTo(tempUser);
 		return tempUser;
+	}
+
+
+	public static void test(String[] args) {
+		new DlgAddUsers();
 	}
 
 }
