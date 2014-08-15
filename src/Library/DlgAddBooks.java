@@ -212,12 +212,15 @@ public class DlgAddBooks extends JDialog {
 		try {
 			img = ImageIO.read(new File(imgPath));
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.print("cannot read file");
+			return null;
 		}
 
 		Image scaledImg = img.getScaledInstance(width, height,
 				java.awt.Image.SCALE_SMOOTH);
 		ImageIcon imageIcon = new ImageIcon(scaledImg);
+		
 		return imageIcon;
 	}
 

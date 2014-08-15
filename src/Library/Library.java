@@ -116,7 +116,7 @@ public class Library {
 		try {
 			fi = new FileInputStream(srcPath);
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			return false;
 		}
 		BufferedInputStream in = new BufferedInputStream(fi);
@@ -294,9 +294,11 @@ public class Library {
 		while(bookItr.hasNext()){
 			Book tempBook = bookItr.next();
 			if(tempBook.isRented()==true){
-				
+				if(tempBook.getLastRented() == null)
+					continue;
 				if(new Date().getTime() - tempBook.getLastRented().getTime() >=  OverdueTimeLimit)
-				tempBookList.add(tempBook);
+					tempBookList.add(tempBook);
+					
 				
 				
 			}//end if

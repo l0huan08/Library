@@ -127,6 +127,7 @@ public class FrmBooksManagement extends JFrame {
 
 		tStatus.setVisible(true);
 		tStatus.setBounds(750, 100, 200, 25);
+		tStatus.setEnabled(false);
 		this.add(tStatus);
 
 		lISBN = new JLabel();
