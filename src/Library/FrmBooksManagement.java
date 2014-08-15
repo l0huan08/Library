@@ -218,6 +218,10 @@ public class FrmBooksManagement extends JFrame {
 
 		btnDelete.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				if (row<0)	{
+					JOptionPane.showMessageDialog(FrmBooksManagement.this, "Please select a book to delete!", "Delete Fail", JOptionPane.INFORMATION_MESSAGE);
+					return;
+				}
 				FrmBooksManagement.this.library.deleteBook(table.getValueAt(
 						row, 2).toString());
 				Refresh();
@@ -308,6 +312,11 @@ public class FrmBooksManagement extends JFrame {
 
 		btnUpdate.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				if (row<0)	{
+					JOptionPane.showMessageDialog(FrmBooksManagement.this, "Please select a book to update!", "Update Fail", JOptionPane.INFORMATION_MESSAGE);
+					return;
+				}
+				
 				String oldISBN = table.getValueAt(row, 2).toString();
 				Book tempBook = FrmBooksManagement.this.library
 						.getBookByISBN(oldISBN);

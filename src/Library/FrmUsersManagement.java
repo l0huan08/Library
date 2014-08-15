@@ -249,6 +249,7 @@ public class FrmUsersManagement extends JFrame{
 		User user =  getSelectedUser();
 		if (user==null) {
 			JOptionPane.showMessageDialog(null, "Please select a user to delete!");
+			return;
 		}
 		
 		//need return value
@@ -266,6 +267,7 @@ public class FrmUsersManagement extends JFrame{
 		if (user == null) {
 			JOptionPane.showMessageDialog(null,
 				"Please select a user to update!");
+			return;
 		}
 
 		User newUser = new User();
