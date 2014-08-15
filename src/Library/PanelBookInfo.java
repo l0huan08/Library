@@ -220,7 +220,7 @@ public class PanelBookInfo extends JPanel {
 		try {
 		    img = ImageIO.read(new File(imgPath));
 		} catch (IOException e) {
-		    e.printStackTrace();
+		    //e.printStackTrace();
 		    return null;
 		}
 		

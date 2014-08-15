@@ -156,8 +156,10 @@ public class FrmAddBooks extends JFrame {
 
 					// ***************************
 					try {
-						new reName().rename(picDirectory, picFileName,
-								currentISBN);
+						// del by Li Huang 2014.8.14 not use reName.
+//						new reName().rename(picDirectory, picFileName,
+//								currentISBN); 
+						library.copyBookImage(picDirectory, picFileName, currentISBN);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						System.out.println("No picture selected.");

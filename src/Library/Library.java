@@ -15,8 +15,8 @@ import java.util.*;
 public class Library {
 	
 	public static final int LIBRARY_OWNER_ID = 0; // ownerId of the library is 0. i.e. not rented.  
-	private final String bookListURL = "c:\\BookList.dat";
-	private final String userListURL = "c:\\userList.dat";
+	private final String BookListURL = "./books.dat";
+	private final String UserListURL = "./users.dat";
 	private final long OverdueTimeLimit = 60*1000; // in millisecond
 	private final long NewbookTimeLimit = 60*1000; // in millisecond
 	private final int FINE_PER_SECOND = 1;
@@ -33,7 +33,7 @@ public class Library {
 	
 	void saveBooks() throws IOException{
 		
-		FileOutputStream fout = new FileOutputStream(bookListURL);
+		FileOutputStream fout = new FileOutputStream(BookListURL);
 		ObjectOutputStream oos = new ObjectOutputStream(fout);
 		oos.writeObject(bookList);
 
@@ -41,7 +41,7 @@ public class Library {
 	
 	void saveUsers() throws IOException{
 		
-		FileOutputStream fout = new FileOutputStream(userListURL);
+		FileOutputStream fout = new FileOutputStream(UserListURL);
 		ObjectOutputStream oos = new ObjectOutputStream(fout);
 		oos.writeObject(userList);
 		oos.close();
@@ -50,7 +50,7 @@ public class Library {
 	@SuppressWarnings("unchecked")
 	void loadBooks() throws Exception{
 		
-		FileInputStream fis = new FileInputStream(bookListURL);
+		FileInputStream fis = new FileInputStream(BookListURL);
 	    ObjectInputStream ois = new ObjectInputStream(fis);
 	    bookList = (ArrayList<Book>)ois.readObject();
 	    ois.close();
@@ -61,7 +61,7 @@ public class Library {
 	@SuppressWarnings("unchecked")
 	void loadUsers() throws Exception{
 		
-		FileInputStream fis = new FileInputStream(userListURL);
+		FileInputStream fis = new FileInputStream(UserListURL);
 	    ObjectInputStream ois = new ObjectInputStream(fis);
 	    userList = (ArrayList<User>)ois.readObject();
 	    ois.close();

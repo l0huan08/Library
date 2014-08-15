@@ -6,14 +6,21 @@ import java.awt.event.*;
 import javax.swing.*; //javax.swing.JFrame;
 
 import java.io.*;
-/*
- * Joe
- * Very First Frame  Chose login Type
+/**
+ * Very First Frame Chose login Type(System Main Frame)
+ * @author Joe
+ * add 2014.8.12
+ * edit by Li Huang 2014.8.14 fix bugs
  * */
 import java.util.Date;
 public class FrmLibrary extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	//FrmLibrary frmLibrary = new FrmLibrary();
-	Library L = new Library();
+	Library L;
 	
 	JLabel label1 = new JLabel("Welcome to Our Library System!");
 	JLabel label2 = new JLabel("Log in as a:  ");
@@ -23,28 +30,8 @@ public class FrmLibrary extends JFrame{
 	JButton btnAbout = new JButton("About");
 	
 	public FrmLibrary(){
-		Book book1 = new Book();
-		book1.setBookName("GVF");
-		book1.setAddedDate(new Date());
-		book1.setAuthor("XMQ");
-		book1.setCategory(Category.CHILDREN);
-		book1.setIsbn("2B64B");
-		book1.setLastRented(new Date());
-		book1.setOwnerId(Library.LIBRARY_OWNER_ID);
-		book1.setRented(false);		
-		L.addBook(book1);
 		
-		Book book2 = new Book();
-		book2.setBookName("WWII");
-		book2.setAddedDate(new Date());
-		book2.setAuthor("SomeTwo");
-		book2.setCategory(Category.HISTORY);
-		book2.setIsbn("SBSBDSB");
-		book2.setLastRented(new Date());
-		book2.setOwnerId(Library.LIBRARY_OWNER_ID);
-		book2.setRented(false);
-		L.addBook(book2);
-		
+		L = createDemoLibrary();
 		
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
@@ -102,6 +89,81 @@ public class FrmLibrary extends JFrame{
 				FrmAbout about = new FrmAbout();
 			}
 		});
+	}
+	
+	private Library createDemoLibrary() {
+		Library library=new Library();
+		Book book1 = new Book();
+		book1.setBookName("GVF");
+		book1.setAddedDate(new Date());
+		book1.setAuthor("XMQ");
+		book1.setCategory(Category.CHILDREN);
+		book1.setIsbn("2B64B");
+		book1.setLastRented(new Date());
+		book1.setOwnerId(Library.LIBRARY_OWNER_ID);
+		book1.setRented(false);		
+		library.addBook(book1);
+		
+		Book book2 = new Book();
+		book2.setBookName("WWII");
+		book2.setAddedDate(new Date());
+		book2.setAuthor("SomeTwo");
+		book2.setCategory(Category.HISTORY);
+		book2.setIsbn("SBSBDSB");
+		book2.setLastRented(new Date());
+		book2.setOwnerId(Library.LIBRARY_OWNER_ID);
+		book2.setRented(false);
+		library.addBook(book2);
+		
+		//------------ users ----------------------
+		User u1 = new User(); //admin
+		User u2 = new User(); //user1
+		User u3 = new User(); //user2
+
+		u1.setUserId(1);
+		u1.setPassword("1");
+		u1.setUserName("admin");
+		u1.setAdmin(true);
+		
+		u2.setUserId(2);
+		u2.setPassword("123");
+		u2.setUserName("user");
+		u2.setAdmin(false);
+		
+		u3.setUserId(3);
+		u3.setPassword("123");
+		u3.setUserName("user2");
+		u3.setAdmin(false);
+		
+		//----------- books --------------------
+		Book b1 = new Book();
+		Book b2 = new Book();
+		Book b3 = new Book();
+		b1.setIsbn("0778801314");
+		b1.setBookName("Ball Complete Book of Home Preserving");
+		b1.setAuthor("Judi Kingry");
+		b1.setCategory(Category.COOKING);
+		b2.setIsbn("0736430512");
+		b2.setBookName("Frozen Little Golden Book");
+		b2.setAuthor("RH Disney");
+		b2.setCategory(Category.CHILDREN);
+		b3.setIsbn("1476751447");
+		b3.setBookName("Hard Choices");
+		b3.setAuthor("Hillary Rodham Clinton");
+		b3.setCategory(Category.HISTORY);
+		
+		
+		//-------------------------------
+		library.addUser(u1);
+		library.addUser(u2);
+		library.addUser(u3);
+		
+		library.addBook(b1);
+		library.addBook(b2);
+		library.addBook(b3);
+		library.rentBook(u2.getUserId(), b1.getIsbn());
+		
+		return library;
 	}
 	
 	public static void main(String[] a){
