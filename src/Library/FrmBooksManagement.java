@@ -37,6 +37,21 @@ public class FrmBooksManagement extends JFrame {
 	JButton btnRented;
 	JButton btnNotRented;
 	JButton btnOverDue;
+	JButton btnRefresh;
+	
+	public void Refresh(){
+		int j = table.getRowCount();
+		for (int i = 0; i < j; i++) {
+			dtm.removeRow(0);
+		}
+		ArrayList<Book> books = FrmBooksManagement.this.library
+				.showBookList_all();
+		int nBook = books.size();
+
+		for (int i = 0; i < nBook; i++) {
+			dtm.addRow(createBookTableRowData(books.get(i)));
+		}
+	}
 	
 	public FrmBooksManagement(Library lib) {
 		this.library = lib;
@@ -163,10 +178,11 @@ public class FrmBooksManagement extends JFrame {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				FrmBooksManagement.this.library.deleteBook(table.getValueAt(
 						row, 2).toString());
+				Refresh();
 			}
 		});
 
-		JButton btnRefresh = new JButton("Refresh");
+		btnRefresh = new JButton("Refresh");
 		btnRefresh.setVisible(true);
 		btnRefresh.setBounds(250, 470, 120, 30);
 		this.add(btnRefresh);
@@ -186,6 +202,8 @@ public class FrmBooksManagement extends JFrame {
 				}
 			}
 		});
+		
+
 		
 		btnRented.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -219,6 +237,7 @@ public class FrmBooksManagement extends JFrame {
 					dtm.addRow(createBookTableRowData(books.get(i)));
 				}
 			}
+			
 		});
 		
 		btnOverDue.addActionListener(new java.awt.event.ActionListener() {
@@ -254,8 +273,10 @@ public class FrmBooksManagement extends JFrame {
 				} else {
 					table.setValueAt("0", row, 6);
 					table.setValueAt("false", row, 5);
+					tempBook.setOwnerId(0);
 				}
 				FrmBooksManagement.this.library.updateBook(oldISBN, tempBook);
+				Refresh();
 			}
 		});
 
