@@ -8,6 +8,7 @@ import java.awt.event.*;
  * Frame for the customer to login
  * @author Run Yan
  * add 8/12/2014
+ * edit by Li Huang 2014.8.14 fix bug
  */
 
 public class FrmCustomerLogin extends JFrame{
@@ -25,13 +26,13 @@ public class FrmCustomerLogin extends JFrame{
 	private JButton btnLogin, btnClose;
 	private String pwd, user;
 	
-	FrmCustomerLogin(Library l, User u){
-		this();
-		this.library = l;
-		this.currentUser = u;
+	private FrmCustomerLogin(){
+		this(null);
 	}
 	
-	FrmCustomerLogin(){
+	FrmCustomerLogin(Library l){
+		this.library=l;
+		
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setTitle("Customer Login");
 		this.setLayout(null);
@@ -78,8 +79,8 @@ public class FrmCustomerLogin extends JFrame{
 					if(pwd.length() == 0){
 						JOptionPane.showMessageDialog(FrmCustomerLogin.this, "Please enter your password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
 					} else{
-						if(library.login(user, pwd) != null){
-							currentUser = library.login(user, pwd);
+						currentUser = library.login(user, pwd);
+						if(currentUser != null){
 							if(!currentUser.isAdmin()){
 								JOptionPane.showMessageDialog(FrmCustomerLogin.this, "Welcome, " + currentUser.getUserName() + "!", "Welcome", JOptionPane.INFORMATION_MESSAGE);
 								FrmCustomerLogin.this.dispose();
@@ -140,6 +141,7 @@ public class FrmCustomerLogin extends JFrame{
 		l.addBook(b2);
 		l.addBook(b3);
 		l.rentBook(u1.getUserId(), b1.getIsbn());
-		new FrmCustomerLogin(l,u1);
+		
+		new FrmCustomerLogin(l);
 	}
 }

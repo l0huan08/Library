@@ -2,7 +2,9 @@ package Library;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*; //javax.swing.JFrame;
+
 import java.io.*;
 /*
  * Joe
@@ -42,6 +44,9 @@ public class FrmLibrary extends JFrame{
 		book2.setOwnerId(Library.LIBRARY_OWNER_ID);
 		book2.setRented(false);
 		L.addBook(book2);
+		
+		
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		this.setSize(600, 600);
 		this.setLocation(350, 50);
@@ -88,7 +93,7 @@ public class FrmLibrary extends JFrame{
 		
 		btnCustomer.addActionListener(new java.awt.event.ActionListener() {
 		    public void actionPerformed(java.awt.event.ActionEvent evt) {
-		       FrmCustomerLogin CustomerLogin = new FrmCustomerLogin();
+		       FrmCustomerLogin CustomerLogin = new FrmCustomerLogin(L);
 		    }
 		});
 		

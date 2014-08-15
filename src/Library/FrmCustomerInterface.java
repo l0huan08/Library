@@ -9,6 +9,7 @@ import java.awt.event.*;
  * Frame to guide customer
  * @author Run Yan
  * add 8/12/2014
+ * edit by Li Huang 2014.8.14 fix bug
  */
 
 public class FrmCustomerInterface extends JFrame{
@@ -61,7 +62,7 @@ public class FrmCustomerInterface extends JFrame{
 		{
 			public void actionPerformed(ActionEvent ae){
 				FrmCustomerInterface.this.dispose();
-				new FrmCustomerLogin(library, user);
+				new FrmCustomerLogin(library);
 			}
 		});
 		
@@ -77,7 +78,7 @@ public class FrmCustomerInterface extends JFrame{
 			@Override
 			public void windowClosing(WindowEvent e) {
 				FrmCustomerInterface.this.dispose();
-				new FrmCustomerLogin(library, user);
+				new FrmCustomerLogin(library);
 			}
 		});
 	}
