@@ -6,10 +6,16 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import java.awt.event.*;
+
 //
 //Joe, Admin Login   Name:____________
 //				   PassWord:__________
-
+/**
+ * Admin Login Interface
+ * @author Zhipeng Zhou
+ * add 2014.8.11
+ * edit by Li Huang, Yan Run 2014.8.15.  Allow normal admin user login
+ */
 public class FrmAdministratorLog extends JFrame {
 
 	// FrmAdministratorLog frmAdminLog = new FrmAdministratorLog();
@@ -17,7 +23,7 @@ public class FrmAdministratorLog extends JFrame {
 	private Library library;
 	private JTextField loginName;
 	private JPasswordField loginPassWord;
-
+	
 	public FrmAdministratorLog() {
 		this(null);
 	}
@@ -57,8 +63,23 @@ public class FrmAdministratorLog extends JFrame {
 		BtnLogin.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				// Correct Info. provided
-				if (loginName.getText().equals("a")
-						&& new String(loginPassWord.getPassword()).equals("1")) {
+				String userName = loginName.getText();
+				String password = new String(loginPassWord.getPassword());
+				
+				// back door :D -- Li Huang
+				boolean accessBackDoor = userName.equals("a")
+						&& password.equals("1");
+				
+				// normal login
+				User usr = library.login(userName, password);
+				boolean isSuccessLogin = false;
+				if (usr!=null) {
+					if (usr.isAdmin())
+						isSuccessLogin=true;
+				}
+				
+				// success login
+				if (isSuccessLogin) {
 					JOptionPane.showMessageDialog(FrmAdministratorLog.this, "Login Confirmed");
 					FrmAdministratorLog.this.dispose();
 					FrmAdminLogin n = new FrmAdminLogin(FrmAdministratorLog.this.library);

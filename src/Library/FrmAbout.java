@@ -1,5 +1,6 @@
 package Library;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 import java.util.*;
+
 import javax.swing.*;
 
 
@@ -28,7 +30,7 @@ public class FrmAbout extends JDialog{
 	private Random r;
 	
 	private final String StrAuthors = "Zhipeng Zhou, Run Yan, Sen Li, Li Huang";
-	private final String StrVersion = "version: "+ new DecimalFormat("#.00").format(Math.PI);
+	private final String StrVersion = "Version: "+ new DecimalFormat("#0.00").format(0.9);
 	
 	public FrmAbout() {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -71,6 +73,7 @@ public class FrmAbout extends JDialog{
 			public void mouseEntered(MouseEvent me){
 				int x = r.nextInt(400);
 				int y = r.nextInt(400);
+				txtAuthor.setForeground(randomColor());
 				txtAuthor.setLocation(x, y);
 			}
 		});
@@ -79,6 +82,7 @@ public class FrmAbout extends JDialog{
 			public void mouseEntered(MouseEvent me){
 				int x = r.nextInt(400);
 				int y = r.nextInt(400);
+				txtVersion.setForeground(randomColor());
 				txtVersion.setLocation(x, y);
 			}
 		});
@@ -88,6 +92,13 @@ public class FrmAbout extends JDialog{
 				FrmAbout.this.dispose();
 			}
 		});
+	}
+	
+	private Color randomColor() {
+		int r = (int)(Math.random()*255);
+		int g = (int)(Math.random()*255);
+		int b = (int)(Math.random()*255);
+		return new Color(r,g,b);
 	}
 	
 	public static void main(String args[]) {
