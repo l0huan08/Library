@@ -249,7 +249,8 @@ public class FrmBooksManagement extends JFrame {
 				ArrayList<Book> books = FrmBooksManagement.this.library
 						.showBookList_all();
 				int nBook = books.size();
-				for (int i = 0; i < nBook; i++) {
+				int o_size = library.showBookList_overdue().size();
+				for (int i = 0; i < o_size; i++) {
 //					if(books.get(i).isRented()){continue;}
 					dtm.addRow(createBookTableRowData(library.showBookList_overdue().get(i)));
 				}
