@@ -17,6 +17,7 @@ import java.util.Date;
  * @author Sen Li
  * add 2014.8.11
  * edit by Li Huang 2014.8.15 Change base class to JDialog to allow showing in Modal way 
+ *    Default is not visible, need to use frmAddBooks.setVisible(true) to show it
  */
 public class FrmAddBooks extends JDialog {
 
@@ -90,7 +91,7 @@ public class FrmAddBooks extends JDialog {
 
 		this.setSize(500, 600);
 		this.setLayout(null);
-		this.setVisible(true);
+		//this.setVisible(true); //remove by Li Huang 2014.8.15 to make it can be shown in Modal way
 
 		choosePic.addMouseListener(new MouseAdapter() // choose a picture
 				{
