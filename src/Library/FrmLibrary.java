@@ -68,7 +68,7 @@ public class FrmLibrary extends JFrame{
 		
 		btnAdmin.addActionListener(new java.awt.event.ActionListener() {
 	    public void actionPerformed(java.awt.event.ActionEvent evt) {
-	    	FrmAdministratorLog AdministratorLog = new FrmAdministratorLog(L);
+	    	FrmAdminLogin AdministratorLog = new FrmAdminLogin(L);
 	    	}
 		});
 		

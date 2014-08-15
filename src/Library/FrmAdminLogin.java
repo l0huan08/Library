@@ -1,73 +1,118 @@
 package Library;
 
-
 import javax.swing.*;
 
-// Joe, 
-
+//
+//Joe, Admin Login   Name:____________
+//				   PassWord:__________
 /**
- * After Administrator sucessfully Login, Main menu  (Books, Customers and Categories)
- * @author Joe
- * add 2014.8.13
- * edit 2014.8.14 edit by Li Huang, fix complile problem from JDK 8.0 
- * fix bugs
+ * Admin Login Interface
+ * @author Zhipeng Zhou
+ * add 2014.8.11
+ * edit by Li Huang, Yan Run 2014.8.15.  Allow normal admin user login
  */
 public class FrmAdminLogin extends JFrame {
-	//JFrame J = new JFrame("Admin Login");
-	
-	private Library library;
-	
-	public FrmAdminLogin(Library lib){
-		this.library=lib;
 
-		this.setSize(600, 280);
-		this.setLocation(250,40);
-		this.setVisible(true);
-		this.setLayout(null);
-		this.setTitle("Admin Interface"); // add by Li Huang 2014.8.14
-		
-		JButton btnBooks = new JButton("Books");
-		btnBooks.setBounds(140, 80, 90, 40);
-		this.add(btnBooks);
-		
-		JButton btnCustomers = new JButton("Customers");
-		btnCustomers.setBounds(260, 80, 110, 40);
-		this.add(btnCustomers);
-		
-		JButton btnCategories = new JButton("Categories");
-		btnCategories.setBounds(400, 80, 110, 40);
-		this.add(btnCategories);
-		
-		//JButton btnClose = new JButton("Clsoe");
-		JButton btnClose = new JButton("Close"); //modify by Li Huang 2014.8.14
-		btnClose.setBounds(450, 190, 90, 40);
-		this.add(btnClose);
-		
-		btnBooks.addActionListener(new java.awt.event.ActionListener() {
-		    public void actionPerformed(java.awt.event.ActionEvent evt) {
-		    	FrmBooksManagement frmBookManagement = new FrmBooksManagement(library);
-		    }
-		});
-		
-		btnCustomers.addActionListener(new java.awt.event.ActionListener() {
-		    public void actionPerformed(java.awt.event.ActionEvent evt) {
-		    	FrmUsersManagement frmUserManagement = new FrmUsersManagement(library);
-		    	frmUserManagement.setVisible(true);
-		    }
-		});
-		
-		btnCategories.addActionListener(new java.awt.event.ActionListener() {
-		    public void actionPerformed(java.awt.event.ActionEvent evt) {
-		    	FrmViewCategories N = new FrmViewCategories();
-		    }
-		});
-		
-		btnClose.addActionListener(new java.awt.event.ActionListener() {
-		    public void actionPerformed(java.awt.event.ActionEvent evt) {
-		    	FrmAdminLogin.this.setVisible(false);
-		    }
-		});
-		}
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	// FrmAdministratorLog frmAdminLog = new FrmAdministratorLog();
+
+	private Library library;
+	private JTextField loginName;
+	private JPasswordField loginPassWord;
 	
-	public FrmAdminLogin() {}
+	public FrmAdminLogin() {
+		this(null);
+	}
+
+	public FrmAdminLogin(Library lib) {
+		this.library = lib;
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setSize(600, 280);
+		this.setLocation(250, 40);
+		this.setVisible(true);
+		this.setTitle("Admin Login");
+		this.setLayout(null);
+
+		JLabel label1 = new JLabel("Administrator Name: ");
+		label1.setBounds(50, 54, 120, 120);
+		this.add(label1);
+
+		JLabel label2 = new JLabel("PassWord: ");
+		label2.setBounds(100, 85, 120, 120);
+		this.add(label2);
+
+		// Administrator Log Name
+		loginName = new JTextField();
+		loginName.setBounds(180, 100, 290, 25);
+		this.add(loginName);
+
+		// Administrator Log PassWord
+		loginPassWord = new JPasswordField();
+		loginPassWord.setBounds(180, 131, 290, 25);
+		this.add(loginPassWord);
+
+		JButton BtnLogin = new JButton("Login");
+		BtnLogin.setBounds(380, 190, 90, 25);
+		this.add(BtnLogin);
+		
+
+		BtnLogin.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				// Correct Info. provided
+				String userName = loginName.getText();
+				String password = new String(loginPassWord.getPassword());
+				
+				// back door :D -- Li Huang
+				boolean accessBackDoor = userName.equals("a")
+						&& password.equals("1");
+				
+				// normal login
+				User usr = library.login(userName, password);
+				boolean isSuccessLogin = false;
+				if (usr!=null) {
+					if (usr.isAdmin())
+						isSuccessLogin=true;
+				}
+				
+				// success login
+				if (accessBackDoor || isSuccessLogin) {
+					JOptionPane.showMessageDialog(FrmAdminLogin.this, "Login Confirmed");
+					FrmAdminLogin.this.dispose();
+					FrmAdminInterface frmAdminInterface = new FrmAdminInterface(FrmAdminLogin.this.library);
+				} else {
+					// Wrong info. provided
+					JOptionPane.showMessageDialog(FrmAdminLogin.this, "Sorry, Worng Input!");
+					
+//					
+//					JFrame F1C = new JFrame();
+//					F1C.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//					F1C.setSize(350, 200);
+//					F1C.setLocation(450, 300);
+//					F1C.setVisible(true);
+//					F1C.setTitle("Login Confirmed");
+//					F1C.setLayout(null);
+//
+//					JLabel label3 = new JLabel("Sorry, Worng Input!");
+//					label3.setBounds(100, 20, 200, 120);
+//					F1C.add(label3);
+//
+//					JButton BtnConfirm = new JButton("OK");
+//					BtnConfirm.setBounds(120, 110, 90, 25);
+//					F1C.add(BtnConfirm);
+//
+//					BtnConfirm
+//							.addActionListener(new java.awt.event.ActionListener() {
+//								public void actionPerformed(
+//										java.awt.event.ActionEvent evt) {
+//									F1C.setVisible(false);
+//								}
+//							});
+				}
+			}
+		});
+	}
+
 }

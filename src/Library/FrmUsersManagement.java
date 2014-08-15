@@ -147,7 +147,7 @@ public class FrmUsersManagement extends JFrame{
 		
 		btnAdd.addActionListener(new java.awt.event.ActionListener() {
 		    public void actionPerformed(java.awt.event.ActionEvent evt) {
-		    	FrmAddUsers dlgAddUser =new FrmAddUsers();
+		    	DlgAddUsers dlgAddUser =new DlgAddUsers();
 		    	dlgAddUser.setModal(true);
 		    	
 		    	// When frmAddUser closed (User clicked "Add" button, then this frame will add the user into Library)

@@ -19,7 +19,7 @@ import java.util.Date;
  * edit by Li Huang 2014.8.15 Change base class to JDialog to allow showing in Modal way 
  *    Default is not visible, need to use frmAddBooks.setVisible(true) to show it
  */
-public class FrmAddBooks extends JDialog {
+public class DlgAddBooks extends JDialog {
 
 	/**
 	 * 
@@ -35,7 +35,7 @@ public class FrmAddBooks extends JDialog {
 	//private ImageIcon bookPic;
 	private Library library;
 	
-	FrmAddBooks(Library lib) {
+	DlgAddBooks(Library lib) {
 		this.library = lib;
 		
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -108,7 +108,7 @@ public class FrmAddBooks extends JDialog {
 						ImageIcon bookImgIcon = CreateStretchImageIcon(picPath,
 								picturePanel.getWidth(),
 								picturePanel.getHeight());
-						FrmAddBooks.this.picLabel.setIcon(bookImgIcon);
+						DlgAddBooks.this.picLabel.setIcon(bookImgIcon);
 					}
 				});
 
@@ -177,16 +177,16 @@ public class FrmAddBooks extends JDialog {
 						// TODO Auto-generated catch block
 						System.out.println("No picture selected.");
 					} finally {
-						JOptionPane.showMessageDialog(FrmAddBooks.this,
+						JOptionPane.showMessageDialog(DlgAddBooks.this,
 								"New book added.", "OK",
 								JOptionPane.PLAIN_MESSAGE);
-						FrmAddBooks.this.dispose(); // add by Li Huang 2014.8.15
+						DlgAddBooks.this.dispose(); // add by Li Huang 2014.8.15
 					}
 
 				}
 
 				else {
-					JOptionPane.showMessageDialog(FrmAddBooks.this,
+					JOptionPane.showMessageDialog(DlgAddBooks.this,
 							"Invaild book information!", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				}
@@ -197,7 +197,7 @@ public class FrmAddBooks extends JDialog {
 		close.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent me) {
 				//FrmAddBooks.this.setVisible(false); //modify by Li Huang. use dispose() to totally dispose this window 
-				FrmAddBooks.this.dispose();
+				DlgAddBooks.this.dispose();
 			}
 		});
 	}

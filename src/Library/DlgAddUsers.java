@@ -13,7 +13,7 @@ import java.awt.event.MouseEvent;
  * edit by Li Huang 2014.8.14: change its base class to JDialog. 
  *   Set it default visible = false .
  */
-public class FrmAddUsers extends JDialog {
+public class DlgAddUsers extends JDialog {
 
 	/**
 	 * 
@@ -24,7 +24,7 @@ public class FrmAddUsers extends JDialog {
 	private PanelUserInfo infoPanel;
 	private boolean bool_isActionAdd;
 
-	FrmAddUsers() {
+	DlgAddUsers() {
 		
 		this.setTitle("Add Users");
 
@@ -55,15 +55,15 @@ public class FrmAddUsers extends JDialog {
 
 				) {
 					bool_isActionAdd = true;
-					JOptionPane.showMessageDialog(FrmAddUsers.this,
+					JOptionPane.showMessageDialog(DlgAddUsers.this,
 							"New user added.", "OK", JOptionPane.PLAIN_MESSAGE);
 					//FrmAddUsers.this.setVisible(false); //modify by Li Huang 2014.8.14: dirctedly dispose this window
-					FrmAddUsers.this.dispose();
+					DlgAddUsers.this.dispose();
 
 				}
 
 				else {
-					JOptionPane.showMessageDialog(FrmAddUsers.this,
+					JOptionPane.showMessageDialog(DlgAddUsers.this,
 							"Invaild user information!", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				}
@@ -75,13 +75,13 @@ public class FrmAddUsers extends JDialog {
 			public void mouseClicked(MouseEvent me) {
 				bool_isActionAdd = false;
 				//FrmAddUsers.this.setVisible(false); //modify by Li Huang 2014.8.14: dirctedly dispose this window
-				FrmAddUsers.this.dispose();
+				DlgAddUsers.this.dispose();
 			}
 		});
 	}
 
 	public static void main(String[] args) {
-		new FrmAddUsers();
+		new DlgAddUsers();
 	}
 
 	public boolean isActionAdd() {

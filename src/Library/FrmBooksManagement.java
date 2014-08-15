@@ -146,7 +146,7 @@ public class FrmBooksManagement extends JFrame {
 
 		btnAdd.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				FrmAddBooks n = new FrmAddBooks(FrmBooksManagement.this.library);
+				DlgAddBooks n = new DlgAddBooks(FrmBooksManagement.this.library);
 				n.setModal(true);
 				n.setVisible(true);
 			}
