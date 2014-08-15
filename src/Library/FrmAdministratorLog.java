@@ -60,7 +60,7 @@ public class FrmAdministratorLog extends JFrame {
 						&& loginPassWord.getText().equals("1")) {
 					JOptionPane.showMessageDialog(FrmAdministratorLog.this, "Login Confirmed");
 					FrmAdministratorLog.this.dispose();
-					FrmAdminLogin n = new FrmAdminLogin(lib);
+					FrmAdminLogin n = new FrmAdminLogin(FrmAdministratorLog.this.library);
 				} else {
 					// Wrong info. provided
 					JOptionPane.showMessageDialog(FrmAdministratorLog.this, "Sorry, Worng Input!");
