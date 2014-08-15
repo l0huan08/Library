@@ -16,7 +16,7 @@ public class FrmAdministratorLog extends JFrame {
 
 	private Library library;
 	private JTextField loginName;
-	private JTextField loginPassWord;
+	private JPasswordField loginPassWord;
 
 	public FrmAdministratorLog() {
 		this(null);
@@ -45,7 +45,7 @@ public class FrmAdministratorLog extends JFrame {
 		this.add(loginName);
 
 		// Administrator Log PassWord
-		loginPassWord = new JTextField();
+		loginPassWord = new JPasswordField();
 		loginPassWord.setBounds(180, 131, 290, 25);
 		this.add(loginPassWord);
 
@@ -57,7 +57,7 @@ public class FrmAdministratorLog extends JFrame {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				// Correct Info. provided
 				if (loginName.getText().equals("a")
-						&& loginPassWord.getText().equals("1")) {
+						&& new String(loginPassWord.getPassword()).equals("1")) {
 					JOptionPane.showMessageDialog(FrmAdministratorLog.this, "Login Confirmed");
 					FrmAdministratorLog.this.dispose();
 					FrmAdminLogin n = new FrmAdminLogin(FrmAdministratorLog.this.library);
