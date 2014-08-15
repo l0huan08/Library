@@ -5,6 +5,8 @@ import java.awt.event.*;
 
 import javax.swing.*; //javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import java.io.*;
 import java.util.*;
@@ -54,6 +56,7 @@ public class FrmBooksManagement extends JFrame {
 	}
 	
 	public FrmBooksManagement(Library lib) {
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.library = lib;
 
 		// In the Requirement Document, Administrator is supposed to notify all
@@ -158,6 +161,9 @@ public class FrmBooksManagement extends JFrame {
 		tAuthor.setVisible(true);
 		tAuthor.setBounds(750, 220, 200, 25);
 		this.add(tAuthor);
+		
+		SelectionListener listener = new SelectionListener(table);
+		table.getSelectionModel().addListSelectionListener(listener);
 
 		btnClose.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,6 +177,7 @@ public class FrmBooksManagement extends JFrame {
 				DlgAddBooks n = new DlgAddBooks(FrmBooksManagement.this.library);
 				n.setModal(true);
 				n.setVisible(true); 
+				Refresh();
 			}
 		});
 
@@ -186,6 +193,8 @@ public class FrmBooksManagement extends JFrame {
 		btnRefresh.setVisible(true);
 		btnRefresh.setBounds(250, 470, 120, 30);
 		this.add(btnRefresh);
+		
+		
 
 		btnRefresh.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -281,35 +290,6 @@ public class FrmBooksManagement extends JFrame {
 			}
 		});
 
-		table.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				JTable target = (JTable) e.getSource();
-				row = target.getSelectedRow();
-
-				// Status
-				if (table.getValueAt(row, 6) == "0") {
-					tStatus.setSelectedIndex(1);
-				} else {
-					tStatus.setSelectedIndex(0);
-				}
-
-				// ISBN (ID Number)
-				tISBN.setText(table.getValueAt(row, 2).toString());
-
-				// Book Name
-				tName.setText(table.getValueAt(row, 0).toString());
-
-				// Book Author
-				tAuthor.setText(table.getValueAt(row, 1).toString());
-				
-				// Book Rented or not
-				if(table.getValueAt(row, 5).toString()=="false"){
-					tStatus.setSelectedIndex(1);// not rented
-				}else{tStatus.setSelectedIndex(0);}
-				
-			}
-		});
-
 	}
 
 	private Object[][] getAllBookTableData(Library library) {
@@ -340,6 +320,45 @@ public class FrmBooksManagement extends JFrame {
 		row[7] = book.getCategory();
 
 		return row;
+	}
+	
+	private class SelectionListener implements ListSelectionListener {
+		private JTable target;
+		
+		public SelectionListener(JTable target){
+			this.target=target;
+		}
+		@Override
+		public void valueChanged(ListSelectionEvent e) {
+			// TODO Auto-generated method stub
+			if (target==null)
+				return;
+			//target = (JTable)e.getSource();
+			row = target.getSelectedRow();
+			if(row < 0)
+				return;
+			// Status
+			if (target.getValueAt(row, 6) == "0") {
+				tStatus.setSelectedIndex(1);
+			} else {
+				tStatus.setSelectedIndex(0);
+			}
+
+			// ISBN (ID Number)
+			tISBN.setText(target.getValueAt(row, 2).toString());
+
+			// Book Name
+			tName.setText(target.getValueAt(row, 0).toString());
+
+			// Book Author
+			tAuthor.setText(target.getValueAt(row, 1).toString());
+			
+			// Book Rented or not
+			if(target.getValueAt(row, 5).toString()=="false"){
+				tStatus.setSelectedIndex(1);// not rented
+			}else{tStatus.setSelectedIndex(0);}
+		}
+		
 	}
 
 	public FrmBooksManagement() {
