@@ -18,6 +18,7 @@ public class FrmLibrary extends JFrame{
 	JButton btnCustomer = new JButton("Customer");
 	JButton btnAdmin = new JButton("Adminstrator");
 	JButton btnExit = new JButton("Exit");
+	JButton btnAbout = new JButton("About");
 	
 	public FrmLibrary(){
 		Book book1 = new Book();
@@ -69,6 +70,10 @@ public class FrmLibrary extends JFrame{
 		btnExit.setBounds(450, 520, 120, 30);
 		this.add(btnExit);
 		
+		btnAbout.setVisible(true);
+		btnAbout.setBounds(20, 520, 120, 30);
+		this.add(btnAbout);
+		
 		btnAdmin.addActionListener(new java.awt.event.ActionListener() {
 	    public void actionPerformed(java.awt.event.ActionEvent evt) {
 	    	FrmAdministratorLog AdministratorLog = new FrmAdministratorLog(L);
@@ -85,6 +90,12 @@ public class FrmLibrary extends JFrame{
 		    public void actionPerformed(java.awt.event.ActionEvent evt) {
 		       FrmCustomerLogin CustomerLogin = new FrmCustomerLogin();
 		    }
+		});
+		
+		btnAbout.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt){
+				FrmAbout about = new FrmAbout();
+			}
 		});
 	}
 	
