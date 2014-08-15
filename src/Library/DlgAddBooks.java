@@ -4,6 +4,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -93,10 +95,11 @@ public class DlgAddBooks extends JDialog {
 		this.setLayout(null);
 		//this.setVisible(true); //remove by Li Huang 2014.8.15 to make it can be shown in Modal way
 
-		choosePic.addMouseListener(new MouseAdapter() // choose a picture
+		//choosePic.addMouseListener(new MouseAdapter() // choose a picture
+		choosePic.addActionListener(new ActionListener() // choose a picture
 				{
-					public void mouseClicked(MouseEvent me) {
-
+					@Override
+					public void actionPerformed(ActionEvent e) {
 						// System.out.println("fffff"); //test1
 						FileDialog readFD = new FileDialog(new Frame(),
 								"Choose a file", FileDialog.LOAD);
@@ -112,10 +115,11 @@ public class DlgAddBooks extends JDialog {
 					}
 				});
 
-		add.addMouseListener(new MouseAdapter() // add new book
+		//add.addMouseListener(new MouseAdapter() // add new book
+		add.addActionListener(new ActionListener() // add new book
 		{
-			public void mouseClicked(MouseEvent me) {
-
+			@Override
+			public void actionPerformed(ActionEvent e) {
 				Validator test = new Validator();
 
 				String currentISBN = jtf_isbn.getText();
@@ -173,7 +177,7 @@ public class DlgAddBooks extends JDialog {
 //						new reName().rename(picDirectory, picFileName,
 //								currentISBN); 
 						library.copyBookImage(picDirectory, picFileName, currentISBN);
-					} catch (Exception e) {
+					} catch (Exception ex) {
 						// TODO Auto-generated catch block
 						System.out.println("No picture selected.");
 					} finally {
@@ -184,18 +188,17 @@ public class DlgAddBooks extends JDialog {
 					}
 
 				}
-
 				else {
 					JOptionPane.showMessageDialog(DlgAddBooks.this,
 							"Invaild book information!", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				}
-
-			}// mouse clicked
+			}
 		});
 
-		close.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent me) {
+		close.addActionListener( new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
 				//FrmAddBooks.this.setVisible(false); //modify by Li Huang. use dispose() to totally dispose this window 
 				DlgAddBooks.this.dispose();
 			}

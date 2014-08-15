@@ -30,7 +30,7 @@ public class FrmAbout extends JDialog{
 	private Random r;
 	
 	private final String StrAuthors = "Zhipeng Zhou, Run Yan, Sen Li, Li Huang";
-	private final String StrVersion = "Version: "+ new DecimalFormat("#0.00").format(0.9);
+	private final String StrVersion = "Version: "+ new DecimalFormat("#0.00").format(1.0);
 	
 	public FrmAbout() {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

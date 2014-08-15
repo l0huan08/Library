@@ -2,6 +2,8 @@ package Library;
 
 import javax.swing.*;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -43,10 +45,10 @@ public class DlgAddUsers extends JDialog {
 		this.setLayout(null);
 		//this.setVisible(true); //del by Li Huang 2014.8.14
 
-		addUser.addMouseListener(new MouseAdapter() // add new user
+		addUser.addActionListener(new ActionListener() // add new user
 		{
-			public void mouseClicked(MouseEvent me) {
-
+			@Override
+			public void actionPerformed(ActionEvent e) {
 				Validator validator = new Validator();
 				if (validator.isUserIdValid(infoPanel.getIdText())
 						&& validator.isUserNameValid(infoPanel.getNameText())
@@ -67,12 +69,13 @@ public class DlgAddUsers extends JDialog {
 							"Invaild user information!", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				}
-
-			}// mouse clicked
+			}
 		});
 
-		close.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent me) {
+		close.addActionListener( new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) {
 				bool_isActionAdd = false;
 				//FrmAddUsers.this.setVisible(false); //modify by Li Huang 2014.8.14: dirctedly dispose this window
 				DlgAddUsers.this.dispose();
