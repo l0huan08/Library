@@ -204,8 +204,8 @@ public class FrmAddBooks extends JFrame {
 		return imageIcon;
 	}
 
-	public static void main(String[] args) {
-		new FrmAddBooks(new Library());
-	}
+//	public static void main(String[] args) {
+//		new FrmAddBooks(new Library());
+//	}
 
 }
