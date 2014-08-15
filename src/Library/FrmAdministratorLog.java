@@ -52,6 +52,7 @@ public class FrmAdministratorLog extends JFrame {
 		JButton BtnLogin = new JButton("Login");
 		BtnLogin.setBounds(380, 190, 90, 25);
 		this.add(BtnLogin);
+		
 
 		BtnLogin.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
