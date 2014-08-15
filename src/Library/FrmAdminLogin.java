@@ -10,6 +10,7 @@ import javax.swing.*;
  * @author Joe
  * add 2014.8.13
  * edit 2014.8.14 edit by Li Huang, fix complile problem from JDK 8.0 
+ * fix bugs
  */
 public class FrmAdminLogin extends JFrame {
 	//JFrame J = new JFrame("Admin Login");
@@ -23,6 +24,7 @@ public class FrmAdminLogin extends JFrame {
 		this.setLocation(250,40);
 		this.setVisible(true);
 		this.setLayout(null);
+		this.setTitle("Admin Interface"); // add by Li Huang 2014.8.14
 		
 		JButton btnBooks = new JButton("Books");
 		btnBooks.setBounds(140, 80, 90, 40);
@@ -36,7 +38,8 @@ public class FrmAdminLogin extends JFrame {
 		btnCategories.setBounds(400, 80, 110, 40);
 		this.add(btnCategories);
 		
-		JButton btnClose = new JButton("Clsoe");
+		//JButton btnClose = new JButton("Clsoe");
+		JButton btnClose = new JButton("Close"); //modify by Li Huang 2014.8.14
 		btnClose.setBounds(450, 190, 90, 40);
 		this.add(btnClose);
 		
