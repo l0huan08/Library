@@ -222,8 +222,21 @@ public class FrmBooksManagement extends JFrame {
 					JOptionPane.showMessageDialog(FrmBooksManagement.this, "Please select a book to delete!", "Delete Fail", JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}
-				FrmBooksManagement.this.library.deleteBook(table.getValueAt(
-						row, 2).toString());
+				
+				//******************************
+				//modified by Sen Li after demo
+			
+				if(!FrmBooksManagement.this.library.deleteBook(table.getValueAt(
+						row, 2).toString()))
+				{
+					JOptionPane.showMessageDialog(FrmBooksManagement.this,
+							"This book has been rented.", "Error",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+					
+				//******************************
+			
 				Refresh();
 			}
 		});

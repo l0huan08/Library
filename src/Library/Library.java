@@ -4,6 +4,8 @@ import java.io.*;
 import java.text.*;
 import java.util.*;
 
+import javax.swing.JOptionPane;
+
 /**
  * Library class, manage books and users
  * @author Sen Li
@@ -181,17 +183,29 @@ public class Library {
 		}//end while
 	}//update book
 	
-	void deleteBook(String isbn){
+	boolean deleteBook(String isbn){
 		Iterator<Book> bookItr = bookList.iterator();
 		int index = -1;
 		while(bookItr.hasNext()){
 			Book tempBook = bookItr.next();
 			index++;
 			if(tempBook.getIsbn().equals(isbn)){
-				bookList.remove(index);
-				break;
+				//***********************************************
+				//modified by Sen Li after demo
+				//rented book can not be deleted.
+				if(tempBook.isRented()==true){
+					return false;
+				}
+				else{
+					bookList.remove(index);
+					return true;
+				}
+				//***********************************************
+				
 			}//end if
+			
 		}//end while
+		return false;
 	}//delete book
 	
 	boolean addUser(User user){
@@ -224,6 +238,15 @@ public class Library {
 			User tempUser = userItr.next();
 			index++;
 			if(tempUser.getUserId()==userId){
+				//******************************
+				//modified by Sen Li after demo
+				//users who hold rented books can not be deleted.
+				Iterator<Book> bookItr = bookList.iterator();
+				while(bookItr.hasNext()){
+					if(bookItr.next().getOwnerId() == userId)
+						return false;
+				}//end while
+				//******************************
 				userList.remove(index);
 				return true;
 			}//end if

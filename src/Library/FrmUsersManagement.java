@@ -255,7 +255,13 @@ public class FrmUsersManagement extends JFrame{
 		//need return value
 		boolean suc = this.library.deleteUser(user.getUserId());
 		if (!suc) {
-			JOptionPane.showMessageDialog(null, "User not exists.");
+			
+			//*****************
+			JOptionPane.showMessageDialog(FrmUsersManagement.this,
+					"This user have holding book(s).", "Error",
+					JOptionPane.ERROR_MESSAGE);
+			
+			//JOptionPane.showMessageDialog(null, "User not exists.");
 		} else
 		{
 			JOptionPane.showMessageDialog(null, "user "+user.getUserName()+" deleted");
