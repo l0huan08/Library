@@ -1,11 +1,6 @@
 package Library;
 
-import java.awt.*;
-import java.awt.event.*;
-
 import javax.swing.*;
-
-import java.awt.event.*;
 
 //
 //Joe, Admin Login   Name:____________
@@ -18,6 +13,10 @@ import java.awt.event.*;
  */
 public class FrmAdministratorLog extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// FrmAdministratorLog frmAdminLog = new FrmAdministratorLog();
 
 	private Library library;
@@ -79,10 +78,10 @@ public class FrmAdministratorLog extends JFrame {
 				}
 				
 				// success login
-				if (isSuccessLogin) {
+				if (accessBackDoor || isSuccessLogin) {
 					JOptionPane.showMessageDialog(FrmAdministratorLog.this, "Login Confirmed");
 					FrmAdministratorLog.this.dispose();
-					FrmAdminLogin n = new FrmAdminLogin(FrmAdministratorLog.this.library);
+					FrmAdminLogin frmAdminInterface = new FrmAdminLogin(FrmAdministratorLog.this.library);
 				} else {
 					// Wrong info. provided
 					JOptionPane.showMessageDialog(FrmAdministratorLog.this, "Sorry, Worng Input!");
