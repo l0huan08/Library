@@ -1,7 +1,7 @@
 Marlabs Project 1 - Library Management System
 =======
 Programmers:
-Li Huang, Run Yan, Zhipeng Zhou, Shen Li
+Li Huang, Run Yan, Zhipeng Zhou, Sen Li
 =======
 Version History:
 2014.8.15
