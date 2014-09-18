@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{554B746D-75E1-482B-AEA7-6BA03CE6CF64}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Library</RootNamespace>
+    <AssemblyName>Library</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DlgBorrowBookFinish2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DlgBorrowBookFinish2.Designer.cs">
+      <DependentUpon>DlgBorrowBookFinish2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DlgBorrowBookFinish.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DlgBorrowBookFinish.Designer.cs">
+      <DependentUpon>DlgBorrowBookFinish.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DlgReturnBookFinish.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DlgReturnBookFinish.Designer.cs">
+      <DependentUpon>DlgReturnBookFinish.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmBorrowBook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBorrowBook.Designer.cs">
+      <DependentUpon>FrmBorrowBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCustomerInterface.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCustomerInterface.Designer.cs">
+      <DependentUpon>FrmCustomerInterface.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCustomerLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCustomerLogin.Designer.cs">
+      <DependentUpon>FrmCustomerLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAddBook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddBook.Designer.cs">
+      <DependentUpon>FrmAddBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAdminInterface.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAdminInterface.Designer.cs">
+      <DependentUpon>FrmAdminInterface.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMain.Designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAdminLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAdminLogin.Designer.cs">
+      <DependentUpon>FrmAdminLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmManageBooks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmManageBooks.Designer.cs">
+      <DependentUpon>FrmManageBooks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmManageUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmManageUsers.Designer.cs">
+      <DependentUpon>FrmManageUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmManageCategories.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmManageCategories.Designer.cs">
+      <DependentUpon>FrmManageCategories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmRentBookReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmRentBookReport.Designer.cs">
+      <DependentUpon>FrmRentBookReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmReturnBook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmReturnBook.Designer.cs">
+      <DependentUpon>FrmReturnBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DlgBorrowBookFinish2.resx">
+      <DependentUpon>DlgBorrowBookFinish2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DlgBorrowBookFinish.resx">
+      <DependentUpon>DlgBorrowBookFinish.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DlgReturnBookFinish.resx">
+      <DependentUpon>DlgReturnBookFinish.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmBorrowBook.resx">
+      <DependentUpon>FrmBorrowBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCustomerInterface.resx">
+      <DependentUpon>FrmCustomerInterface.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCustomerLogin.resx">
+      <DependentUpon>FrmCustomerLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAddBook.resx">
+      <DependentUpon>FrmAddBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAdminInterface.resx">
+      <DependentUpon>FrmAdminInterface.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAdminLogin.resx">
+      <DependentUpon>FrmAdminLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmManageBooks.resx">
+      <DependentUpon>FrmManageBooks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmManageUsers.resx">
+      <DependentUpon>FrmManageUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmManageCategories.resx">
+      <DependentUpon>FrmManageCategories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmRentBookReport.resx">
+      <DependentUpon>FrmRentBookReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmReturnBook.resx">
+      <DependentUpon>FrmReturnBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

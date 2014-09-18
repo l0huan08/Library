@@ -1,0 +1,42 @@
+Mini Project - Books Library
+-----------------------------------------
+Develop a Java GUI application using Java Swing and Collections API to maintain a books library. 
+
+As this application does not use a permanent storage database, all your data would be stored in the form of collection objects at the run time and will be destroyed when you exit the application.
+
+You can as well think of forming the basic data objects (java objects) for books, customers and transactions into permanent storage like files, so that every time the application loads, you can read these objects from files and load the respective object to populate the data in the application.
+
+The system must have the following basic features:
+
+(1) *- Adding, Updating and Deleting of Books
+
+(2) *- Adding, Updating and Deleting of customers
+
+(3) *- Customer to view the list of books available and take it on rental basis. There is no rental fee charged but the book must be returned by due date. If not, a penalty amount per day must be paid. This renting of a book is called as transaction.
+
+(4) * - Customer should be able to view his current books taken from library and mark for returning
+
+
+(5) * - Admin to notify all the customers when a new book arrives to library
+
+
+(6) *- Different categories of books can be created so that each category can have many books
+
+
+
+(7) *- Customer can opt for notifications about new books arrivals category-wise
+
+
+
+(8) *- An image of book can as well be displayed when the customer is browsing the list of books available.
+
+
+*- Admin to view the following reports:
+	- List of customers
+	- List of books/category
+	- List of books rented out
+	- List of books which are yet to be rented out
+	- List of books overdue from customers
+
+	
+	www.blogjava.net/sitinspring/archive/2007/12/18/168425.html
